@@ -146,9 +146,22 @@ function resolvePath(path) { return path.startsWith('/') ? path : join(process.c
 // on authored `deps`, never on a potentially stale plan scaffold.
 const items = new Map();
 const aliases = new Map();
+// Other live workflows replace carriers during recertification. Retry only a
+// transient missing-file read; persistent absence and every other error retain
+// the original failure. Never omit an inventory entry or prerequisite.
+function readInventoryItem(path) {
+  const waits = [20, 50, 100, 200, 400];
+  for (let attempt = 0; ; attempt++) {
+    try { return readFileSync(path, 'utf8'); }
+    catch (cause) {
+      if (cause.code !== 'ENOENT' || attempt >= waits.length) throw cause;
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, waits[attempt]);
+    }
+  }
+}
 for (const file of readdirSync(join(REPO, 'items')).sort()) {
   if (!file.endsWith('.md')) continue;
-  const source = readFileSync(join(REPO, 'items', file), 'utf8');
+  const source = readInventoryItem(join(REPO, 'items', file));
   const { fm, body } = split(source);
   let metadata = {};
   let frontmatterError;

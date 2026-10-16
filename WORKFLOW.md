@@ -177,6 +177,11 @@ The `anisotropic-real-norm-complex-homogeneity-witness` check uses exact Gaussia
 
 The `cyclotomic-rank-one-f5-inverse` check exhausts all 16 unit parameter pairs in F5 and independently searches all 25 quadratic residues for the inverse of X. The `cyclotomic-rank-one-content-collision` check reduces the actual rational specialization Q=2, u1=u2=1 using exact monic integer polynomial division, then checks every unit repeated root in F5. It verifies a nonzero square-zero element and vanishing interpolation denominator. These are bounded sanity checks for rank-one examples, not proofs for arbitrary fields or ranks.
 
+During content-policy inventory reads, a missing carrier is retried five times
+over at most 770 ms to tolerate concurrent replacement by another workflow.
+Persistent absence and all other read errors still fail; no inventory entry,
+scoped item, prerequisite, or policy check is omitted.
+
 ## Independent review through closeout
 
 For an owner-authorized recovery of exactly two local, unpushed legacy whole-tree
