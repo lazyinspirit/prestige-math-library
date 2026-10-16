@@ -833,12 +833,109 @@ function loadOperationalSupplement(root,pack,reports,current) {
   return {...row,ids:new Set(ids),path,evidence:{...row.bindings,[path]:digest(readFileSync(path,'utf8'))},[operationalSupplementSeal]:true};
 }
 
-export function validateReports(pack,reports,now,{root=null,ownerSupplement=null,operationalSupplement=null}={}) {
+// A confirmed consumer defect can be repaired at its direct supplier. This
+// receipt identifies an already completed same-native-reviewer repair; it never
+// supplies a new review, changes a decision, or treats downstream membership as
+// proof of repair. See step5-supplier-repairs.md for the deliberately narrow form.
+const supplierRepairSeal=Symbol('validated-same-native-supplier-repair');
+export const supplierRepairPath=(root,run,phase,round)=>join(workflowDir(root,run),`${phase}-${round}-owner-supplier-repairs.json`);
+function loadSupplierRepairs(root,pack,reports,current,items) {
+  const path=supplierRepairPath(root,pack.run,pack.phase,pack.round);
+  if(!existsSync(path))return null;
+  const receipt=read(path),evidence={...receipt.bindings,[path]:digest(readFileSync(path,'utf8'))};
+  requireValue(receipt.version===1&&receipt.kind==='same-native-reviewer-supplier-repairs'
+    &&receipt.run===pack.run&&receipt.phase===pack.phase&&receipt.round===pack.round
+    &&['initial','repeat'].includes(pack.phase)&&pack.rejected&&pack.repair_scope==='frontier'
+    &&receipt.pack_sha256===digest(pack)&&receipt.authorized_by==='owner'&&receipt.owner_identity==='/root'
+    &&receipt.native_coverage_adopted===false&&Number.isFinite(Date.parse(receipt.recorded_at))
+    &&Array.isArray(receipt.entries)&&receipt.entries.length>0,'invalid supplier repair receipt identity');
+  requireValue(receipt.bindings&&typeof receipt.bindings==='object'&&!Array.isArray(receipt.bindings)
+    &&Object.entries(receipt.bindings).every(([p,hash])=>resolve(p).startsWith(resolve(root,'research')+'/')
+      &&/^[a-f0-9]{64}$/.test(hash)),'invalid supplier repair evidence bindings');
+  const bound=p=>{requireValue(Object.hasOwn(receipt.bindings,p),`missing supplier repair binding: ${p}`);return read(p);};
+  verifyEvidence(evidence);
+  requireValue(typeof receipt.owner_review_evidence==='string'
+    &&Object.hasOwn(receipt.bindings,receipt.owner_review_evidence),'supplier repair requires bound focused owner review evidence');
+  bound(packPath(root,pack.run,pack.phase,pack.round));
+  const snapshot=bound(receipt.creation_state),stage=pack.phase==='initial'?'5.1-adjudicate':'5.5-adjudicate';
+  requireValue(snapshot.run===pack.run&&snapshot.stage===stage&&snapshot.paused===true
+    &&snapshot.blockers?.some(row=>row.stage===stage&&row.key==='gate:step5-wave-evidence')
+    &&Object.values(snapshot.dispatches??{}).every(row=>!row.startedAt||Boolean(row.endedAt)),
+    'supplier repair receipt requires an archived paused held collection gate and drained writers');
+  const graph=new Map(items.map(row=>[row.id,row])),contexts=reviewContexts(items),resolved=new Map();
+  for(const entry of receipt.entries){
+    const unit=String(entry.unit),report=reports.find(row=>String(row.unit)===unit),decision=entry.decision;
+    const nativePath=workerReport(root,pack.run,pack.phase,pack.round,unit);
+    const reportBytes=bound(nativePath);
+    requireValue(report&&digest(reportBytes)===digest(report)&&report.input_sha256===digest(pack)
+      &&report.completion!=='blocked'&&!(report.blockers??[]).length,'supplier repair must retain the exact completed native report');
+    const dispatchPath=join(root,'research',`${pack.run}-dispatch`,`alpha-adjudicate-${workerLabel(pack.phase,pack.round,unit)}.result.json`);
+    const dispatch=bound(dispatchPath);
+    requireValue(dispatch.ok===true&&dispatch.run===pack.run&&dispatch.role==='alpha-adjudicate'
+      &&dispatch.label===workerLabel(pack.phase,pack.round,unit)&&dispatch.model===MODELS.sol61.id
+      &&dispatch.provider_effort==='high'&&typeof dispatch.session_id==='string'&&dispatch.session_id.length>0
+      &&Number.isInteger(dispatch.attempt)&&dispatch.attempt>0&&Number.isFinite(Date.parse(dispatch.ended_at))
+      &&Date.parse(receipt.recorded_at)>=Date.parse(dispatch.ended_at),'supplier repair lacks successful authorized native completion');
+    const attemptPath=dispatchPath.replace(/\.result\.json$/,`.attempt-${dispatch.attempt}.result.json`);
+    requireValue(digest(bound(attemptPath))===digest(dispatch),'supplier repair native attempt differs from its successful result');
+    requireValue(typeof dispatch.prompt==='string','supplier repair native prompt missing');
+    requireValue(dispatch.prompt===dispatchPath.replace(/\.result\.json$/,`.attempt-${dispatch.attempt}.prompt.md`)
+      &&Object.hasOwn(receipt.bindings,dispatch.prompt),'supplier repair must bind its actual native attempt prompt');
+    const assigned=pack.assignments[unit]??[],supplier=entry.supplier;
+    requireValue(decision&&assigned.some(row=>key(row)===key(decision))
+      &&report.decisions.filter(row=>key(row)===key(decision)&&digest(row)===digest(decision)).length===1
+      &&['confirmed_fatal','confirmed_nonfatal'].includes(decision.outcome)&&evidenceText(decision)
+      &&!resolved.has(key(decision)),'supplier repair must name one exact unchanged confirmed native decision');
+    const consumerReviews=report.reviews.filter(row=>row.id===decision.id),supplierReviews=report.reviews.filter(row=>row.id===supplier?.id);
+    const consumer=consumerReviews[0],review=supplierReviews[0],supply=graph.get(supplier?.id);
+    requireValue(supplier&&supplier.id!==decision.id&&assigned.some(row=>row.id===supplier.id)
+      &&consumerReviews.length===1&&supplierReviews.length===1&&consumer.disposition==='unaffected'
+      &&review.disposition==='repaired'&&evidenceText(consumer)&&evidenceText(review)
+      &&digest(consumer)===entry.consumer_review_sha256&&digest(review)===supplier.review_sha256
+      &&contexts.matches(consumer,current)&&contexts.matches(review,current)
+      &&pack.before[decision.id]===current[decision.id]&&current[decision.id]===consumer.post_sha256
+      &&entry.consumer_raw_sha256===graph.get(decision.id)?.sha256,
+      'supplier repair requires unchanged consumer and current completed same-report reviews');
+    const source=readFileSync(join(root,'items',`${decision.id}.md`),'utf8');
+    const deps=source.match(/^---\r?\n[\s\S]*?^deps:[ \t]*\r?\n((?:[ \t]+[^\r\n]*\r?\n)*)/m)?.[1]??'';
+    requireValue(supply&&graph.get(decision.id)?.deps.includes(supplier.id)
+      &&deps.split(/\r?\n/).some(line=>line.trim()===`- ${supplier.id}`)
+      &&['definition','algorithm'].includes(itemKind(root,supplier.id))
+      &&supplier.before_guard_sha256===pack.before[supplier.id]&&supplier.before_guard_sha256!==current[supplier.id]
+      &&supplier.post_guard_sha256===current[supplier.id]&&review.post_sha256===current[supplier.id]
+      &&supplier.post_raw_sha256===supply.sha256
+      &&/^[a-f0-9]{64}$/.test(pack.before_statements?.[supplier.id]??'')
+      &&supplier.before_statement_sha256===pack.before_statements[supplier.id]
+      &&supplier.post_statement_sha256===supply.statement_sha256
+      &&supplier.before_statement_sha256!==supplier.post_statement_sha256,
+      'supplier repair requires a changed direct declared definition interface, not metadata or an ancestor');
+    requireValue(report.decisions.some(row=>row.id===supplier.id&&['confirmed_fatal','confirmed_nonfatal'].includes(row.outcome)
+      &&evidenceText(row)&&digest(row)===supplier.decision_sha256),
+      'supplier repair requires the supplier own confirmed native adjudication');
+    const interfaceText=readFileSync(join(root,'items',`${supplier.id}.md`),'utf8')
+      .match(/^## Definition[ \t]*\r?\n([\s\S]*?)(?=^##[ \t]+|(?![\s\S]))/m)?.[1]??'';
+    requireValue(typeof entry.reason==='string'&&entry.reason.trim().length>=80
+      &&typeof entry.native_remedy_excerpt==='string'&&entry.native_remedy_excerpt.length>=40
+      &&decision.reason.includes(entry.native_remedy_excerpt)&&consumer.reason.includes(entry.native_remedy_excerpt)
+      &&typeof supplier.native_remedy_excerpt==='string'&&supplier.native_remedy_excerpt.length>=40
+      &&review.reason.includes(supplier.native_remedy_excerpt)
+      &&report.decisions.some(row=>digest(row)===supplier.decision_sha256&&row.reason.includes(supplier.native_remedy_excerpt))
+      &&typeof supplier.current_interface_excerpt==='string'&&supplier.current_interface_excerpt.length>=20
+      &&interfaceText.includes(supplier.current_interface_excerpt),
+      'supplier repair lacks exact native remedy attribution and current defining clause');
+    resolved.set(key(decision),digest(decision));
+  }
+  return {pack_sha256:digest(pack),resolved,evidence,path,[supplierRepairSeal]:true};
+}
+
+export function validateReports(pack,reports,now,{root=null,ownerSupplement=null,operationalSupplement=null,supplierRepairs=null}={}) {
   const errors=[],decisions=[],reviews=[],createdItems=[],creatorById=new Map();
   requireValue(!ownerSupplement||(root&&ownerSupplement[ownerSupplementSeal]===true
     &&ownerSupplement.pack_sha256===digest(pack)),'owner supplement must pass native guarded loading');
   requireValue(!operationalSupplement||(root&&operationalSupplement[operationalSupplementSeal]===true
     &&operationalSupplement.pack_sha256===digest(pack)),'unvalidated operational supplement');
+  requireValue(!supplierRepairs||(root&&supplierRepairs[supplierRepairSeal]===true
+    &&supplierRepairs.pack_sha256===digest(pack)),'unvalidated supplier repair supplement');
   const ownerReviews=new Map((ownerSupplement?.reviews??[]).map(row=>[row.id,row]));
   const ownerDecisions=new Map((ownerSupplement?.decisions??[]).map(row=>[key(row),row]));
   for(const unit of pack.units) {
@@ -892,7 +989,7 @@ export function validateReports(pack,reports,now,{root=null,ownerSupplement=null
   }
   for(const id of Object.keys(pack.before))if((!scoped||scoped.has(id))&&!now[id])errors.push(`unlicensed deletion ${id}`);
   for(const id of creatorById.keys())if(!changed.includes(id))errors.push(`claimed creation without new item ${id}`);
-  for(const row of decisions)if(['confirmed_fatal','confirmed_nonfatal'].includes(row.outcome)&&!changed.includes(row.id))errors.push(`confirmed defect not repaired ${row.id}`);
+  for(const row of decisions)if(['confirmed_fatal','confirmed_nonfatal'].includes(row.outcome)&&!changed.includes(row.id)&&supplierRepairs?.resolved.get(key(row))!==digest(row))errors.push(`confirmed defect not repaired ${row.id}`);
   for(const row of reviews)if(['repaired','authored'].includes(row.disposition)&&!changed.includes(row.id))errors.push(`claimed repair or authorship without change ${row.id}`);
   if(createdItems.length&&root){
     try{
@@ -1065,6 +1162,7 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
   const current=hashes(root,run),reported={...current},items=readLibraryItems(root,{run});
   const ownerSupplement=loadOwnerSupplement(root,pack,reports,current,items);
   const operationalSupplement=loadOperationalSupplement(root,pack,reports,current);
+  const supplierRepairs=loadSupplierRepairs(root,pack,reports,current,items);
   if(deferImpactClosure) {
     requireValue(!pack.rejected,'only owner waves can defer impact closure');
     // Archive the carriers workers actually reviewed. Later edits are queued
@@ -1072,10 +1170,10 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
     const assigned=new Set(Object.values(pack.assignments).flat());
     for(const row of reports.flatMap(report=>report.reviews??[]))if(assigned.has(row.id)&&/^[a-f0-9]{64}$/.test(row.post_sha256??''))reported[row.id]=row.post_sha256;
   }
-  const result=validateReports(pack,reports,reported,{root,ownerSupplement,operationalSupplement});
+  const result=validateReports(pack,reports,reported,{root,ownerSupplement,operationalSupplement,supplierRepairs});
   if(result.errors.length)throw Error(result.errors.join('\n'));
   const evidence={...(pack.input_evidence??{}),[packPath(root,run,phase,round)]:digest(readFileSync(packPath(root,run,phase,round),'utf8'))};
-  Object.assign(evidence,ownerSupplement?.evidence??{},operationalSupplement?.evidence??{});
+  Object.assign(evidence,ownerSupplement?.evidence??{},operationalSupplement?.evidence??{},supplierRepairs?.evidence??{});
   verifyEvidence(evidence);
   const creationAuthors=new Map();
   for(const unit of pack.units) {
