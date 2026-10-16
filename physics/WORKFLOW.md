@@ -74,7 +74,10 @@ item ownership index, but hashes only the target and its actual transitive
 dependencies, including explicitly examined context. A bare item ID in an
 unrelated unfinished inventory does not prevent that local authoring record;
 the same unfinished ID in the target's dependency closure fails recording.
-Malformed JSON, ambiguous ownership and invalid page/pair structure still fail.
+Unrelated malformed carrier YAML is deferred during identity/alias indexing;
+a reached carrier is parsed strictly, and relevant duplicate identity or alias
+claims remain blocking. Malformed JSON, ambiguous ownership and invalid
+page/pair structure still fail.
 The hash calculation and alias resolution are shared with the strict full-frontier
 checker; local readiness records grant no global acceptance or gate authority.
 

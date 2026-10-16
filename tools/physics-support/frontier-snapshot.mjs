@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { yaml } from './pathway-lib.mjs';
+import { parseFrontmatter } from './content-policy-lib.mjs';
 const safe = value => { if (!/^[a-zA-Z0-9_-]+$/.test(value ?? '')) throw Error('Invalid identity'); return value; };
 const json = path => JSON.parse(readFileSync(path, 'utf8'));
 const read = path => existsSync(path) ? json(path) : null;
@@ -102,13 +103,14 @@ function dependency(s, id) {
   const live = s.items.get(id), planned = s.planned.get(id);
   const path = join(s.root, 'items', `${safe(id)}.md`);
   const body = existsSync(path) ? readFileSync(path, 'utf8') : null;
-  const fm = body ? yaml().parse(body.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1] ?? '') : null;
+  const fm = body ? parseFrontmatter(body.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1] ?? '') : null;
+  if (fm && fm.id !== id) throw Error(`Invalid authored identity ${id}: ${fm.id}`);
   const contract = live ?? planned;
   // Missing prerequisites must remain auditable and escalatable, not prevent dispatch.
   if (!contract && !fm) return { bytes: { missing: id }, deps: [] };
   const declarations = [contract?.item, fm].filter(Boolean);
   if (s.invalidItems) for (const declaration of declarations) {
-    for (const field of ['deps', 'justified_by', 'forward_refs']) {
+    for (const field of ['deps', 'justified_by', 'forward_refs', 'aliases']) {
       const values = declaration[field] ?? [];
       if (!Array.isArray(values) || values.some(value => typeof value !== 'string' || !value))
         throw Error(`${id}: ${field} must name dependency IDs`);
@@ -125,13 +127,55 @@ function dependency(s, id) {
   return value;
 }
 
+// Like the physics repository loader, defer unrelated carrier parse errors.
+// Recover only identity claims from the renderer's YAML document nodes, never
+// metadata used for hashing. A reached carrier is parsed strictly by dependency.
+function localIdentity(s, token) {
+  if (!s.identityIndex) {
+    const ids = new Map(), aliases = new Map();
+    const add = (map, key, name) => {
+      if (typeof key !== 'string' || !key) return;
+      if (!map.has(key)) map.set(key, new Set());
+      map.get(key).add(name);
+    };
+    for (const name of readdirSync(join(s.root, 'items')).filter(name => name.endsWith('.md'))) {
+      const id = name.slice(0, -3);
+      add(ids, id, id);
+      const text = readFileSync(join(s.root, 'items', name), 'utf8');
+      const doc = yaml().parseDocument(text.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1] ?? '');
+      // Valid YAML aliases/anchors have exactly the ordinary parser meaning.
+      if (!doc.errors.length) {
+        const fm = doc.toJS();
+        if (Array.isArray(fm?.aliases)) for (const alias of fm.aliases) add(aliases, alias, id);
+      }
+      // Inspect all claims (including duplicate YAML keys), so malformed YAML
+      // cannot hide an alias collision or a second claim to a reached identity.
+      if (yaml().isMap(doc.contents)) for (const pair of doc.contents.items) {
+        if (!yaml().isScalar(pair.key)) continue;
+        if (pair.key.value === 'id' && yaml().isScalar(pair.value)) add(ids, pair.value.value, id);
+        if (pair.key.value === 'aliases') {
+          if (yaml().isSeq(pair.value)) {
+            for (const alias of pair.value.items) if (yaml().isScalar(alias)) add(aliases, alias.value, id);
+          } else if (yaml().isScalar(pair.value)) add(aliases, pair.value.value, id);
+        }
+      }
+    }
+    s.identityIndex = { ids, aliases };
+  }
+  const { ids, aliases } = s.identityIndex;
+  const matches = ids.get(token) ?? aliases.get(token);
+  if (matches?.size > 1) throw Error(`Ambiguous prerequisite identity or alias ${token}`);
+  return matches?.values().next().value ?? token;
+}
+
 function itemInputs(s, id, extra = []) {
   if (!s.items.has(id)) throw Error(`Unknown run item ${id}`);
   if (!Array.isArray(extra) || extra.some(d => typeof d !== 'string')) throw Error('dependencies must be an ID array');
   const seen = new Map(), queue = [id, ...extra];
   while (queue.length) {
     let key = queue.pop();
-    if (!s.items.has(key) && !s.planned.has(key) && !existsSync(join(s.root,'items',`${safe(key)}.md`))) {
+    if (s.invalidItems) key = localIdentity(s, key);
+    else if (!s.items.has(key) && !s.planned.has(key) && !existsSync(join(s.root,'items',`${safe(key)}.md`))) {
       if (!s.aliases) {
         s.aliases=new Map();
         const names=readdirSync(join(s.root,'items')).filter(name=>name.endsWith('.md'));

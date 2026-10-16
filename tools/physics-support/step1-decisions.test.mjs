@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, readdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { recordStep1, checkStep1 } from './step1-decisions.mjs';
@@ -79,4 +79,78 @@ test('empty scaffolds, malformed records and missing evidence fail closed', t =>
   assert.ok(f.check().work.some(row => row.reason === 'Empty scaffold inventory'));
   writeFileSync(join(f.root, 'research/demo-step1-lem-local-first.json'), '{"version":2}');
   assert.throws(f.check, /Invalid Step 1 record/);
+});
+
+const carrier = (f, id, fields = '') => writeFileSync(join(f.root, 'items', `${id}.md`),
+  `---\nid: ${id}\n${fields}---\nDefinition.\n`);
+
+test('local recording excludes malformed unrelated carriers during alias lookup; drained checking stays strict', t => {
+  const f = fixture(t);
+  carrier(f, 'def-aliased', 'names: &names [supplier-alias]\naliases: *names\ndeps: []\n');
+  carrier(f, 'def-unrelated', 'aliases: [other-alias]\nphysical_scope: [unfinished\n');
+  f.pages[0].items[0].deps = ['supplier-alias']; f.save();
+  const row = f.record('lem-local-first');
+  assert.match(row.sha256, /^[a-f0-9]{64}$/);
+  assert.throws(f.check, /Flow sequence/);
+  // Removing an unrelated broken carrier cannot change the actual input hash.
+  rmSync(join(f.root, 'items/def-unrelated.md'));
+  assert.equal(f.check().ready, 1);
+  carrier(f, 'def-aliased', 'aliases: [supplier-alias]\ndeps: []\nchanged: true\n');
+  assert.equal(f.check().ready, 0);
+});
+
+for (const use of ['target', 'direct', 'transitive-alias', 'examined'])
+  test(`malformed ${use} carrier fails local recording without writing a readiness receipt`, t => {
+    const f = fixture(t);
+    const malformed = 'aliases: [broken-alias]\nphysical_scope: [unfinished\n';
+    if (use === 'target') carrier(f, 'lem-local-first', malformed);
+    else {
+      carrier(f, 'def-broken', malformed);
+      if (use === 'direct') f.pages[0].items[0].deps = ['def-broken'];
+      if (use === 'transitive-alias') carrier(f, 'def-published-input', 'deps: [broken-alias]\n');
+    }
+    f.save();
+    assert.throws(() => f.record('lem-local-first', use === 'examined' ? { dependencies: ['broken-alias'] } : {}), /Flow sequence/);
+    assert.equal(readdirSync(join(f.root, 'research')).some(name => name.startsWith('demo-step1-')), false);
+  });
+
+test('relevant duplicate aliases and carrier identity claims remain blocking, including malformed claimants', t => {
+  for (const malformed of [false, true]) {
+    const f = fixture(t);
+    carrier(f, 'def-first', 'aliases: [supplier-alias]\n');
+    carrier(f, 'def-second', `aliases: [supplier-alias]\n${malformed ? 'scope: [unfinished\n' : ''}`);
+    f.pages[0].items[0].deps = ['supplier-alias']; f.save();
+    assert.throws(() => f.record('lem-local-first'), /Ambiguous.*supplier-alias/);
+    carrier(f, 'def-second', `id: def-published-input\n${malformed ? 'scope: [unfinished\n' : ''}`);
+    f.pages[0].items[0].deps = ['def-published-input']; f.save();
+    assert.throws(() => f.record('lem-local-first'), /Ambiguous.*def-published-input/);
+  }
+});
+
+test('nonmapping, mismatched identity and malformed dependency declarations in reached carriers fail closed', t => {
+  for (const content of ['---\n[not, a, mapping]\n---\n', '---\nid: def-other\n---\n', '---\nid: def-published-input\ndeps: wrong\n---\n', '---\nid: def-published-input\naliases: wrong\n---\n']) {
+    const f = fixture(t);
+    writeFileSync(f.supplier, content);
+    assert.throws(() => f.record('lem-local-first'), /mapping|identity|dependency IDs/);
+  }
+});
+
+test('local recording keeps complete manifest structural and ownership checks', t => {
+  for (const change of [
+    f => { f.pages[1].items.push({ id: 'lem-local-first' }); f.save(); },
+    f => { f.pages[1].id = f.pages[0].id; f.save(); },
+    f => { f.pages[0].companion = 'absent'; f.save(); },
+    f => { f.pages[1].requires = 'invalid'; f.save(); },
+    f => writeFileSync(join(f.root, 'research/demo-batch-2.pages.json'), '{unfinished'),
+  ]) {
+    const f = fixture(t); change(f);
+    assert.throws(() => f.record('lem-local-first'), /Duplicate|ownership|pair|JSON/);
+  }
+});
+
+test('a malformed alias declaration used as a supplier cannot become a missing-input sentinel', t => {
+  const f = fixture(t);
+  carrier(f, 'def-malformed-alias', 'aliases: bad-alias\n');
+  f.pages[0].items[0].deps = ['bad-alias']; f.save();
+  assert.throws(() => f.record('lem-local-first'), /aliases must name dependency IDs/);
 });
