@@ -145,8 +145,13 @@ function localIdentity(s, token) {
       const doc = yaml().parseDocument(text.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1] ?? '');
       // Valid YAML aliases/anchors have exactly the ordinary parser meaning.
       if (!doc.errors.length) {
-        const fm = doc.toJS();
-        if (Array.isArray(fm?.aliases)) for (const alias of fm.aliases) add(aliases, alias, id);
+        try {
+          const fm = doc.toJS();
+          if (Array.isArray(fm?.aliases)) for (const alias of fm.aliases) add(aliases, alias, id);
+        } catch {
+          // Unresolved YAML anchors can fail conversion without parse errors.
+          // Retain raw identity claims below; reached content is still strict.
+        }
       }
       // Inspect all claims (including duplicate YAML keys), so malformed YAML
       // cannot hide an alias collision or a second claim to a reached identity.

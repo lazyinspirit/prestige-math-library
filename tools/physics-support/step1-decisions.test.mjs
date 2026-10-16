@@ -154,3 +154,27 @@ test('a malformed alias declaration used as a supplier cannot become a missing-i
   f.pages[0].items[0].deps = ['bad-alias']; f.save();
   assert.throws(() => f.record('lem-local-first'), /aliases must name dependency IDs/);
 });
+
+test('unrelated unresolved YAML anchors do not prevent local recording', t => {
+  const f = fixture(t);
+  carrier(f, 'def-unrelated', 'deps: *missing\n');
+  assert.match(f.record('lem-local-first').sha256, /^[a-f0-9]{64}$/);
+});
+
+test('an actual supplier with an unresolved YAML anchor still fails strictly', t => {
+  const f = fixture(t);
+  carrier(f, 'def-published-input', 'deps: *missing\n');
+  assert.throws(() => f.record('lem-local-first'), /Unresolved alias/);
+  assert.equal(readdirSync(join(f.root, 'research')).some(name => name.startsWith('demo-step1-')), false);
+});
+
+test('unresolved YAML anchors cannot conceal relevant raw identity or alias conflicts', t => {
+  const f = fixture(t);
+  carrier(f, 'def-first', 'aliases: [supplier-alias]\n');
+  carrier(f, 'def-second', 'aliases: [supplier-alias]\ndeps: *missing\n');
+  f.pages[0].items[0].deps = ['supplier-alias']; f.save();
+  assert.throws(() => f.record('lem-local-first'), /Ambiguous.*supplier-alias/);
+  writeFileSync(join(f.root, 'items/def-second.md'), '---\nid: def-published-input\ndeps: *missing\n---\n');
+  f.pages[0].items[0].deps = ['def-published-input']; f.save();
+  assert.throws(() => f.record('lem-local-first'), /Ambiguous.*def-published-input/);
+});
