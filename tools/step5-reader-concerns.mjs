@@ -127,7 +127,7 @@ export function loadReaderConcerns(root,run,{requireCollection=true}={}) {
 export function readerConcernSession(root,run,phase,round,unit) {
   const packPath=join(root,'research',`${run}-step5-v2`,`${phase}-${round}.json`);
   if(!existsSync(packPath))return {};
-  const pack=read(packPath),owners=pack.reader_concern_owners??{};
+  const pack=read(packPath),owners=pack.reader_review_owners??pack.reader_concern_owners??{};
   if(!(pack.assignments?.[unit]??[]).some(id=>owners[id]===unit))return {};
   const sessionHome=join(root,'.autopilot',run,'step5-reader-owner-sessions',`u${unit}`);
   if(phase==='impact-initial'&&round===1)return {sessionHome};

@@ -602,6 +602,7 @@ function writeTasks(root,pack,mode) {
         'Examine assigned frontier consumers, not the whole library. Assignment requires examination, not an edit. Leave a sound consumer byte-for-byte unchanged with an item-specific explanation. Repair only an actual logical defect using the smallest sufficient edit; no stylistic or unrelated rewriting. Work supplier-before-consumer and reconcile only metadata actually invalidated. A reference is not automatic repair authority. Report direct downstream effects of statement changes, including outside consumers for separate maintenance.',
       `Return JSON {run:"${pack.run}",phase:"${pack.phase}",round:${pack.round},unit:"${unit}",input_sha256:"${digest(pack)}",decisions:[],reviews:[],created_items:[],downstream:[]}. Copy these exact identity values; a phase such as impact-repeat is not repeat. Each decision includes id,model,context_sha256,outcome,reason,uncertain:false,source_urls:[...],familiar:boolean. Each review includes id,disposition:"repaired"|"unaffected"|"authored",post_sha256,review_context_sha256,reason,uncertain:false,source_urls,familiar. Disposition describes the item carrier: if its itemHashGuard is unchanged from the assignment before hash, use unaffected even when you repaired a contract or page; retain those metadata repairs explicitly in the reason and metadata_repair_only:true. Never claim an item repair without an item change. All assigned and created items require a review; only a newly created item uses authored. Each created_items row includes id,kind,home_page,batch,consumers:[direct consumer IDs],reason,uncertain:false,source_urls,familiar. Reasons must explain actual logical checks (at least 40 characters). familiar:false requires authoritative source URLs actually consulted; never switch it to true merely to pass validation. Unresolved uncertainty blocks completion.`,
       `Immediately after completing each mathematical review, before editing another supplier, run node tools/step5-workflow.mjs review-contexts --run ${pack.run} --items ID and copy its post_sha256 and review_context_sha256 into that review. You may batch ids reviewed on the same stable state. Never recompute an old review's context after a supplier edit without actually reviewing its effects again. The controller will schedule unresolved effects before certification.`,
+      pack.reader_review_owners?`This pass retains your own genuine prior reviewer session. Selected same-reviewer obligations for this lane: ${assigned.filter(id=>pack.reader_review_owners[id]===unit).join(', ')||'(none)'}. Actually examine each current assigned consumer against your earlier supplier changes. Another reviewer may separately owe the same consumer in a later serialized pass; your review supplies only your own obligation.`:'',
       mode==='adjudicate' ? 'The assigned tuples below are ordered by increasing in-run dependency level. Adjudicate and repair lower-level items before higher-level items within this batch; keep multiple tuples for the same item together.' : '',
       mode==='adjudicate' ? `Assigned item order: ${[...new Set(assigned.map(row=>row.id))].map(id=>`${pack.dependency_levels?.[id]??'?'}:${id}`).join(', ')||'(none)'}.` : '',
       mode==='adjudicate' ? 'Include canonical defect-ledger and published-ledger proposed updates in your report as ledger_updates. The controller merges shared adjudication evidence; do not edit shared ledgers concurrently. No claims of source reading you did not perform.' :
@@ -1297,7 +1298,124 @@ export function impactWork(root,run,phase,round) {
 export const maintenanceLabel=(phase,round,id,lane)=>`consumer-maintenance-${phase}-r${round}-${id}-lane-${lane}`;
 export const maintenancePack=(root,run,id)=>read(join(root,'research',`${run}-consumer-maintenance`,`${id}.json`));
 
-export function assertImpactProgress(packs,pending,current,{items=null}={}) {
+// Keep the authentic reviewer identity separate from an item's several review
+// obligations. A native review belongs to its report lane and persistent session,
+// never to the last writer or an arbitrarily selected supplier owner.
+function readerReviewOwnership(root,run,packs,receipts,items,current) {
+  const obligations=new Map(),originalOwners={},events=[],records=[],contexts=reviewContexts(items);
+  const frontier=new Set(packs.flatMap(pack=>pack.frontier_ids??[]));
+  const add=(id,unit)=>{
+    if(!frontier.has(id))return false;
+    requireValue(['1','2','3'].includes(unit),`invalid reader reviewer lane: ${id}/${unit}`);
+    if(!obligations.has(id))obligations.set(id,new Set());
+    const owners=obligations.get(id),size=owners.size;owners.add(unit);return owners.size!==size;
+  };
+  for(const pack of packs)if(pack.reader_concerns?.length){
+    for(const concern of pack.reader_concerns){
+      const unit=pack.reader_concern_owners?.[concern.id];
+      requireValue(unit&&pack.assignments[unit]?.includes(concern.id)
+        &&(!originalOwners[concern.id]||originalOwners[concern.id]===unit),
+        `reader concern original reviewer changed: ${concern.id}`);
+      originalOwners[concern.id]=unit;add(concern.id,unit);
+    }
+  }
+  if(!obligations.size)return {originalOwners,obligations,pending:new Map(),coverage:[]};
+  const originCache=new Map();
+  const origin=unit=>{
+    if(originCache.has(unit))return originCache.get(unit);
+    const path=join(root,'research',`${run}-dispatch`,`alpha-repair-${workerLabel('impact-initial',1,unit)}.result.json`);
+    const result=read(path),sha256=digest(readFileSync(path,'utf8'));
+    requireValue(result.run===run&&result.role==='alpha-repair'&&result.label===workerLabel('impact-initial',1,unit)
+      &&result.ok===true&&result.model===MODELS.sol61.id&&result.provider_effort==='high'
+      &&result.session_home===join(root,'.autopilot',run,'step5-reader-owner-sessions',`u${unit}`)
+      &&typeof result.session_id==='string'&&result.session_id.length>0,
+      `reader concern lacks genuine persistent reviewer origin: ${unit}`);
+    const value={path,result,sha256};originCache.set(unit,value);return value;
+  };
+  for(let index=0;index<packs.length;index++){
+    const pack=packs[index],receipt=receipts[index];
+    // Frozen earlier obligations cannot disappear when a later repair changes an
+    // edge. This adds duties only; it never supplies coverage for any of them.
+    for(const [id,units]of Object.entries(pack.reader_review_obligations??{})){
+      requireValue(Array.isArray(units)&&units.length>0,`invalid reader review obligations: ${id}`);
+      for(const unit of units)add(id,unit);
+    }
+    const nativeReports=new Map(pack.units.map(unit=>[unit,read(workerReport(root,run,pack.phase,pack.round,unit))]));
+    for(const event of receipt.statement_events??[]){
+      if(event.before_statement_sha256===event.after_statement_sha256)continue;
+      const createdBy=unit=>!Object.hasOwn(pack.before,event.id)
+        &&nativeReports.get(unit).created_items.some(row=>row.id===event.id)
+        &&receipt.created_items.some(row=>row.id===event.id);
+      const units=pack.units.filter(unit=>pack.assignments[unit]?.includes(event.id)||createdBy(unit));
+      const review=units.length===1?nativeReports.get(units[0]).reviews.find(row=>row.id===event.id):null;
+      requireValue((review?.disposition==='repaired'||review?.disposition==='authored'&&createdBy(units[0]))
+        &&review.post_sha256===receipt.post[event.id],
+        `reader repair event lacks its actual native repairing or creating lane: ${event.id}`);
+      events.push({id:event.id,unit:units[0]});
+    }
+    for(const unit of pack.units){
+      const reportPath=workerReport(root,run,pack.phase,pack.round,unit),report=nativeReports.get(unit);
+      const dispatchPath=join(root,'research',`${run}-dispatch`,`alpha-repair-${workerLabel(pack.phase,pack.round,unit)}.result.json`);
+      for(const review of report.reviews??[])records.push({id:review.id,unit,review,pack,receipt,reportPath,dispatchPath});
+    }
+  }
+  // Only actual interface changes propagate. If an already affected consumer
+  // itself restated, its actual modifying reviewer owns that next boundary.
+  // Iterate to cover supplier-before-consumer changes within the same pass.
+  const edges=discoverDownstream({items,repairedIds:[...new Set(events.map(row=>row.id))]});
+  const historical=packs.flatMap(pack=>pack.impacts??[]);
+  let grew=true;
+  while(grew){
+    grew=false;
+    for(const event of events)if(obligations.has(event.id)){
+      grew=add(event.id,event.unit)||grew;
+      for(const impact of [...edges,...historical])if(impact.suppliers?.includes(event.id))grew=add(impact.id,event.unit)||grew;
+    }
+  }
+  const pending=new Map(),coverage=[];
+  for(const [id,units]of [...obligations].sort(([a],[b])=>a.localeCompare(b))){
+    for(const unit of [...units].sort()){
+      const auth=origin(unit);
+      // Every qualifying review is looked up in its original native report;
+      // aggregate receipts cannot relabel another lane's review as this one's.
+      let match=null;
+      for(const record of records.filter(row=>row.id===id&&row.unit===unit)){
+        const claimed=(record.pack.reader_review_owners??record.pack.reader_concern_owners)?.[id]===unit;
+        const currentReview=contexts.matches(record.review,current,record.receipt.post);
+        if(!claimed&&!currentReview)continue;
+        requireValue(record.receipt.evidence[record.reportPath]===digest(readFileSync(record.reportPath,'utf8'))
+          &&record.receipt.evidence[record.dispatchPath]===digest(readFileSync(record.dispatchPath,'utf8'))
+          &&record.receipt.reviews.some(row=>digest(row)===digest(record.review)),
+          `reader review is not bound to its original collected native evidence: ${id}/${unit}`);
+        const dispatch=read(record.dispatchPath);
+        const sameReviewer=dispatch.run===run&&dispatch.role==='alpha-repair'
+          &&dispatch.label===workerLabel(record.pack.phase,record.pack.round,unit)
+          &&dispatch.ok===true&&dispatch.model===MODELS.sol61.id&&dispatch.provider_effort==='high'
+          &&dispatch.session_home===auth.result.session_home&&dispatch.session_id===auth.result.session_id;
+        // An incidental lane number grants no coverage. A genuine review from
+        // this exact session can count even before this item acquired a tag.
+        if(!claimed&&!sameReviewer)continue;
+        requireValue(sameReviewer,`reader review does not retain its genuine reviewer session: ${id}/${unit}`);
+        if(claimed&&(record.pack.phase!=='impact-initial'||record.pack.round!==1)){
+          const binding=record.pack.reader_owner_sessions?.[unit];
+          requireValue(binding?.result===auth.path&&binding.sha256===auth.sha256&&binding.session_id===auth.result.session_id
+            &&record.pack.input_evidence?.[auth.path]===auth.sha256,
+            `reader review continuation lacks its exact original session binding: ${id}/${unit}`);
+        }
+        if(!currentReview)continue;
+        match={id,unit,phase:record.pack.phase,report:record.reportPath,dispatch:record.dispatchPath,
+          session_id:dispatch.session_id,review_sha256:digest(record.review)};
+      }
+      if(match)coverage.push(match);
+      else {if(!pending.has(id))pending.set(id,[]);pending.get(id).push(unit);}
+    }
+  }
+  return {originalOwners,obligations,pending,coverage};
+}
+const readerObligationInventory=ownership=>Object.fromEntries([...ownership.obligations]
+  .sort(([a],[b])=>a.localeCompare(b)).map(([id,units])=>[id,[...units].sort()]));
+
+export function assertImpactProgress(packs,pending,current,{items=null,reviewOwners=null}={}) {
   const targets=[...new Set(pending)].sort();
   for(const pack of packs) {
     // Pre-statement-policy assignments may legitimately need one migration
@@ -1305,7 +1423,9 @@ export function assertImpactProgress(packs,pending,current,{items=null}={}) {
     if(!pack.before_statements)continue;
     const previous=[...new Set(Object.values(pack.assignments).flat())].sort();
     const scoped=items?prerequisiteScope(items,targets):subjectScope(pack);
-    if(JSON.stringify(previous)===JSON.stringify(targets)&&diff(pack.before,current).filter(id=>!scoped||scoped.has(id)).length===0)
+    const sameOwners=!reviewOwners||targets.every(id=>!reviewOwners[id]
+      ||(pack.reader_review_owners?.[id]??pack.units.find(unit=>pack.assignments[unit]?.includes(id)))===reviewOwners[id]);
+    if(JSON.stringify(previous)===JSON.stringify(targets)&&sameOwners&&diff(pack.before,current).filter(id=>!scoped||scoped.has(id)).length===0)
       throw Error(`Step 5 no-progress hold: ${pack.phase} already assigned the same ${targets.length} pending item(s) at this exact content state. Resolve stale/missing review evidence or the repair oscillation before retry; no duplicate owner wave was launched.`);
   }
 }
@@ -1320,7 +1440,7 @@ export function advanceImpact(root,run,phase,round) {
   progress.work_order??=progress.passes.map(pass=>({kind:'frontier',phase:pass}));
   for(const row of progress.superseded??[])verifyEvidence(row.evidence,{root,run});
   verifyEvidence(progress.maintenance_evidence,{root,run});
-  if(progress.complete)return {complete:true,phase,round,passes:progress.passes};
+  if(progress.complete){verifyCompletedImpact(root,run,phase,round);return {complete:true,phase,round,passes:progress.passes};}
   if(progress.activeMaintenance){
     const pack=maintenancePack(root,run,progress.activeMaintenance);
     if(pack.lanes.some(lane=>!existsSync(join(root,lane.report))))return {complete:false,maintenance:pack};
@@ -1373,29 +1493,29 @@ export function advanceImpact(root,run,phase,round) {
   const operationalIds=[...new Set(completed.flatMap(receipt=>receipt.operational_resolution?.subjects??[]))]
     .filter(id=>!scope.targets.includes(id)&&!changed.includes(id));
   if(operationalIds.length){verifyOperationalCoverage(root,run,operationalIds,current);for(const id of operationalIds)required.delete(id);}
-  const pending=[...required].filter(id=>!contexts.matches(reviews.get(id)??sourceReviews.get(id),current,snapshots.get(id))).sort();
+  const packs=progress.passes.map(pass=>readPack(root,run,pass,round));
+  const ownership=readerReviewOwnership(root,run,packs,completed,items,current);
+  const pending=[...new Set([...required].filter(id=>!contexts.matches(reviews.get(id)??sourceReviews.get(id),current,snapshots.get(id)))
+    .concat([...ownership.pending.keys()]))].sort();
   if(pending.length) {
-    assertImpactProgress(progress.passes.map(pass=>readPack(root,run,pass,round)),pending,current,{items});
+    // One actual reviewer per item in this pass. Remaining owed reviewers run
+    // in later drained native passes, preserving disjoint write assignments.
+    const selectedOwners=Object.fromEntries([...ownership.pending].map(([id,units])=>[id,units[0]]));
+    for(const id of pending)if(!selectedOwners[id]&&ownership.obligations.has(id))selectedOwners[id]=[...ownership.obligations.get(id)].sort()[0];
+    assertImpactProgress(packs,pending,current,{items,reviewOwners:selectedOwners});
     const nextPhase=nextImpactPhase(phase,progress);
     const assignments={'1':[],'2':[],'3':[]};
     const {order,cycles}=orderImpacts(items,pending);
-    // Admitted supplier restatements retain their actual native reviewer.
-    const concernOwners=Object.assign({},...progress.passes.map(pass=>readPack(root,run,pass,round).reader_concern_owners??{}));
-    const propagated={...concernOwners};
-    for(const impact of impacts){
-      const owners=new Set(impact.suppliers.map(id=>concernOwners[id]).filter(Boolean));
-      if(propagated[impact.id])owners.add(propagated[impact.id]);
-      requireValue(owners.size<=1,`reader concern consumer has conflicting reviewer owners: ${impact.id}`);
-      if(owners.size)propagated[impact.id]=[...owners][0];
-    }
-    order.forEach((id,index)=>assignments[propagated[id]??String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
+    order.forEach((id,index)=>assignments[selectedOwners[id]??String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
     const identity=libraryIdentity(root,run);
     const pack={version:2,run,phase:nextPhase,basePhase:phase,repair_scope:'frontier',frontier_ids:[...scope.frontier].sort(),consumer_maintenance:scope.maintenance,round,units:['1','2','3'],assignments,before:current,before_statements:statementHashes(root,run),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),seeds,impacts,cycles,failures:null,gateAssignments:{},ledger_updates:completed.flatMap(receipt=>receipt.ledger_updates??[])};
-    if(Object.keys(propagated).length){
-      pack.reader_concern_owners=propagated;
+    if(ownership.obligations.size){
+      pack.reader_concern_owners=ownership.originalOwners;
+      pack.reader_review_obligations=readerObligationInventory(ownership);
+      pack.reader_review_owners=selectedOwners;
       pack.reader_owner_sessions={};pack.input_evidence={};
       for(const unit of pack.units){
-        if(!assignments[unit].some(id=>propagated[id]===unit))continue;
+        if(!assignments[unit].some(id=>selectedOwners[id]===unit))continue;
         const origin=join(root,'research',`${run}-dispatch`,`alpha-repair-${workerLabel('impact-initial',1,unit)}.result.json`);
         const result=read(origin);
         pack.reader_owner_sessions[unit]={result:origin,sha256:digest(readFileSync(origin,'utf8')),session_id:result.session_id};
@@ -1426,6 +1546,10 @@ export function advanceImpact(root,run,phase,round) {
   const receipt={version:2,run,phase,round,errors:[],decisions:[],reviews:[...reviews.values()],created_items:completed.flatMap(row=>row.created_items??[]),changed,restated:seeds,post:current,evidence,downstream:scope.targets,consumer_maintenance:scope.maintenance,maintenance_packs:[...maintenanceIds],ledger_updates:completed.flatMap(row=>row.ledger_updates??[])};
   receipt.operational_carries=operationalIds;
   receipt.operational_resolutions=completed.filter(row=>row.operational_resolution).map(row=>row.operational_resolution);
+  if(ownership.obligations.size){
+    receipt.reader_review_obligations=readerObligationInventory(ownership);
+    receipt.reader_owner_reviews=ownership.coverage;
+  }
   frozen(join(workflowDir(root,run),`${phase}-${round}-closed.json`),receipt);
   progress.complete=true;atomic(path,progress);
   return {complete:true,phase,round,passes:progress.passes};
@@ -1468,6 +1592,11 @@ export function verifyCompletedImpact(root,run,phase,round) {
   const contexts=reviewContexts(items);
   for(const id of required)if(frontier.has(id))requireValue(contexts.matches(reviews.get(id),current,snapshots.get(id)),
     `completed owner collection lacks current review: ${id}`);
+  const ownership=readerReviewOwnership(root,run,progress.passes.map(pass=>readPack(root,run,pass,round)),passes,items,current);
+  requireValue(ownership.pending.size===0,
+    `completed owner collection lacks current same-reviewer obligations: ${[...ownership.pending].map(([id,units])=>`${id}/${units.join(',')}`).join('; ')}`);
+  if(ownership.obligations.size)requireValue(digest(result.reader_review_obligations)===digest(readerObligationInventory(ownership))
+    &&digest(result.reader_owner_reviews)===digest(ownership.coverage),'completed owner reviewer obligations or native provenance changed');
   return result;
 }
 
@@ -1574,11 +1703,12 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
     const current=hashes(root,run);for(const row of scoped)requireValue(row.guard_sha256===current[row.id],`stale completed certification ${row.id}`);
     const contexts=contextHasher(root,scoped.map(row=>row.id));
     for(const row of scoped){const now=contexts.get(row.id);requireValue(now?.item_sha256===row.item_sha256&&now?.context_sha256===row.context_sha256,`stale completed certification context ${row.id}`);}
+    verifyCompletedImpact(root,run,phase,round);
     atomic(join(workflowDir(root,run),'certification.json'),saved);return saved;
   }
   const advanced=advanceImpact(root,run,phase,round);
   requireValue(advanced.complete,'owner impact repair continuation must finish before certification');
-  const dir=workflowDir(root,run), result=read(effectiveWorkflowArtifact(root,run,join(dir,`${phase}-${round}-closed.json`)));
+  const dir=workflowDir(root,run), result=verifyCompletedImpact(root,run,phase,round);
   verifyEvidence(result.evidence,{root,run});
   const source=phase==='impact-initial'?'initial':'repeat';
   const prior=verifyCertification(root,run);
