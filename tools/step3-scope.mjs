@@ -545,6 +545,20 @@ function findingDependencies(batch, consumers, findings, manifests = manifestIte
   return dependencies;
 }
 
+// Extra reads are context only, never additional flag/acceptance scope.
+function refuterContext(batch, scope, opened, reportError, manifests = manifestItems()) {
+  const required = new Set(scope.refuter_scope ?? []);
+  const extra = opened.filter(id => !required.has(id));
+  if (!extra.length) return [];
+  const roots = [...required], runIds = new Set(Object.values(manifests).flat());
+  const published = publishedDependencies(roots, runIds);
+  const inRun = inRunDependencies(batch, roots, manifests);
+  for (const id of extra) if (!published.has(id) && !inRun.has(id)) {
+    reportError(`extra opened context ${id} is not a reachable declared supplier of the required scope`);
+  }
+  return [...extra].sort();
+}
+
 // Definition carriers are exact source/manifest evidence even when there is no
 // numbered-proof contract. The null contract hash records that absence; it is
 // not a proof certificate and does not waive normal definition adjudication.
@@ -977,10 +991,12 @@ if (command === 'collect') {
   if (!unique(notOpened)) error('not_opened contains duplicate ids');
   const overlap = opened.filter((id) => new Set(notOpened).has(id));
   if (overlap.length) error(`opened and not_opened overlap: ${overlap.join(', ')}`);
-  if (!sameSet([...opened, ...notOpened], scope.refuter_scope)) error('opened and not_opened do not exactly partition the computed refuter scope');
+  const required = new Set(scope.refuter_scope ?? []);
+  const context = refuterContext(batch, scope, opened, error);
+  if (!sameSet([...opened.filter(id => required.has(id)), ...notOpened], scope.refuter_scope)) error('required opened and not_opened do not exactly partition the computed refuter scope');
   if (notOpened.length) error(`refuter left ${notOpened.length} item(s) unopened: ${notOpened.join(', ')}`);
 
-  const openedSet = new Set(opened);
+  const openedSet = new Set(opened.filter(id => required.has(id)));
   const live = liveFingerprints(batch);
   const requiredPages = loadRequiredPageRoutes(ROOT, run, batch);
   for (const finding of scope.reader_findings ?? []) if (finding.owner_required_page_route
@@ -1019,6 +1035,8 @@ if (command === 'collect') {
   }
 
   scope.opened = [...opened].sort();
+  if (context.length) scope.refuter_context_opened = context;
+  else delete scope.refuter_context_opened;
   scope.not_opened = [];
   scope.flagged = [...new Set(refuterFindings.map((finding) => finding.id))].sort();
   scope.refuter_findings = refuterFindings;
@@ -1259,8 +1277,10 @@ if (command === 'check') {
           if (!matchesBatchLabel(report.batch, batch)) reportError(`report names batch ${report.batch ?? '(missing)'}`);
           if (!unique(opened) || !unique(notOpened) || opened.some((id) => notOpened.includes(id))) reportError('coverage arrays are not unique and disjoint');
           if (!sameSet(opened, scope.opened ?? []) || notOpened.length) reportError('coverage no longer matches the collected scope');
+          const context = refuterContext(batch, scope, opened, reportError, manifests);
+          if (!sameSet(context, scope.refuter_context_opened ?? [])) reportError('prerequisite context no longer matches the collected context');
           if (typeof report.coverage_note !== 'string' || !report.coverage_note.trim()) reportError('coverage_note is empty');
-          const normalized = normalizeRefuterFindings(flagged, batch, new Set(opened), reportError);
+          const normalized = normalizeRefuterFindings(flagged, batch, new Set(opened.filter(id => (scope.refuter_scope ?? []).includes(id))), reportError);
           const stored = (scope.refuter_findings ?? []).map(finding => reportOnlyFinding(finding, true));
           if (JSON.stringify(normalized) !== JSON.stringify(stored)) reportError('findings no longer match the collected obligations');
           const inRun = findingDependencies(batch, scope.manifest_post ?? [], scope.reader_findings ?? [], manifests);
@@ -1283,7 +1303,7 @@ if (command === 'check') {
         ...(scope.reader_findings ?? []).filter(row => row.subject_type === 'in-run-dependency').map(row => row.id),
         ...[...downstream.values()].map(route => route.entry.consumer_id)])];
       if (!sameSet(scope.refuter_scope ?? [], expectedRefuterScope)) error('refuter-scope', `batch ${batch} refuter scope is stale`);
-      if (!sameSet(scope.opened ?? [], scope.refuter_scope ?? [])) error('refuter-coverage', `batch ${batch} did not open every routed refuter item`);
+      if (!sameSet(scope.opened ?? [], [...(scope.refuter_scope ?? []), ...(scope.refuter_context_opened ?? [])])) error('refuter-coverage', `batch ${batch} did not open every routed refuter item plus its recorded context`);
       if ((scope.not_opened ?? []).length) error('refuter-incomplete', `batch ${batch} retains unopened items`);
       for (const finding of scope.refuter_findings ?? []) {
         if (!(scope.refuter_scope ?? []).includes(finding.id)) error('flag-out-of-scope', `[${finding.id}] ${finding.obligation} is outside the refuter scope`);
