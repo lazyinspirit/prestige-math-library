@@ -6,6 +6,7 @@ import { readFileSync, readdirSync, lstatSync, existsSync } from 'node:fs';
 import { resolve, relative, isAbsolute } from 'node:path';
 import { split, yaml } from './pathway-lib.mjs';
 import { itemHashGuard } from './item-hash.mjs';
+import { verifyCertification } from './step5-workflow.mjs';
 const sha = x => createHash('sha256').update(x).digest('hex');
 const canonical = x => Array.isArray(x) ? x.map(canonical) : x && typeof x === 'object'
   ? Object.fromEntries(Object.keys(x).sort().map(k => [k,canonical(x[k])])) : x;
@@ -26,6 +27,59 @@ const bytes=(root,p)=>readFileSync(file(root,p));
 const json=(root,p)=>JSON.parse(bytes(root,p));
 function ref(root,r) {assert(r && /^[a-f0-9]{64}$/.test(r.sha256 ?? ''),'missing reference');const b=bytes(root,r.path);assert(sha(b)===r.sha256,`changed ${r.path}`);return b;}
 const front = b => yaml().parse(split(String(b)).fm);
+function currentManifestRoute(root,run,e,manifest) {
+  const rows=Array.isArray(manifest)?manifest:manifest.pages;
+  const origin=rows.filter(p=>p.id===e.origin_page);assert(origin.length===1 && origin[0].requires?.includes(e.page)
+    && origin[0].items?.some(x=>(typeof x==='string'?x:x.id)===e.consumer_id),'page not required by assigned consumer home');
+  for(const n of readdirSync(resolve(root,'research')).filter(n=>n.startsWith(`${run}-batch-`) && /-batch-\d+\.pages\.json$/.test(n))) {
+    const raw=json(root,`research/${n}`);assert(!(Array.isArray(raw)?raw:raw.pages).some(p=>p.id===e.page),'foreign page acquired run ownership');
+  }
+}
+// A closed route's original manifest remains historical after native Step-5
+// repairs update its mirrors. Resolve only the exact already-certified preimage;
+// no registry, closure key/hash, current manifest or native receipt is rewritten.
+function closureManifest(root,run,e) {
+  const r=e.manifest;assert(r?.path===`research/${run}-batch-${e.batch}.pages.json`,'wrong historical manifest');
+  const current=bytes(root,r.path);if(sha(current)===r.sha256)return;
+  assert(/^[a-f0-9]{64}$/.test(r.sha256??''),'missing historical manifest hash');
+  const dir=`research/${run}-step5-v2`,archive=`${dir}/supporting-metadata/${r.sha256}.json`;
+  const archived=ref(root,{path:archive,sha256:r.sha256});
+  const certificate=verifyCertification(root,run,{allowMissing:false});
+  assert(['impact-initial','impact-repeat','gate'].includes(certificate.phase)
+    &&Number.isSafeInteger(certificate.round)&&certificate.round>0,'historical manifest lacks native certification');
+  const frozen=json(root,`${dir}/certification-${certificate.phase}-${certificate.round}.json`);
+  assert(JSON.stringify(frozen)===JSON.stringify(certificate),'historical manifest certificate has no exact frozen receipt');
+  const binding=(evidence,path)=>Object.entries(evidence??{}).find(([p])=>resolve(root,p)===resolve(root,path))?.[1];
+  assert(binding(certificate.evidence,archive)===r.sha256,'manifest archive is not certified');
+  let native=false;
+  for(const [path,hash] of Object.entries(certificate.evidence??{})) {
+    const local=relative(resolve(root),resolve(root,path));
+    if(!new RegExp(`^${dir}/(?:impact-initial|impact-repeat|gate)-[1-9]\\d*-collected\\.json$`).test(local))continue;
+    const collected=JSON.parse(ref(root,{path:local,sha256:hash}));
+    if(binding(collected.evidence,archive)!==r.sha256)continue;
+    assert(collected.version===2&&collected.run===run&&['impact-initial','impact-repeat','gate'].includes(collected.phase)
+      &&Number.isSafeInteger(collected.round)&&collected.round>0
+      &&local===`${dir}/${collected.phase}-${collected.round}-collected.json`,'invalid historical native collection');
+    const packPath=`${dir}/${collected.phase}-${collected.round}.json`;
+    const pack=JSON.parse(ref(root,{path:packPath,sha256:binding(collected.evidence,packPath)}));
+    assert(pack.run===run&&pack.phase===collected.phase&&pack.round===collected.round
+      &&Array.isArray(pack.units)&&pack.units.length>0,'invalid historical owner pack');
+    for(const unit of pack.units) {
+      const label=`step5-v2-${pack.phase}-r${pack.round}-u${unit}`,reportPath=`${dir}/${label}.json`;
+      const report=JSON.parse(ref(root,{path:reportPath,sha256:binding(collected.evidence,reportPath)}));
+      const resultPath=`research/${run}-dispatch/alpha-repair-${label}.result.json`;
+      const result=JSON.parse(ref(root,{path:resultPath,sha256:binding(collected.evidence,resultPath)}));
+      assert(report.run===run&&report.phase===pack.phase&&report.round===pack.round&&String(report.unit)===String(unit)
+        &&report.input_sha256===sha(JSON.stringify(pack))&&result.run===run&&result.role==='alpha-repair'
+        &&result.label===label&&result.ok===true&&result.exit_code===0&&result.timed_out!==true,
+        'historical manifest lacks successful native owners');
+    }
+    native=true;break;
+  }
+  assert(native,'manifest archive lacks a certified successful native collection');
+  currentManifestRoute(root,run,e,JSON.parse(archived));
+  currentManifestRoute(root,run,e,JSON.parse(current));
+}
 export function validateRequiredPageRoute(root,run,e,receipt) {
   assert(safe(run) && e.version===1 && e.policy===policy && e.run===run && e.owner_identity==='/root'
     && e.mathematical_acceptance===false && e.historical_page_observation_bound===false,'invalid authority');
@@ -62,12 +116,7 @@ export function validateRequiredPageRoute(root,run,e,receipt) {
       && !s.page_manifest?.includes(e.page),'invalid foreign page snapshot');
   }
   assert(e.manifest.path===`research/${run}-batch-${e.batch}.pages.json`,'wrong manifest');
-  const manifest=JSON.parse(ref(root,e.manifest));const rows=Array.isArray(manifest)?manifest:manifest.pages;
-  const origin=rows.filter(p=>p.id===e.origin_page);assert(origin.length===1 && origin[0].requires?.includes(e.page)
-    && origin[0].items?.some(x=>(typeof x==='string'?x:x.id)===e.consumer_id),'page not required by assigned consumer home');
-  for(const n of readdirSync(resolve(root,'research')).filter(n=>n.startsWith(`${run}-batch-`) && /-batch-\d+\.pages\.json$/.test(n))) {
-    const raw=json(root,`research/${n}`);assert(!(Array.isArray(raw)?raw:raw.pages).some(p=>p.id===e.page),'foreign page acquired run ownership');
-  }
+  currentManifestRoute(root,run,e,JSON.parse(ref(root,e.manifest)));
   assert(/^library\/[a-z0-9-]+\/[a-z0-9-]+\.md$/.test(e.current_path)
     && e.current_path.endsWith('/'+e.page+'.md'),'wrong published page path');
   const homes=readdirSync(resolve(root,'library'),{withFileTypes:true}).filter(d=>d.isDirectory()
@@ -122,7 +171,8 @@ export function requiredPageClosureEvidence(root,run) {
   const out={[p]:sha(raw)};
   for(const e of doc.routes) for(const key of ['findings','report','native_result','prompt','pre_snapshot','post_snapshot','manifest','before','after','review']) {
     const r=e[key];assert(typeof r?.path==='string' && r.path.startsWith('research/'),'invalid historical closure path');
-    ref(root,r);assert(out[r.path]===undefined || out[r.path]===r.sha256,'ambiguous closure reference');out[r.path]=r.sha256;
+    if(key==='manifest')closureManifest(root,run,e);else ref(root,r);
+    assert(out[r.path]===undefined || out[r.path]===r.sha256,'ambiguous closure reference');out[r.path]=r.sha256;
   }
   return out;
 }

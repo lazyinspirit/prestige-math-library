@@ -267,6 +267,16 @@ findings retain the ordinary rejection; this receipt does not enlarge refuter
 or owned-page inventories. The Step-3 closure freezes this exact optional registry
 and its hash-bound native and owner historical evidence; later verification rejects
 registry or referenced-evidence mutation.
+A later native Step-5 manifest mirror repair may retain the route's exact old
+manifest through its existing content-addressed supporting-metadata archive.
+Closure accepts only the original expected hash, authenticated by a verified
+current certificate, its identical frozen certificate, and a certificate-bound
+native owner collection with its unchanged pack, reports and successful results.
+The original closure still records the original manifest path/hash. Current
+origin-page ownership, its explicit required-page edge, the same assigned
+consumer and the published page's exclusion from run ownership are checked
+separately. Other historical references remain strict; no registry or closure
+is refreshed and no new historical observation or acceptance is supplied.
 
 When a reader repairs some defects but cannot resolve another in the same
 draft, the owner may retain its original open finding through
@@ -329,6 +339,12 @@ central-certification policy. A selective closure joins the complete immutable
 frontier, hash-bound baseline and original native verdict inventory; it never
 accepts arbitrary models, invents verdicts or drops subjects. All normal item/context
 currency and exact rejection-adjudication checks continue to apply.
+Genuine native Step-5 helper creations stay separate from that frozen original
+frontier. Selective closure requires exactly all original IDs plus all creations
+from the authenticated native certificate, with no unknown, duplicate or omitted
+subject. Original baseline/Luna checks remain unchanged; helpers acquire no
+invented original verdict and require the existing current central certification
+or genuine current Sol evidence under ordinary closure currency checks.
 Repeated adjudication consumes the actual rejudge verdicts.
 An explicit native confirmed-fatal supplier scope blocker may receive a separately
 attributed current root repair review through the guarded

@@ -14,8 +14,14 @@ export function step5JudgePolicy(root, run, ids, judgeLedger) {
   const frontierPath = join(dir, 'frontier.json'), baselinePath = join(dir, 'baseline.json');
   const verdictPath = join(dir, 'step4-verdicts.json');
   const frontier = validateFrontier(read(frontierPath));
-  if (frontier.run !== run || ids.length !== frontier.ids.length
-    || [...ids].sort().some((id, index) => id !== [...frontier.ids].sort()[index])) throw Error('selective judge policy requires the complete frozen original frontier');
+  // Native helpers remain separately authenticated creations; they never
+  // acquire an original baseline or a carried Luna verdict. The selected scope
+  // must still contain every original and every certified creation exactly once.
+  const created = (certificate.creations ?? []).map(row => row.id);
+  if (created.some(id => frontier.ids.includes(id))) throw Error('selective judge policy creation overlaps the original frontier');
+  const expected = [...frontier.ids, ...created].sort();
+  if (frontier.run !== run || ids.length !== expected.length || new Set(ids).size !== ids.length
+    || [...ids].sort().some((id, index) => id !== expected[index])) throw Error('selective judge policy requires the complete frozen original frontier and certified creations');
   for (const path of [frontierPath, baselinePath, verdictPath]) {
     if (!certificate.evidence?.[path]) throw Error(`selective judge policy lacks frozen certification binding: ${path}`);
   }
@@ -31,9 +37,10 @@ export function step5JudgePolicy(root, run, ids, judgeLedger) {
   }
   return {
     models: [MODELS.luna.id, MODELS.sol61.id],
-    requiredModels(id, text) { return [itemHashGuard(text) === baseline[id] ? MODELS.luna.id : MODELS.sol61.id]; },
+    requiredModels(id, text) { return [!created.includes(id) && itemHashGuard(text) === baseline[id] ? MODELS.luna.id : MODELS.sol61.id]; },
     eligible(id, row, text) {
-      return itemHashGuard(text) !== baseline[id] || originals.get(id)?.some(original => isDeepStrictEqual(original, row));
+      return created.includes(id) ? row.model === MODELS.sol61.id
+        : itemHashGuard(text) !== baseline[id] || originals.get(id)?.some(original => isDeepStrictEqual(original, row));
     },
   };
 }
