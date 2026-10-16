@@ -277,6 +277,22 @@ origin-page ownership, its explicit required-page edge, the same assigned
 consumer and the published page's exclusion from run ownership are checked
 separately. Other historical references remain strict; no registry or closure
 is refreshed and no new historical observation or acceptance is supplied.
+Downstream routes use that same archive authentication for their supplier and
+consumer manifests, retaining exact historical and current subject inventories
+and current unique draft ownership and direct dependency checks. An authentic
+owner-captured original preimage absent from Step-5 certification may instead be
+bound by `RUN-step3-owner-manifest-continuities.json` (version 1,
+`owner-step3-historical-manifest-continuity`). This explicit root historical-only
+receipt binds the unchanged original registry, exact route/index/reference,
+original closed Step-3 receipt and successful native close result, recovered raw
+preimage and earlier owner receipt pinning its original hash. Durable copies of
+both original owner evidence files must live in run-owned `research/`; original
+runtime paths may remain provenance metadata but are not future inputs. Creation
+requires an archived paused/drained 5.9 state with the exact native ledger failure
+naming that changed downstream manifest. The original closure path/hash remains;
+no prior certificate binding, native observation or mathematical acceptance is
+invented. Missing or changed evidence fails closed; other historical references
+stay strict and all gates retain their ordinary current inputs.
 
 When a reader repairs some defects but cannot resolve another in the same
 draft, the owner may retain its original open finding through

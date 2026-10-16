@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync, lstatSync } from 'node:fs';
 import { resolve, relative, isAbsolute } from 'node:path';
 import { split, yaml } from './pathway-lib.mjs';
+import { historicalStep3Manifest } from './step3-manifest-history.mjs';
 import { draftOwnerMatcher } from './run-draft-ownership.mjs';
 import { requiredPageHash as hash } from './step3-owner-required-page-routes.mjs';
 export const downstreamConsumerHash = hash;
@@ -155,9 +156,17 @@ export function downstreamConsumerClosureEvidence(root,run) {
   const raw=bytes(root,p),doc=JSON.parse(raw);
   assert(doc.version===1 && doc.run===run && doc.policy===policy && Array.isArray(doc.routes),'wrong closure registry');
   const out={[p]:sha(raw)};
-  for(const e of doc.routes)for(const key of ['findings','report','native_result','prompt','pre_snapshot','post_snapshot',
+  for(const [index,e] of doc.routes.entries())for(const key of ['findings','report','native_result','prompt','pre_snapshot','post_snapshot',
     'consumer_pre_snapshot','manifest','consumer_manifest','supplier_before','supplier_after','consumer_registration_source','review']) {
-    const r=e[key];ref(root,r);assert(out[r.path]===undefined || out[r.path]===r.sha256,'ambiguous historical reference');out[r.path]=r.sha256;
+    const r=e[key];
+    if(['manifest','consumer_manifest'].includes(key)){
+      const batch=key==='manifest'?e.batch:e.consumer_batch,item=key==='manifest'?e.supplier_id:e.consumer_id;
+      const manifest=historicalStep3Manifest(root,run,batch,r,{kind:'downstream-consumer',registry:p,index,field:key});
+      for(const value of [manifest.historical,manifest.current])assert(inventory(JSON.parse(value)).filter(id=>id===item).length===1,
+        'subject absent or duplicated in historical/current assigned manifest');
+      if(manifest.archived)currentOwnership(root,run,e);
+    }else ref(root,r);
+    assert(out[r.path]===undefined || out[r.path]===r.sha256,'ambiguous historical reference');out[r.path]=r.sha256;
   }
   for(const e of doc.routes)if(e.refuter_evidence)for(const key of ['report','native_result','prompt']) {
     const r=e.refuter_evidence[key];ref(root,r);assert(out[r.path]===undefined || out[r.path]===r.sha256,'ambiguous refuter reference');out[r.path]=r.sha256;
