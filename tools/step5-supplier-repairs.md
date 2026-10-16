@@ -68,3 +68,13 @@ by this evidence. Every other report check, supplier and consumer maintenance,
 certification, repeat-round obligation, original fatal count and complete native
 gate battery remains required. This receipt is not a false-positive disposition
 and does not turn a metadata-only consumer observation into an item repair.
+
+## Native creation consumer inventory
+
+Collection also joins the explicit original report `created_items[].consumers`
+into its downstream routing inventory after ordinary creation validation passes.
+Those consumers already name actual declared direct dependency edges and a
+completed assigned repair anchor; the original report retains their evidence.
+This deterministic union joins both original inventory fields into derived routing.
+It adds no review, decision, consumer waiver or certification. The ordinary
+actual-graph downstream inventory check still rejects every remaining omission.

@@ -1219,7 +1219,11 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
     evidence[dispatch]=digest(readFileSync(dispatch,'utf8'));
     for(const row of reports.find(value=>String(value.unit)===unit)?.created_items??[])creationAuthors.set(row.id,basename(dispatch));
   }
-  const receipt={...result,created_items:result.created_items.map(row=>({...row,author_result:creationAuthors.get(row.id)})),version:2,run,phase,round,evidence,post:hashes(root,run),downstream:[...new Set(reports.flatMap(row=>row.downstream))],ledger_updates:reports.flatMap(row=>row.ledger_updates??[])};
+  // Creation consumers are an explicit native inventory too. validateReports
+  // already checked their actual direct dependency and completed repair anchor;
+  // joining them records routing, never an additional mathematical review.
+  const downstream=[...new Set([...reports.flatMap(row=>row.downstream),...result.created_items.flatMap(row=>row.consumers)])];
+  const receipt={...result,created_items:result.created_items.map(row=>({...row,author_result:creationAuthors.get(row.id)})),version:2,run,phase,round,evidence,post:hashes(root,run),downstream,ledger_updates:reports.flatMap(row=>row.ledger_updates??[])};
   if(operationalSupplement){
     receipt.operational_resolution={path:operationalSupplement.path,subjects:[...operationalSupplement.ids],
       reason:operationalSupplement.reason,mathematical_review:false,native_coverage_adopted:false};
