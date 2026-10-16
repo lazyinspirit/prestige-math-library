@@ -131,7 +131,11 @@ field. Normalization retains `refuter:29:2` and the original flag's fields, with
 no invented `subject_type`, `consumer_id` or `observed_source`. The separate
 `owner_downstream_reader_obligation: reader:29:2` anchor selects the authenticated
 reader route; it is stripped together with derived carrier annotations during
-original-report reconciliation. Ambiguous anchors fail. This flag also keeps
+original-report reconciliation. Ambiguous anchors fail. The stamp caller's
+derived `batch` remains separate from native fields: it may be absent
+or exactly equal the authenticated origin batch, and only then is excluded from
+the exact native-flag comparison. A wrong batch or any other changed field fails.
+This flag also keeps
 `observed_sha256: null`, unbound history, and the actual batch34 current decision
 carrier. Its original independent flagged adjudication and ordinary closed-ledger
 requirements remain mandatory. No new shared-defect waiver is introduced.

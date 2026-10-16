@@ -119,6 +119,7 @@ export function downstreamConsumerRoute(root,run,batch,finding) {
   if(refuter) {
     assert(finding.subject_type===undefined && finding.consumer_id===undefined,'invented native refuter labels');
     assert(finding.route===undefined || finding.route==='flagged','wrong refuter adjudication route');
+    assert(finding.batch===undefined || finding.batch===route.entry.batch,'wrong derived refuter origin batch');
     const e=route.entry,r=e.refuter_evidence;
     assert(r,'missing explicit native refuter evidence');
     const report=JSON.parse(ref(root,r.report,`research/${run}-refute-${batch}.json`));
@@ -139,7 +140,7 @@ export function downstreamConsumerRoute(root,run,batch,finding) {
     const original=report.flagged[Number(refuter[1])-1];
     assert(original?.id===finding.id && original.subject_type===undefined && original.consumer_id===undefined
       && original.observed_source===undefined,'wrong original refuter finding');
-    const {obligation,route:adjudicationRoute,owner_downstream_reader_obligation,owner_downstream_consumer_route,
+    const {obligation,batch:originBatch,route:adjudicationRoute,owner_downstream_reader_obligation,owner_downstream_consumer_route,
       observed_sha256,observation_basis,...native}=finding;
     assert(hash(native)===hash(original),'changed original refuter finding');
   } else {
