@@ -130,46 +130,6 @@ both copies, their categories and relevant original are bound. Different bodies,
 unpinned extra copies and wrong page identities remain blocking. This resolution
 examines only the actual required page names.
 
-## Recorded published-carrier maintenance
-
-For an authorized surgical correction of a local published carrier outside
-Step 3, use a distinct owner-maintenance run identity (for example,
-`RUN-owner-context`) and claim its unchanged pre-edit bytes from the physics cwd:
-
-```bash
-node ../tools/physics-support/published-repairs.mjs claim --run RUN-owner-context --id ITEM --group OWNER --claim-namespace owner-maintenance
-```
-
-This example writes only
-`research/RUN-owner-context-owner-maintenance-published-claims.jsonl`.
-It creates no Step-3 ownership, coverage, review or transition. The default
-`claim` namespace remains `step3`; `append` accepts no namespace option and
-cannot use maintenance claims for Step-3 receipts. One item cannot mix the two
-ownership namespaces within a run. Keeping owner maintenance under the distinct
-run identity preserves the native `RUN` namespace for any later genuine Step-3
-supplier repair; this protocol provides no ownership migration.
-
-A `recorded-local-published-repair` receipt using maintenance ownership must set
-`ownership_namespace: "owner-maintenance"`, `ownership_claims_file` to that exact
-fixed path, and `ownership_claims_sha256` to the ledger's raw SHA-256. Its unique
-claim must bind the same run, item, group, pre-edit content hash, namespace and
-path. Existing Step-3 receipts retain their default ledger path and format.
-
-If the archived published preimage has no historical `verification.audited` or
-`verification.verified`, `prior_publication_commit` must name a full immutable
-commit hash ancestral to current HEAD, dated no later than the ownership claim.
-That commit must contain the exact archived raw bytes at the actual workspace
-prefix plus `items/ITEM.md` (normally `physics/items/ITEM.md`), including in linked
-worktrees. An unpublished preimage, different committed bytes, a judge marker,
-or an unauthenticated history cannot establish prior publication. This fallback
-records no invented audit and does not authorize initial publication.
-
-The preimage raw/content hashes, changed current published content hash, canonical
-consumer/supplier ledger excerpt and successful current local `precheck` and
-`rendercheck` evidence remain mandatory. Checks must postdate the claim and
-predate recording. Missing or stale evidence fails closed. This route changes no
-native run receipts, historical evidence or ordinary consumer-review duties.
-
 ## Whole-batch scope/prerequisite loop
 
 Step 2 workers perform only substantive scope/prerequisite review, local source
