@@ -12,6 +12,8 @@ Read these complete required sources before drift review or scaffolding:
 
 The mechanical mapping and supplier qualifications are in `research/prose-scaffold-splice.json`. Source page codes and provisional item/module names are research reservations; they are not accepted production claims.
 
+2026-10-16 category-local audit addendum: the historical source hashes and original reservation below are preserved as frozen design evidence, not asserted as current pins. The current research expansion is indexed in `research/scaffold-audit-2026-10-16/classical-statistical-mechanics/report.md` and its supplier/consumer map. New bounded static-EM proposals F8–F9 and explicit discrete ergodic/mixing interfaces are included in the category-local inventory; the then-current root source bindings appear below as historical evidence; production import verification remains a pre-build obligation.
+
 ## Classical configuration, phase and reference spaces
 
 A page `csm-phase-ensembles`; B companion `csm-phase-ensembles-examples`. Category `classical-statistical-mechanics`; library `physics`.
@@ -38,6 +40,8 @@ Original reservation (read together with the full required sources above):
     "post-csm-grand-preparation",
     "post-csm-isobaric-preparation",
     "post-csm-microcanonical-preparation",
+    "def-csm-static-gauge-coupled-particle-model",
+    "pthm-csm-static-gauge-canonical-partition-invariance",
     "thm-csm-relative-gibbs-variational-principle",
     "pthm-csm-canonical-momentum-equipartition",
     "pthm-csm-canonical-response-identities",
@@ -179,6 +183,8 @@ Original reservation (read together with the full required sources above):
     "thm-csm-dk-finite-measure-recurrence",
     "thm-csm-dk-invariant-hamiltonian-and-shell-measures",
     "thm-csm-dk-qualified-time-averages",
+    "def-csm-dk-ergodic-and-mixing-notions",
+    "thm-csm-dk-mixing-hierarchy",
     "thm-csm-dk-liouville-and-fine-entropy",
     "pthm-csm-dk-qualified-hamiltonian-statistical-predictions"
   ],
@@ -186,6 +192,10 @@ Original reservation (read together with the full required sources above):
   "companion": "csm-hamiltonian-statistics-examples"
 }
 ```
+
+The `csm-hamiltonian-statistics-examples` companion also reserves the B-leaf
+`cex-csm-dk-weak-mixing-not-strong-mixing` in D2; its exact discrete Chacon
+scope is recorded in the category paired inventory.
 
 ## Smooth periodic finite-N and scaled mean-field phase data
 
@@ -283,7 +293,7 @@ Original reservation (read together with the full required sources above):
 
 A page `csm-exact-models`; B companion `csm-exact-models-examples`. Category `classical-statistical-mechanics`; library `physics`.
 Order 503. Exact source inventory: `research/extended-frameworks-2026-10-03/classical-statistical-mechanics/paired-inventory.json`.
-Declared earlier prerequisites: `csm-phase-ensembles`, `fd-mf01`, `rpm-geometry-actions`.
+Declared earlier prerequisites (2026-10-17 scoped amendment): `csm-phase-ensembles`, `cm-math-continuum`, `mixed-partials-taylor-and-extrema`, `the-total-derivative`, `matrices-and-the-matrix-of-a-linear-map`, `fubini-and-change-of-variables`, `the-derivative-and-mean-value-theorems`, `continuity-ivt-evt-and-uniform-continuity`, `rpm-geometry-actions`. The former `fd-mf01` edge is superseded by local `lem-csm-examples-smooth-flow-jacobian` (M3J) before `thm-csm-examples-flow-fine-entropy`; all original claims/hypotheses remain. See `research/physics-remaining-80-2026-10-17-csm-supplier-resolution.md` for the exact contract and production obligations. The original reservation below remains historical; the current inventory adds that lemma.
 
 Original reservation (read together with the full required sources above):
 
@@ -335,3 +345,22 @@ Original reservation (read together with the full required sources above):
   "companion": "csm-fluctuations-countermodels-examples"
 }
 ```
+
+
+## Historical scaffold source bindings — 2026-10-16 (superseded for current inputs on 2026-10-17)
+
+The source-list hashes above remain historical splice pins. The following table records the draft bindings as of 2026-10-16 only; its hashes are not current bindings after the 2026-10-17 scoped amendment. Historical structural and closure receipts do not certify the revisions.
+
+| Historical source (2026-10-16) | SHA-256 |
+|---|---|
+| `research/extended-frameworks-2026-10-03/classical-statistical-mechanics/pathway-and-inventory.md` | `54fa811ca2c900607dd0e68d7adb385b3727969d7464ccf3658453d7f663929a` |
+| `research/extended-frameworks-2026-10-03/classical-statistical-mechanics/prose-scaffold.md` | `dea6dbf096edf81801c7703ae33f13aa436eb9f33ec606fb594c2ab2ae8e9a4f` |
+| `research/extended-frameworks-2026-10-03/classical-statistical-mechanics/paired-inventory.json` | `146e0ad47013e41b7140c61232537a867868ebb9c0ddfa654e0fa36040aaa312` |
+| `research/extended-frameworks-2026-10-03/classical-statistical-mechanics/supplier-map.json` | `f9d4e927fe273bc8860a39b6a1b0c1073b9842f8181898a406d933c3670f2034` |
+| `research/extended-frameworks-2026-10-03/classical-statistical-mechanics/closure-ledger.json` | `1a59290caff6b31ac124802a9bcc4000a148f3ac920d0e31d7649fe7709e653b` |
+
+Historical record: `research/scaffold-audit-2026-10-16/classical-statistical-mechanics/root-source-bindings.json`. Selected mathematical suppliers were bound there as research context at that time. The statement “the shared import manifest is unchanged” applies only to that 2026-10-16 audit; root has since performed an owner-authorized import refresh. Neither this table nor its original report is resealed by the amendment. Production import and closure verification retain their native obligations.
+
+## Scoped amendment source bindings — 2026-10-17
+
+`research/physics-remaining-80-2026-10-17-csm-amendment-bindings.json` records the exact changed research/plan bytes at this amendment handoff, including this track and the scoped resolution report. It supersedes the old table only for the changed inputs it names. It is a point-in-time binding, not an audit receipt, import certificate, external-source rereading claim or production proof acceptance; subsequent changes require a separate successor record. The complete contract, proof and remaining authoring obligations are in `research/physics-remaining-80-2026-10-17-csm-supplier-resolution.md`.

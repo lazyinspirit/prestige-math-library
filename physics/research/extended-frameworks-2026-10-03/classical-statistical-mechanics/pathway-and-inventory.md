@@ -18,6 +18,8 @@ Research-only canonical supplier-first placement. B companions are leaves.
 | `post-csm-grand-preparation` — Grand canonical particle-exchange preparation | postulate / physics | `workers/foundations/ensemble-proofs.md#f4` |
 | `post-csm-isobaric-preparation` — Isothermal-isobaric joint preparation | postulate / physics | `workers/foundations/ensemble-proofs.md#f4` |
 | `post-csm-microcanonical-preparation` — Accessible shell or band preparation | postulate / physics | `workers/foundations/ensemble-proofs.md#f4` |
+| `def-csm-static-gauge-coupled-particle-model` — Static electromagnetic coupling and typed canonical momentum | definition / physics | `workers/foundations/ensemble-proofs.md#f8` |
+| `pthm-csm-static-gauge-canonical-partition-invariance` — Finite canonical partition invariant under static electromagnetic gauge changes | physics-theorem / physics | `workers/foundations/ensemble-proofs.md#f9` |
 | `thm-csm-relative-gibbs-variational-principle` — Reference-relative entropy and Gibbs variational inequality | theorem / mathematics | `workers/foundations/ensemble-proofs.md#f6` |
 | `pthm-csm-canonical-momentum-equipartition` — Canonical momentum distribution and equipartition | physics-theorem / physics | `workers/foundations/ensemble-proofs.md#f7` |
 | `pthm-csm-canonical-response-identities` — Canonical energy and fluctuation responses | physics-theorem / physics | `workers/foundations/ensemble-proofs.md#f5` |
@@ -100,10 +102,12 @@ B companion: `csm-full-phase-local-equivalence-examples` (2 leaf items).
 | `thm-csm-dk-finite-measure-recurrence` — Hamiltonian recurrence with exact finite-measure hypotheses | theorem / mathematics | `workers/dynamics-kinetics/hamiltonian-averages.md#D2` |
 | `thm-csm-dk-invariant-hamiltonian-and-shell-measures` — Invariant energy-weighted and regular-shell probabilities | theorem / mathematics | `workers/dynamics-kinetics/hamiltonian-averages.md#D0` |
 | `thm-csm-dk-qualified-time-averages` — Conditional sampled ergodic and continuous-time averages | theorem / mathematics | `workers/dynamics-kinetics/hamiltonian-averages.md#D2` |
+| `def-csm-dk-ergodic-and-mixing-notions` — Ergodicity and mixing relative to a selected probability map | definition / mathematics | `workers/dynamics-kinetics/hamiltonian-averages.md#D2` |
+| `thm-csm-dk-mixing-hierarchy` — Mixing hierarchy for a selected probability-preserving map | theorem / mathematics | `workers/dynamics-kinetics/hamiltonian-averages.md#D2` |
 | `thm-csm-dk-liouville-and-fine-entropy` — Liouville probability transport and constant fine entropy | theorem / mathematics | `workers/dynamics-kinetics/hamiltonian-averages.md#D1` |
 | `pthm-csm-dk-qualified-hamiltonian-statistical-predictions` — Conditional Hamiltonian ensemble and response predictions | physics-theorem / physics | `workers/dynamics-kinetics/hamiltonian-averages.md#D0` |
 
-B companion: `csm-hamiltonian-statistics-examples` (2 leaf items).
+B companion: `csm-hamiltonian-statistics-examples` (3 leaf items, including the Chacon weak-not-strong-mixing counterexample).
 
 ## csm-mean-field-hierarchy
 
@@ -157,6 +161,7 @@ B companion: `csm-stochastic-response-examples` (1 leaf items).
 | Proposed item | Kind / domain | Exact argument |
 |---|---|---|
 | `lem-csm-examples-gamma-gaussian-tools` — Gaussian and gamma product tools | lemma / mathematics | `workers/examples/proofs.md#M0` |
+| `lem-csm-examples-smooth-flow-jacobian` — Jacobian identity for a specified general smooth diffeomorphic flow | lemma / mathematics | `workers/examples/proofs.md#M3J` |
 | `thm-csm-examples-flow-fine-entropy` — Fine entropy for specified incompressible smooth flow | theorem / mathematics | `workers/examples/proofs.md#M3` |
 | `thm-csm-examples-quadratic-covariance` — Quadratic covariance and equipartition boundaries | theorem / mathematics | `workers/examples/proofs.md#M1` |
 | `thm-csm-examples-spherical-marginal` — Constructed spherical shell marginal and weak Gaussian limit | theorem / mathematics | `workers/examples/proofs.md#M2` |
@@ -166,7 +171,6 @@ B companion: `csm-stochastic-response-examples` (1 leaf items).
 | `pthm-csm-ising-ring-correlation` — Finite nearest-neighbor Ising ring correlations | physics-theorem / physics | `workers/examples/proofs.md#E4` |
 | `pthm-csm-tonks-rod-ensemble` — Exact hard-rod pressure and convergent virial series | physics-theorem / physics | `workers/examples/proofs.md#E5` |
 | `pthm-csm-spherical-shell-gas` — Finite shell gas and local Gaussian limit | physics-theorem / physics | `workers/examples/proofs.md#E2` |
-
 B companion: `csm-exact-models-examples` (5 leaf items).
 
 ## csm-fluctuations-countermodels
@@ -179,3 +183,5 @@ B companion: `csm-exact-models-examples` (5 leaf items).
 
 B companion: `csm-fluctuations-countermodels-examples` (3 leaf items).
 
+
+2026-10-17 scoped amendment: M3J replaces the excluded fluid Jacobian supplier for M3; see `research/physics-remaining-80-2026-10-17-csm-supplier-resolution.md`. Historical receipts are not renewed by this inventory update.
