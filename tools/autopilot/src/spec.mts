@@ -69,6 +69,12 @@ export function validateStages(stages: Stage[], ctx: Ctx): SpecProblem[] {
       P(s.id, '`unitPrerequisitePolicy` must be complete or priority');
     if (s.unitPrerequisitePolicy === 'priority' && typeof s.unitPrerequisites !== 'function')
       P(s.id, '`priority` requires a unit prerequisite graph');
+    if (s.deferConstructionArtifactsUntilDrain !== undefined
+      && typeof s.deferConstructionArtifactsUntilDrain !== 'boolean')
+      P(s.id, '`deferConstructionArtifactsUntilDrain` must be boolean');
+    if (s.deferConstructionArtifactsUntilDrain === true
+      && (s.id !== '1-scaffold' || s.unitPrerequisitePolicy !== 'priority'))
+      P(s.id, '`deferConstructionArtifactsUntilDrain` requires priority 1-scaffold');
     if (typeof s.units === 'function' && typeof s.unitPrerequisites === 'function') {
       try {
         const units = s.units(ctx).map(String);

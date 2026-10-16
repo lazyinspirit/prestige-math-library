@@ -21,3 +21,11 @@ forced reports still recompute immediately. In coverage mode, stage status check
 artifacts for effectively covered units and retains uncovered units as missing.
 A successful worker still needs every declared artifact, including after it exits;
 legacy count mode and all readiness, writer and gate checks retain their behavior.
+
+A run-local stage wrapper may opt priority `1-scaffold` into
+`deferConstructionArtifactsUntilDrain`. While any same-stage local or adopted
+writer remains, status withholds all completion credit and skips artifact-based
+stalemate detection. Initial priority dispatch and native refreshes continue;
+at the actual writer drain, the full artifact, readiness, stalemate and gate paths
+run normally. This defaults off and is invalid for other stage policies; common
+mathematics stages do not enable it.

@@ -379,6 +379,15 @@ export class Executor {
     return { stage: null, status: null };
   }
 
+  /** Construction-only scheduling mode: no completion credit while any local
+   * or adopted writer still owns this stage. Other runs/stages keep full checks. */
+  constructionArtifactsDeferred(stage: Stage): boolean {
+    return stage.deferConstructionArtifactsUntilDrain === true
+      && stage.id === '1-scaffold' && stage.unitPrerequisitePolicy === 'priority'
+      && ([...this.inflight.values()].some(row => row.meta.stage === stage.id)
+        || this.adoptedDispatches().some(dispatch => this.dispatchBelongsToStage(dispatch, stage)));
+  }
+
   /**
    * A stage is finished when its units are covered AND its gates have passed.
    *
@@ -427,6 +436,11 @@ export class Executor {
         units.missing = [...new Set([...units.missing, ...refreshes.map(r => r.unit)])];
       }
       units.why += `; native refresh pending for ${refreshes.map(r => r.unit).join(', ')}`;
+    }
+
+    if (this.constructionArtifactsDeferred(stage)) {
+      return { ...units, unitsDone: false, gatesPassed: false, done: false,
+        why: `${units.why}; artifact completion deferred until construction writers drain` };
     }
 
     // A RESULT IS NOT AN ARTIFACT. `ok:true` says the process exited zero; it
@@ -525,6 +539,7 @@ export class Executor {
     // complete when it was stamped, and re-walking them re-pays their readiness
     // hashing for a result already recorded.
     if (this.state.data.stages[stage.id]?.doneAt) return new Set(owed);
+    if (this.constructionArtifactsDeferred(stage)) return new Set();
     const cov = this.stageCoverage(stage, ctx);
     if (stage.reviewCoverage && !this.stageStatus(stage, ctx).unitsDone) return new Set();
     // A stage running in the legacy COUNT mode declares no coverage at all, so
@@ -1577,7 +1592,9 @@ export class Executor {
     // a VISIBLE blocker.
     if (!unitsAllDone) {
       for (const { s, st } of statuses) {
-        if (st.unitsDone) continue;
+        // Deferred artifact evaluation is not evidence of abandoned output.
+        // The unchanged per-unit stalemate check resumes at the actual drain.
+        if (st.unitsDone || this.constructionArtifactsDeferred(s)) continue;
         const owed = (s.units ? s.units(ctx) : []).map(String);
         const cov = this.stageCoverage(s, ctx);
         const complete = this.unitsComplete(s, ctx);
