@@ -110,11 +110,42 @@ export function loadDownstreamConsumerRoutes(root,run,batch) {
   }return out;
 }
 export function downstreamConsumerRoute(root,run,batch,finding) {
-  const route=loadDownstreamConsumerRoutes(root,run,batch).get(finding.obligation);
-  assert(route && finding.id===route.original.id && finding.subject_type===route.original.subject_type
-    && finding.consumer_id===route.original.consumer_id && finding.observed_source===undefined
+  const refuter=new RegExp(`^refuter:${batch}:([1-9]\\d*)$`).exec(finding.obligation ?? '');
+  const anchor=refuter ? finding.owner_downstream_reader_obligation : finding.obligation;
+  const route=loadDownstreamConsumerRoutes(root,run,batch).get(anchor);
+  assert(route && finding.id===route.original.id && finding.observed_source===undefined
     && hash(finding.owner_downstream_consumer_route)===hash(route.binding)
     && finding.observed_sha256===null && finding.observation_basis==='unbound' && finding.pre_sha256===undefined,'lost exact downstream route');
+  if(refuter) {
+    assert(finding.subject_type===undefined && finding.consumer_id===undefined,'invented native refuter labels');
+    assert(finding.route===undefined || finding.route==='flagged','wrong refuter adjudication route');
+    const e=route.entry,r=e.refuter_evidence;
+    assert(r,'missing explicit native refuter evidence');
+    const report=JSON.parse(ref(root,r.report,`research/${run}-refute-${batch}.json`));
+    const prefix=`research/${run}-dispatch/refuter-refute-${batch}`;
+    assert(new RegExp(`^${prefix}\\.attempt-[1-9]\\d*\\.result\\.json$`).test(r.native_result?.path),'wrong refuter attempt');
+    const result=JSON.parse(ref(root,r.native_result));
+    assert(result.run===run && result.role==='refuter' && result.label===`refute-${batch}` && result.ok===true
+      && result.exit_code===0 && result.process_exit_code===0 && result.timed_out!==true
+      && result.covers?.map(String).includes(String(batch)) && Number.isFinite(Date.parse(result.ended_at))
+      && Date.parse(e.at)>=Date.parse(result.ended_at),'refuter did not genuinely succeed');
+    assert(r.prompt?.path===r.native_result.path.replace(/\.result\.json$/,'.prompt.md')
+      && String(result.prompt).endsWith('/'+r.prompt.path),'wrong refuter prompt');ref(root,r.prompt);
+    assert(hash(JSON.parse(result.tail))===hash(report),'native refuter completion differs');
+    assert([String(batch),`${run}-batch-${batch}`].includes(String(report.batch))
+      && Array.isArray(report.opened) && report.opened.filter(x=>x===finding.id).length===1
+      && Array.isArray(report.not_opened) && !report.not_opened.includes(finding.id)
+      && Array.isArray(report.flagged),'refuter did not actually open and flag this target');
+    const original=report.flagged[Number(refuter[1])-1];
+    assert(original?.id===finding.id && original.subject_type===undefined && original.consumer_id===undefined
+      && original.observed_source===undefined,'wrong original refuter finding');
+    const {obligation,route:adjudicationRoute,owner_downstream_reader_obligation,owner_downstream_consumer_route,
+      observed_sha256,observation_basis,...native}=finding;
+    assert(hash(native)===hash(original),'changed original refuter finding');
+  } else {
+    assert(finding.obligation===route.obligation && finding.subject_type===route.original.subject_type
+      && finding.consumer_id===route.original.consumer_id && finding.owner_downstream_reader_obligation===undefined,'changed original reader route');
+  }
   return route;
 }
 export function downstreamConsumerClosureEvidence(root,run) {
@@ -126,5 +157,8 @@ export function downstreamConsumerClosureEvidence(root,run) {
   for(const e of doc.routes)for(const key of ['findings','report','native_result','prompt','pre_snapshot','post_snapshot',
     'consumer_pre_snapshot','manifest','consumer_manifest','supplier_before','supplier_after','consumer_registration_source','review']) {
     const r=e[key];ref(root,r);assert(out[r.path]===undefined || out[r.path]===r.sha256,'ambiguous historical reference');out[r.path]=r.sha256;
+  }
+  for(const e of doc.routes)if(e.refuter_evidence)for(const key of ['report','native_result','prompt']) {
+    const r=e.refuter_evidence[key];ref(root,r);assert(out[r.path]===undefined || out[r.path]===r.sha256,'ambiguous refuter reference');out[r.path]=r.sha256;
   }return out;
 }

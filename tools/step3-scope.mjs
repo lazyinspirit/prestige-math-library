@@ -657,6 +657,7 @@ function reportOnlyFinding(finding, refuter = false) {
     observation_basis: _basis, owner_page_repair: _ownerPageRepair,
     owner_required_page_route: _requiredPageRoute,
     owner_downstream_consumer_route: _downstreamRoute,
+    owner_downstream_reader_obligation: _downstreamReader,
     owner_partial_reader_repair: _ownerPartialReaderRepair,
     owner_unbound_reader_observation: _ownerUnboundReaderObservation, ...row } = finding;
   if (refuter && finding.subject_type === 'in-run-dependency') {
@@ -726,7 +727,7 @@ if (command === 'verify-post-3a') {
     for (const finding of scope.reader_findings ?? []) if (finding.owner_required_page_route
       || routes.has(finding.obligation)) requiredPageCarrier(ROOT, run, batch, finding);
     const downstream = loadDownstreamConsumerRoutes(ROOT, run, batch);
-    for (const finding of scope.reader_findings ?? []) if (finding.owner_downstream_consumer_route
+    for (const finding of [...(scope.reader_findings ?? []), ...(scope.refuter_findings ?? [])]) if (finding.owner_downstream_consumer_route
       || downstream.has(finding.obligation)) downstreamCarrier(batch, finding);
     count += Object.keys(live.items).length;
   }
@@ -927,10 +928,11 @@ if (command === 'split') {
   }
   if (readerErrors.length) fail(`step3-scope: batch ${batch} reader findings invalid: ${readerErrors.join('; ')}`, 1);
   const refuterPages = [...derived.pageManifestPost].sort();
-  // Downstream owner routes retain their original reader adjudication here;
-  // the target batch retains its own full native refuter/Alpha obligations.
+  // Keep all local coverage, plus only explicitly registered downstream targets.
+  // This computed scope does not rewrite the historical native assignment.
   const refuterScope = [...new Set([...derived.untouched, ...highRisk, ...refuterPages,
-    ...readerFindings.filter(row => row.subject_type === 'in-run-dependency').map(row => row.id)])].sort();
+    ...readerFindings.filter(row => row.subject_type === 'in-run-dependency').map(row => row.id),
+    ...[...downstream.values()].map(route => route.entry.consumer_id)])].sort();
   const group = groups().byBatch[batch];
   if (!group) fail(`step3-scope: batch ${batch} has no Alpha group`);
   const scope = {
@@ -992,6 +994,15 @@ if (command === 'collect') {
   }
   const refuterFindings = normalizeRefuterFindings(findings, batch, openedSet, error)
     .map((finding) => {
+      const routes = [...downstream.values()].filter(route => route.entry.consumer_id === finding.id);
+      if (routes.length) {
+        if (routes.length !== 1) { error(`${finding.obligation} has ambiguous downstream reader anchors`); return finding; }
+        finding.owner_downstream_consumer_route = routes[0].binding;
+        finding.owner_downstream_reader_obligation = routes[0].obligation;
+        finding.observed_sha256 = null; finding.observation_basis = 'unbound';
+        downstreamCarrier(batch, finding);
+        return finding;
+      }
       const source = (scope.reader_findings ?? []).find(row => row.id === finding.id && row.subject_type === 'in-run-dependency');
       if (source) {
         const carrier = producerCarrier(source.id, source.producer_batch);
@@ -1254,6 +1265,11 @@ if (command === 'check') {
           if (JSON.stringify(normalized) !== JSON.stringify(stored)) reportError('findings no longer match the collected obligations');
           const inRun = findingDependencies(batch, scope.manifest_post ?? [], scope.reader_findings ?? [], manifests);
           for (const finding of scope.refuter_findings ?? []) {
+            if (finding.owner_downstream_consumer_route
+              || [...downstream.values()].some(route => route.entry.consumer_id === finding.id)) {
+              try { downstreamCarrier(batch, finding); } catch (cause) { reportError(cause.message); }
+              continue;
+            }
             if (finding.subject_type === 'in-run-dependency') {
               validateInRunFinding(finding, batch, inRun, reportError);
               continue;
@@ -1264,7 +1280,8 @@ if (command === 'check') {
         } catch (cause) { error('refuter-invalid', `batch ${batch} report is invalid JSON (${cause.message})`); }
       }
       const expectedRefuterScope = [...new Set([...(scope.untouched ?? []), ...(scope.high_risk ?? []), ...derived.pageManifestPost,
-        ...(scope.reader_findings ?? []).filter(row => row.subject_type === 'in-run-dependency').map(row => row.id)])];
+        ...(scope.reader_findings ?? []).filter(row => row.subject_type === 'in-run-dependency').map(row => row.id),
+        ...[...downstream.values()].map(route => route.entry.consumer_id)])];
       if (!sameSet(scope.refuter_scope ?? [], expectedRefuterScope)) error('refuter-scope', `batch ${batch} refuter scope is stale`);
       if (!sameSet(scope.opened ?? [], scope.refuter_scope ?? [])) error('refuter-coverage', `batch ${batch} did not open every routed refuter item`);
       if ((scope.not_opened ?? []).length) error('refuter-incomplete', `batch ${batch} retains unopened items`);

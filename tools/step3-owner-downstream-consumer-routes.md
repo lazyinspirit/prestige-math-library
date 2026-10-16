@@ -102,15 +102,50 @@ owner resolution (`historical_delta_unknown: true`, `owner_resolution` of at
 least forty characters), and seal that actual current carrier. Native34's empty
 reader findings do not discharge this obligation or establish its disposition.
 
-Refuter29's computed scope is unchanged. The actual consumer remains subject to
-batch34's full native refuter and Alpha obligations, including ordinary coverage
-and current-carrier checks; the route creates no foreign writer or replacement
-review coverage. Root must verify the actual target batch's scope and current
-carrier before gates. The route imposes no notation-only or proof-only repair
-restriction: confirmed source defects require separately assigned owner work,
-writer coordination, and applicable supplier/consumer closure.
+The computed refuter scope includes all ordinary required carriers **plus** the
+explicitly registered downstream target. This does not rewrite the historical
+assignment: native refuter29 truthfully reports opening its 22 listed carriers
+and one additional target. Missing ordinary reads, unknown extras, duplicates,
+and unopened targets still fail the exact coverage checks. Root regenerates the
+scope mechanically while preserving that original prompt, result and report.
+
+To retain a genuine refuter flag about this registered target, add the optional
+entry block below, with actual raw hashes, and update the authority's `at` to be
+no earlier than the successful refuter completion. Reader-only routes do not
+require this block. It grants no access to any other external item.
+
+```json
+{
+  "refuter_evidence": {
+    "report": { "path": "research/RUN-refute-29.json", "sha256": "RAW_HASH" },
+    "native_result": { "path": "research/RUN-dispatch/refuter-refute-29.attempt-1.result.json", "sha256": "RAW_HASH" },
+    "prompt": { "path": "research/RUN-dispatch/refuter-refute-29.attempt-1.prompt.md", "sha256": "RAW_HASH" }
+  }
+}
+```
+
+The refuter result must genuinely succeed with the exact role, batch coverage,
+label, prompt and full structured-tail equality. The unchanged report must list
+the target as opened exactly once and the indexed flag must match every original
+field. Normalization retains `refuter:29:2` and the original flag's fields, with
+no invented `subject_type`, `consumer_id` or `observed_source`. The separate
+`owner_downstream_reader_obligation: reader:29:2` anchor selects the authenticated
+reader route; it is stripped together with derived carrier annotations during
+original-report reconciliation. Ambiguous anchors fail. This flag also keeps
+`observed_sha256: null`, unbound history, and the actual batch34 current decision
+carrier. Its original independent flagged adjudication and ordinary closed-ledger
+requirements remain mandatory. No new shared-defect waiver is introduced.
+
+The actual consumer remains subject to batch34's full native refuter and Alpha
+obligations, including ordinary coverage and current-carrier checks; the route
+creates no foreign writer or replacement review coverage. Root must verify the
+actual target batch's scope and current carrier before gates. The route imposes
+no notation-only or proof-only repair restriction: confirmed source defects
+require separately assigned owner work, writer coordination, and applicable
+supplier/consumer closure.
 
 Split, collection, original-report checking, decision stamping, adjudication,
 final currency checking and post-3a verification all retain this route. Version-3
-closure also freezes its registry and every referenced historical artifact.
+closure also freezes its registry and every referenced historical artifact,
+including any registered refuter report, successful attempt and prompt.
 Existing routes and native artifacts retain their original behavior.
