@@ -109,6 +109,35 @@ a nonempty explicit item selection; a bare invocation checks the whole library.
 before loading renderers or collecting content. Pass explicit item/page paths
 to keep a render check within the current scope.
 
+## Cross-batch dependency inputs
+
+Each batch writes `research/RUN-batch-N.cross-batch-dependencies.json` as an
+array, including an empty array when it has no declared in-run cross-batch
+edges. The collector derives edges from current manifest and source `requires`
+for pages, and `deps`, `justified_by`, and `forward_refs` for items. Reviews use
+one row per exact consumer/supplier edge:
+
+```json
+[
+  {
+    "kind": "item",
+    "consumer": "lem-example-consumer",
+    "supplier": "def-example-supplier",
+    "status": "open",
+    "evidence": "Exact declared dependency; the scoped supplier-use check remains pending."
+  }
+]
+```
+
+`kind` is `item` or `page`, and the consumer must belong to the batch writing
+the file. `status` is `open`, `verified`, or `removed`, with nonempty evidence.
+`verified` records a completed scoped dependency check, not independent proof
+approval. Keep unresolved checks `open`. Put off-owner transitive observations,
+aggregate batch requirements and interface mappings in batch notes or a
+separate context report. Do not disguise them as consumer-owned edge reviews.
+The frontier ledger is derived evidence; its ordinary review and gate duties
+remain in force.
+
 ## Owner resolution of Step-1 drift holds
 
 A native `drift-blocked` observation remains immutable after owner repair.
