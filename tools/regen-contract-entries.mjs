@@ -69,8 +69,8 @@ for (const id of ids) {
   const md = readFileSync(itemPath(id), 'utf8');
   const facts = parseFacts(md);
   const steps = parseSteps(md);
-  if (!facts.length || !steps.length) {
-    console.error(`SKIP ${id}: no facts or no steps parsed`);
+  if (!steps.length) {
+    console.error(`SKIP ${id}: no steps parsed`);
     skipped++; continue;
   }
 
@@ -90,16 +90,27 @@ for (const id of ids) {
   }
 
   // A step's stated inputs must cover every token anywhere in its block.
-  const derivations = steps.map(s => {
+  const stepRecord = s => {
     const inputs = [...s.inputs];
     const have = new Set(inputs.map(t => t.replace(/^step\s+/, '')));
     for (const tok of s.tokens) {
       if (!have.has(tok)) inputs.push(/^\d/.test(tok) ? `step ${tok}` : tok);
     }
     return { id: `step-${s.step.replace('.', '-')}`, claim: s.claim, step: s.step, inputs };
-  });
+  };
+  // Keep the author's routine/derivation classification. Emitting a second
+  // derivation for a routine step creates an overlapping contract and leaves
+  // its original routine inputs stale after a repair.
+  const currentSteps = new Map(steps.map(s => [s.step, stepRecord(s)]));
+  const routine = contracts[id].routine_steps;
+  const routineSteps = new Set(Array.isArray(routine) ? routine.map(s => s.step) : []);
+  const derivations = steps.filter(s => !routineSteps.has(s.step)).map(stepRecord);
+  const routineUpdate = Array.isArray(routine) ? { routine_steps: routine.map(entry => {
+    const current = currentSteps.get(entry.step);
+    return current ? { ...entry, claim: current.claim, inputs: current.inputs } : entry;
+  }) } : {};
 
-  contracts[id] = { ...contracts[id], citations, derivations };
+  contracts[id] = { ...contracts[id], ...routineUpdate, citations, derivations };
   changed++;
 }
 writeFileSync(file, JSON.stringify(doc, null, 2) + '\n');
