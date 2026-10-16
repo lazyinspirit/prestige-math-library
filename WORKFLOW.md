@@ -330,6 +330,13 @@ frontier, hash-bound baseline and original native verdict inventory; it never
 accepts arbitrary models, invents verdicts or drops subjects. All normal item/context
 currency and exact rejection-adjudication checks continue to apply.
 Repeated adjudication consumes the actual rejudge verdicts.
+An explicit native confirmed-fatal supplier scope blocker may receive a separately
+attributed current root repair review through the guarded
+[version-2 owner supplement](tools/step5-owner-scope-blocker.md). The unchanged
+native finding, successful dispatch and paused/drained creation state remain
+bound; genuine supplier and blocker repairs, complete affected-consumer inventory,
+current reviews and source reading are mandatory. Original fatal counts and all
+later gates remain; this supplies no new native execution or judge credit.
 Terminal judge stamps and mechanical coverage use the same per-item policy and
 stamp the actual judging model. When an item has no verification mapping or
 source block, its first judge-only verification mapping is inserted immediately

@@ -632,9 +632,10 @@ const ownerSupplementSeal=Symbol('validated-root-owner-supplement');
 function loadOwnerSupplement(root,pack,reports,current,items) {
   const path=ownerSupplementPath(root,pack.run,pack.phase,pack.round);if(!existsSync(path))return null;
   const row=read(path),unit=String(row.unit),native=reports.find(report=>String(report.unit)===unit);
-  requireValue(row.version===1&&row.run===pack.run&&row.phase===pack.phase&&row.round===pack.round
+  const scopeBlocked=row.version===2&&row.kind==='step5-owner-scope-blocker-supplement';
+  requireValue((row.version===1||scopeBlocked)&&row.run===pack.run&&row.phase===pack.phase&&row.round===pack.round
     &&['initial','repeat'].includes(pack.phase)&&pack.rejected&&pack.repair_scope==='frontier'
-    &&row.pack_sha256===digest(pack)&&native?.completion==='blocked','invalid owner supplement identity or native blocker');
+    &&row.pack_sha256===digest(pack)&&native&&(scopeBlocked||native.completion==='blocked'),'invalid owner supplement identity or native blocker');
   requireValue(row.authorized_by==='owner'&&row.reviewed_by==='root'
     &&typeof row.authorization==='string'&&row.authorization.trim().length>=40,'owner supplement requires explicit root authority');
   const nativePath=workerReport(root,pack.run,pack.phase,pack.round,unit);
@@ -652,7 +653,7 @@ function loadOwnerSupplement(root,pack,reports,current,items) {
   const dispatch=read(dispatchPath),state=read(join(root,'.autopilot',pack.run,'state.json'));
   const stage=pack.phase==='initial'?'5.1-adjudicate':'5.5-adjudicate';
   requireValue(state.run===pack.run&&state.stage===stage
-    &&state.blockers?.some(value=>value.stage===stage&&value.key==='gate:step5-wave-evidence')
+    &&(scopeBlocked||state.blockers?.some(value=>value.stage===stage&&value.key==='gate:step5-wave-evidence'))
     &&Object.values(state.dispatches??{}).every(value=>!value.startedAt||Boolean(value.endedAt)),
     'owner supplement requires the held native collection gate and drained writers');
   requireValue(dispatch.ok===true&&dispatch.run===pack.run&&dispatch.role==='alpha-adjudicate'
@@ -662,7 +663,56 @@ function loadOwnerSupplement(root,pack,reports,current,items) {
   const rejected=pack.assignments[unit]?.find(value=>key(value)===key(row.rejection??{}));
   const blocker=native.blockers?.find(value=>value.id===rejected?.id&&value.uncertain===true);
   const oldReview=native.reviews?.find(value=>value.id===rejected?.id),oldDecision=native.decisions?.find(value=>key(value)===key(rejected??{}));
-  requireValue(rejected&&blocker&&row.blocker_sha256===digest(blocker)&&oldReview?.uncertain===true
+  if(scopeBlocked){
+    const findings=(native.ledger_updates??[]).filter(value=>value.id===rejected?.id
+      &&value.ledger==='canonical-defect-ledger'&&value.action==='record-open-finding');
+    const finding=findings[0],proposal=native.repair_notes?.minimal_supplier_repair;
+    requireValue(rejected&&!Object.hasOwn(native,'completion')&&!(native.blockers??[]).length
+      &&dispatch.model===MODELS.sol61.id&&dispatch.provider_effort==='high'
+      &&dispatch.exit_code===0&&dispatch.timed_out===false&&typeof dispatch.session_id==='string'&&dispatch.session_id.length>0
+      &&JSON.stringify(dispatch.covers)===JSON.stringify([unit])
+      &&native.repair_notes?.status==='blocked_by_assigned_file_scope'&&native.repair_notes.repair_complete===false
+      &&oldReview?.disposition==='unaffected'&&oldReview.post_sha256===pack.before[rejected.id]&&evidenceText(oldReview)
+      &&oldDecision?.outcome==='confirmed_fatal'&&evidenceText(oldDecision)&&FATAL_TYPES.includes(oldDecision.defect_type)
+      &&findings.length===1&&finding.status==='open'&&finding.severity==='fatal'&&evidenceText(finding)
+      &&finding.defect_type===oldDecision.defect_type&&finding.supplier===row.required_supplier
+      &&row.open_finding_sha256===digest(finding)&&row.minimal_supplier_repair_sha256===digest(proposal)
+      &&proposal?.path===`items/${finding.supplier}.md`&&proposal.section==='Definition'
+      &&['source_excerpt','proposed_replacement','justification'].every(name=>typeof proposal[name]==='string'&&proposal[name].trim().length>0)
+      &&proposal.source_excerpt!==proposal.proposed_replacement
+      &&!Object.values(pack.assignments[unit]).some(value=>value.id===finding.supplier),
+      'owner scope supplement requires an exact native open fatal scope-blocked supplier proposal');
+    const attemptPath=dispatchPath.replace(/\.result\.json$/,`.attempt-${dispatch.attempt}.result.json`);
+    requireValue(Number.isInteger(dispatch.attempt)&&dispatch.attempt>0
+      &&dispatch.prompt===dispatchPath.replace(/\.result\.json$/,`.attempt-${dispatch.attempt}.prompt.md`),
+      'owner scope supplement requires the original native attempt and prompt');
+    for(const [binding,expected] of [[row.original_attempt,attemptPath],[row.dispatch_prompt,dispatch.prompt]]){
+      requireValue(binding?.path===expected&&/^[a-f0-9]{64}$/.test(binding.sha256??'')
+        &&(!Object.hasOwn(evidence,expected)||evidence[expected]===binding.sha256),
+        'owner scope supplement original attempt/prompt binding mismatch');
+      evidence[expected]=binding.sha256;
+    }
+    verifyEvidence(evidence);
+    requireValue(digest(read(attemptPath))===digest(dispatch),'owner scope supplement original native attempt differs from result');
+    const creation=row.creation_state;
+    requireValue(creation&&resolve(creation.path??'').startsWith(resolve(root,'research')+'/')
+      &&/^[a-f0-9]{64}$/.test(creation.sha256??''),'owner scope supplement requires bound creation state');
+    requireValue(!Object.hasOwn(evidence,creation.path)||evidence[creation.path]===creation.sha256,
+      'owner scope supplement creation binding conflicts with supporting evidence');
+    evidence[creation.path]=creation.sha256;verifyEvidence(evidence);
+    const snapshot=read(creation.path);
+    const failure=`stage ${stage}: gate step5-wave-evidence failed — confirmed defect not repaired ${rejected.id}`;
+    const held=value=>value.run===pack.run&&value.stage===stage
+      &&Object.values(value.dispatches??{}).every(dispatch=>!dispatch.startedAt||Boolean(dispatch.endedAt))
+      &&value.blockers?.some(blocker=>blocker.stage===stage&&blocker.key==='gate:step5-wave-evidence'
+        &&blocker.message===failure&&Date.parse(blocker.at)<=Date.parse(row.completed_at));
+    const completed=value=>{const worker=value.dispatches?.[`${stage}:${dispatch.label}`];
+      return worker?.lastExitOk===true&&worker.role===dispatch.role&&worker.attempt===dispatch.attempt
+        &&JSON.stringify(worker.covers)===JSON.stringify(dispatch.covers)
+        &&Date.parse(worker.endedAt)>=Date.parse(dispatch.ended_at)&&Date.parse(worker.endedAt)<=Date.parse(row.completed_at);};
+    requireValue(held(snapshot)&&snapshot.paused===true&&completed(state)&&completed(snapshot),
+      'owner scope supplement requires exact paused drained failure and successful native creation state');
+  }else requireValue(rejected&&blocker&&row.blocker_sha256===digest(blocker)&&oldReview?.uncertain===true
     &&native.blockers.length===1
     &&oldDecision?.uncertain===false&&['confirmed_fatal','confirmed_nonfatal'].includes(oldDecision.outcome),
     'owner supplement must bind an exact uncertain native blocker and confirmed frozen rejection');
@@ -683,6 +733,30 @@ function loadOwnerSupplement(root,pack,reports,current,items) {
     &&discoverDownstream({items,repairedIds:[value.id]}).some(impact=>impact.id===rejected.id),
     'owner supplement prerequisite is not a necessary direct definition supplier');
   const suppliers=new Set([rejected.id,...prerequisites.map(value=>value.id)]);
+  if(scopeBlocked){
+    requireValue(prerequisites.length===1&&prerequisites[0].id===row.required_supplier
+      &&byId.get(rejected.id).deps.includes(row.required_supplier)
+      &&pack.before_statements?.[row.required_supplier]
+      &&byId.get(row.required_supplier).statement_sha256!==pack.before_statements[row.required_supplier]
+      &&current[row.required_supplier]!==pack.before[row.required_supplier]
+      &&current[rejected.id]!==pack.before[rejected.id],
+      'owner scope supplement requires genuine supplier Definition and blocker carrier repairs');
+    // Continue propagation only through actual interface changes. The exact
+    // inventory cannot drop a current direct consumer of a repaired interface.
+    const expected=new Set(suppliers),pending=[...suppliers];
+    while(pending.length){
+      const id=pending.shift();
+      if(byId.get(id)?.statement_sha256===pack.before_statements?.[id])continue;
+      for(const impact of discoverDownstream({items,repairedIds:[id]}).filter(value=>frontier.has(value.id))){
+        if(!expected.has(impact.id)){expected.add(impact.id);pending.push(impact.id);}
+      }
+    }
+    const inventory=[...expected].sort();
+    requireValue(JSON.stringify(row.expected_review_ids)===JSON.stringify(inventory)
+      &&JSON.stringify(row.scope.map(value=>value.id).sort())===JSON.stringify(inventory),
+      'owner scope supplement must cover the exact affected consumer inventory');
+    for(const id of expected)if(byId.get(id)?.statement_sha256!==pack.before_statements?.[id])suppliers.add(id);
+  }
   const direct=discoverDownstream({items,repairedIds:[...suppliers]});
   for(const value of row.scope){
     requireValue(value&&frontier.has(value.id)&&pack.before[value.id]&&byId.has(value.id)&&!ids.has(value.id)
@@ -1236,6 +1310,11 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
     receipt.native_decisions=reports.flatMap(report=>report.decisions).filter(row=>key(row)===key(ownerSupplement.rejection));
     receipt.native_downstream=[...receipt.downstream];
     receipt.native_ledger_updates=receipt.ledger_updates;
+    if(ownerSupplement.version===2)receipt.native_scope_blocker={
+      unit:ownerSupplement.unit,repair_notes:reports.find(row=>String(row.unit)===String(ownerSupplement.unit)).repair_notes,
+      open_finding_sha256:ownerSupplement.open_finding_sha256,
+      minimal_supplier_repair_sha256:ownerSupplement.minimal_supplier_repair_sha256,
+      native_execution_coverage_adopted:false};
     receipt.ledger_updates_origin='native-worker-historical-proposals';
     receipt.owner_resolution={reviewed_by:'root',status:'owner-repair-reviewed',id:ownerSupplement.rejection.id,
       rejection:ownerSupplement.rejection,decision:ownerSupplement.decisions[0],completed_at:ownerSupplement.completed_at,
