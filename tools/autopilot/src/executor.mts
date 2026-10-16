@@ -379,13 +379,16 @@ export class Executor {
     return { stage: null, status: null };
   }
 
-  /** Construction-only scheduling mode: no completion credit while any local
-   * or adopted writer still owns this stage. Other runs/stages keep full checks. */
+  /** Construction-only scheduling mode: withhold completion credit until all
+   * owed authoring has current successful coverage and every writer has drained. */
   constructionArtifactsDeferred(stage: Stage): boolean {
-    return stage.deferConstructionArtifactsUntilDrain === true
-      && stage.id === '1-scaffold' && stage.unitPrerequisitePolicy === 'priority'
-      && ([...this.inflight.values()].some(row => row.meta.stage === stage.id)
-        || this.adoptedDispatches().some(dispatch => this.dispatchBelongsToStage(dispatch, stage)));
+    if (stage.deferConstructionArtifactsUntilDrain !== true
+      || stage.id !== '1-scaffold' || stage.unitPrerequisitePolicy !== 'priority') return false;
+    if ([...this.inflight.values()].some(row => row.meta.stage === stage.id)
+      || this.adoptedDispatches().some(dispatch => this.dispatchBelongsToStage(dispatch, stage))) return true;
+    const ctx = this.ctx();
+    const covered = this.stageCoverage(stage, ctx);
+    return (stage.units?.(ctx) ?? []).some(unit => !covered.has(String(unit)));
   }
 
   /**
@@ -440,7 +443,7 @@ export class Executor {
 
     if (this.constructionArtifactsDeferred(stage)) {
       return { ...units, unitsDone: false, gatesPassed: false, done: false,
-        why: `${units.why}; artifact completion deferred until construction writers drain` };
+        why: `${units.why}; artifact completion deferred until authoring coverage is complete and writers drain` };
     }
 
     // A RESULT IS NOT AN ARTIFACT. `ok:true` says the process exited zero; it

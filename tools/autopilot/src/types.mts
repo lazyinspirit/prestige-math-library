@@ -174,8 +174,8 @@ export interface Stage {
   /** Initial dispatch may use the DAG only for priority. Completion, repair
    * and review still require actual stable suppliers; default is complete. */
   unitPrerequisitePolicy?: 'complete' | 'priority';
-  /** Opt-in only for priority construction: while same-stage writers are live,
-   * withhold all artifact-completion credit and check the full artifacts at drain. */
+  /** Opt-in only for priority construction: withhold artifact-completion credit
+   * until all owed units have current coverage and same-stage writers drain. */
   deferConstructionArtifactsUntilDrain?: boolean;
   /** A temporary per-unit hold. The unit remains owed, and its consumers stay
    * blocked, while other eligible units can use available dispatch slots. */

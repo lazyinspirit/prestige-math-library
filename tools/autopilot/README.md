@@ -23,9 +23,11 @@ A successful worker still needs every declared artifact, including after it exit
 legacy count mode and all readiness, writer and gate checks retain their behavior.
 
 A run-local stage wrapper may opt priority `1-scaffold` into
-`deferConstructionArtifactsUntilDrain`. While any same-stage local or adopted
-writer remains, status withholds all completion credit and skips artifact-based
-stalemate detection. Initial priority dispatch and native refreshes continue;
-at the actual writer drain, the full artifact, readiness, stalemate and gate paths
-run normally. This defaults off and is invalid for other stage policies; common
-mathematics stages do not enable it.
+`deferConstructionArtifactsUntilDrain`. While any owed unit lacks current
+successful coverage (including a pending native refresh), or any same-stage local
+or adopted writer remains, status withholds all completion credit and skips
+artifact-based stalemate detection. Initial priority dispatch, failed-execution
+retry limits and blockers, and native refreshes continue. Once all owed authoring
+has coverage and every writer drains, the full artifact, readiness, stalemate and
+gate paths run normally. This defaults off and is invalid for other stage policies;
+common mathematics stages do not enable it.
