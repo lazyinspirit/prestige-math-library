@@ -27,8 +27,9 @@ function fixture(t, physics = false) {
   writeFileSync(join(root,'research/batch.pages.json'),JSON.stringify(pages));
   writeFileSync(join(root,'items/op-question.md'),markdown(problem));
   writeFileSync(join(root,'library/test/questions.md'),'---\npage: questions\nstatus: draft\nitems: [op-question]\nexamples: []\n---\n');
+  if (!physics) copyFileSync(join(tools, 'published-repair-adoption.mjs'), join(root, 'tools/published-repair-adoption.mjs'));
   if (physics) {
-    for (const name of ['published-repair-policy.mjs','item-hash.mjs']) copyFileSync(join(tools,name),join(root,name));
+    for (const name of ['published-repair-adoption.mjs','published-repair-policy.mjs','item-hash.mjs']) copyFileSync(join(tools,name),join(root,name));
     copyFileSync(join(sourceTools,'run-manifest-pages.mjs'),join(root,'tools/run-manifest-pages.mjs'));
   }
   const env = {...process.env,PRESTIGE_APP_DIR:APP_DIR,PHYSICS_REPO:root};

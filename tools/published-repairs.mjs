@@ -2,10 +2,11 @@
 // Serialize published-item repair ownership and append its certification rows.
 
 import {
-  appendFileSync, existsSync, mkdirSync, readFileSync, rmSync, statSync, writeFileSync,
+  appendFileSync, existsSync, mkdirSync, readFileSync, realpathSync, rmSync, statSync, writeFileSync,
 } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { join, resolve, relative, isAbsolute } from 'node:path';
 import { itemHashGuard } from './item-hash.mjs';
+import { ADOPTION_KIND, adoptionSha, readAdoptionResearch, validateAdoptionAcceptance } from './published-repair-adoption.mjs';
 
 const argv = process.argv.slice(2);
 const command = argv[0];
@@ -21,9 +22,10 @@ const claimsPath = R('research', `${run}-step3-published-claims.jsonl`);
 const lockPath = R('research', `${run}-published-repairs.lock`);
 const wait = new Int32Array(new SharedArrayBuffer(4));
 
-if (!run || !['claim', 'append'].includes(command)) {
+if (!run || !['claim', 'append', 'adopt'].includes(command)) {
   console.error('usage: node tools/published-repairs.mjs claim --run <run> --id <published-id> --group <group> [--root <repo>]');
   console.error('   or: node tools/published-repairs.mjs append --run <run> --file <rows.json> [--root <repo>]');
+  console.error('   or: node tools/published-repairs.mjs adopt --run <run> --file <research/acceptance.json> --receipt <research/adoption.json> [--root <repo>]');
   process.exit(2);
 }
 
@@ -79,6 +81,31 @@ try {
       })}\n`);
       console.log(`published-repairs: group ${group} claimed ${id} at ${pre}`);
     }
+  } else if (command === 'adopt') {
+    const input = opt('file'), receiptPath = opt('receipt');
+    if (!input || !receiptPath) throw new Error('adopt requires --file and --receipt research paths');
+    const acceptance = JSON.parse(readAdoptionResearch(root, input));
+    if (acceptance.run !== run) throw new Error('adoption run mismatch');
+    const now = new Date().toISOString();
+    const liveText = readFileSync(R('items', `${acceptance.id}.md`), 'utf8');
+    const { acceptance: a, acceptance_sha256 } = validateAdoptionAcceptance(root, input, now, liveText);
+    if (rows(claimsPath).some(row => row.id === a.id)) throw new Error('adoption cannot replace an existing ownership claim');
+    // Validate the output path with the same lexical rules; no overwrite or
+    // implicit creation of directories or escape through symlinked parents.
+    if (!receiptPath.startsWith('research/') || receiptPath.includes('\\')
+      || receiptPath.split('/').some(part => !part || part === '.' || part === '..'))
+      throw new Error('invalid adoption receipt path');
+    const parent = receiptPath.slice(0, receiptPath.lastIndexOf('/'));
+    const rel = relative(realpathSync(R('research')), realpathSync(R(parent)));
+    if (rel.startsWith('..') || isAbsolute(rel)) throw new Error('adoption receipt escapes research');
+    const adoption = { version: 1, kind: ADOPTION_KIND, run, id: a.id, group: a.group,
+      pre_sha256: a.pre_sha256, recorded_at: now, acceptance_file: input, acceptance_sha256 };
+    const raw = JSON.stringify(adoption, null, 2) + '\n';
+    writeFileSync(R(receiptPath), raw, { flag: 'wx' });
+    appendFileSync(claimsPath, JSON.stringify({ version: 1, run, id: a.id, group: a.group,
+      pre_sha256: a.pre_sha256, claimed_at: now, claim_kind: ADOPTION_KIND,
+      adoption_receipt: receiptPath, adoption_sha256: adoptionSha(raw) }) + '\n');
+    console.log(`published-repairs: owner adopted ${a.id} at ${now}; local checks remain required`);
   } else {
     const input = opt('file');
     if (!input) throw new Error('append requires --file <rows.json>');

@@ -59,7 +59,7 @@ function fixture(t: any, before = auditedBefore) {
     return git('rev-parse', 'HEAD');
   };
   const depcheck = (...args: string[]) => {
-    for (const file of ['depcheck.mjs', 'facts-block.mjs', 'frontmatter-list.mjs', 'item-scope.mjs', 'item-hash.mjs', 'published-repair-policy.mjs'])
+    for (const file of ['depcheck.mjs', 'facts-block.mjs', 'frontmatter-list.mjs', 'item-scope.mjs', 'item-hash.mjs', 'published-repair-policy.mjs', 'published-repair-adoption.mjs'])
       copyFileSync(join(REPO, 'tools', file), join(root, 'tools', file));
     return spawnSync(process.execPath, [join(root, 'tools/depcheck.mjs'), '--json', ...args], { encoding: 'utf8' });
   };
@@ -222,3 +222,188 @@ for (const defect of ['current-content', 'missing-receipt', 'wrong-owner', 'miss
     assert.match(result.stdout, /published-unaudited/);
   });
 }
+
+function adoptedFixture(t: any, shape = 'actual_source_repairs') {
+  const f = fixture(t);
+  f.git('init', '--initial-branch=main');
+  writeFileSync(join(f.root, 'items', `${id}.md`), f.before);
+  f.receipt.prior_publication_commit = f.commit();
+  writeFileSync(join(f.root, 'items', `${id}.md`), f.current);
+  // Preserve the exact corrected delegated bytes before changing verification.
+  const corrected = f.current;
+  writeFileSync(join(f.root, 'research/corrected.md'), corrected);
+  const delegated: any = { version: 1, run: 'r', agent: '/root/delegated-repair', lane: 'focused',
+    [shape]: [{ id, [shape === 'items' ? 'original' : 'before']: { path: 'research/before.md', sha256: sha(f.before) },
+      current: { path: `items/${id}.md`, sha256: sha(corrected) } }] };
+  const delegatedRaw = JSON.stringify(delegated);
+  writeFileSync(join(f.root, 'research/delegated.json'), delegatedRaw);
+  const acceptance: any = { version: 1, kind: 'owner-acceptance-delegated-published-repair',
+    authorized_by: 'owner', verdict: 'accepted', accepted_at: new Date().toISOString(),
+    run: 'r', id, group: 'h', before_file: 'research/before.md', before_raw_sha256: sha(f.before),
+    pre_sha256: itemHashGuard(f.before), corrected_file: 'research/corrected.md', corrected_raw_sha256: sha(corrected),
+    content_sha256: itemHashGuard(corrected), prior_publication_commit: f.receipt.prior_publication_commit,
+    delegated_file: 'research/delegated.json', delegated_sha256: sha(delegatedRaw), delegated_pointer: `/${shape}/0` };
+  const putAcceptance = () => writeFileSync(join(f.root, 'research/acceptance.json'), JSON.stringify(acceptance));
+  putAcceptance();
+  rmSync(join(f.root, 'research/r-step3-published-claims.jsonl'));
+  const adopt = () => spawnSync(process.execPath, [join(REPO, 'tools/published-repairs.mjs'), 'adopt',
+    '--run', 'r', '--root', f.root, '--file', 'research/acceptance.json', '--receipt', 'research/adoption.json'], { encoding: 'utf8' });
+  const finalize = () => {
+    const now = new Date().toISOString();
+    for (const check of Object.values(f.receipt.local_checks) as any[]) check.checked_at = now;
+    f.receipt.recorded_at = now;
+    f.putReceipt();
+  };
+  return { ...f, acceptance, delegated, putAcceptance, adopt, finalize };
+}
+
+for (const shape of ['actual_source_repairs', 'items']) test(`owner adoption authenticates ${shape} without audit or native credit`, t => {
+  const f = adoptedFixture(t, shape);
+  const started = Date.now();
+  const result = f.adopt();
+  assert.equal(result.status, 0, result.stderr);
+  const claim = JSON.parse(readFileSync(join(f.root, 'research/r-step3-published-claims.jsonl'), 'utf8'));
+  assert.equal(claim.claim_kind, 'owner-adopted-delegated-repair');
+  assert.ok(Date.parse(claim.claimed_at) >= started);
+  assert.equal(f.check().ok, false, 'old local checks cannot be reused');
+  f.finalize();
+  assert.equal(f.check().ok, true);
+  assert.equal(f.check(f.current.replace('verification:\n', 'verification:\n  precheck: pass\n')).ok, true);
+  assert.notEqual(f.adopt().status, 0, 'existing claim cannot be replaced');
+  assert.equal(f.depcheck().status, 0);
+});
+
+for (const defect of ['wrong-run', 'wrong-owner', 'wrong-id', 'wrong-source', 'wrong-pointer', 'missing-delegate',
+  'changed-delegate', 'wrong-before-record', 'wrong-current-record', 'forged-before', 'unbound-snapshot',
+  'current-body', 'missing-commit', 'nonancestor', 'unpublished-ancestor', 'not-owner', 'not-accepted', 'future-acceptance']) {
+  test(`adoption rejects ${defect} before writing ownership`, t => {
+    const f = adoptedFixture(t), a = f.acceptance;
+    if (defect === 'wrong-run') a.run = 'other';
+    if (defect === 'wrong-owner') a.group = 'other';
+    if (defect === 'wrong-id') a.id = 'thm-other';
+    if (defect === 'wrong-source') a.corrected_file = 'research/before.md';
+    if (defect === 'wrong-pointer') a.delegated_pointer = '/existing_consumers/0';
+    if (defect === 'missing-delegate') rmSync(join(f.root, 'research/delegated.json'));
+    if (defect === 'changed-delegate') writeFileSync(join(f.root, 'research/delegated.json'), '{}');
+    if (defect === 'wrong-before-record' || defect === 'wrong-current-record' || defect === 'wrong-owner') {
+      if (defect === 'wrong-before-record') f.delegated.actual_source_repairs[0].before.sha256 = '0'.repeat(64);
+      if (defect === 'wrong-current-record') f.delegated.actual_source_repairs[0].current.path = 'items/thm-other.md';
+      // Owner group is explicitly bound by the acceptance, not invented by the delegate.
+      if (defect === 'wrong-owner') a.authorized_by = 'other';
+      const raw = JSON.stringify(f.delegated);
+      writeFileSync(join(f.root, 'research/delegated.json'), raw); a.delegated_sha256 = sha(raw);
+    }
+    if (defect === 'forged-before') {
+      const before = f.before.replace('Original.', 'Fabricated.');
+      writeFileSync(join(f.root, 'research/before.md'), before);
+      a.before_raw_sha256 = sha(before); a.pre_sha256 = itemHashGuard(before);
+      f.delegated.actual_source_repairs[0].before.sha256 = sha(before);
+      const raw = JSON.stringify(f.delegated); writeFileSync(join(f.root, 'research/delegated.json'), raw); a.delegated_sha256 = sha(raw);
+    }
+    if (defect === 'unbound-snapshot') writeFileSync(join(f.root, 'research/corrected.md'), f.current + 'changed');
+    if (defect === 'current-body') writeFileSync(join(f.root, 'items', `${id}.md`), f.current + 'changed');
+    if (defect === 'missing-commit') delete a.prior_publication_commit;
+    if (defect === 'nonancestor') {
+      const ancestor = a.prior_publication_commit;
+      f.git('checkout', '--orphan', 'unrelated');
+      writeFileSync(join(f.root, 'items', `${id}.md`), auditedBefore);
+      a.prior_publication_commit = f.commit('2026-09-30T01:00:00Z');
+      f.git('checkout', '--detach', ancestor);
+      writeFileSync(join(f.root, 'items', `${id}.md`), f.current);
+    }
+    if (defect === 'unpublished-ancestor') {
+      writeFileSync(join(f.root, 'items', `${id}.md`), auditedBefore.replace('published', 'draft'));
+      a.prior_publication_commit = f.commit();
+      writeFileSync(join(f.root, 'items', `${id}.md`), f.current);
+    }
+    if (defect === 'not-owner') a.authorized_by = 'delegate';
+    if (defect === 'not-accepted') a.verdict = 'pending';
+    if (defect === 'future-acceptance') a.accepted_at = '2999-01-01T00:00:00Z';
+    f.putAcceptance();
+    assert.notEqual(f.adopt().status, 0);
+    assert.equal(readFileSync(join(f.root, 'research/acceptance.json'), 'utf8').length > 0, true);
+    assert.throws(() => readFileSync(join(f.root, 'research/r-step3-published-claims.jsonl')));
+  });
+}
+
+for (const defect of ['receipt-hash', 'receipt-identity', 'acceptance-hash', 'delegated-hash', 'claim-kind', 'downgraded-kind', 'missing-kind', 'claim-owner', 'receipt-owner',
+  'commit', 'current-body', 'ledger', 'stale-precheck', 'failed-rendercheck', 'pre-adoption-check']) {
+  test(`recorded repair reauthenticates adoption and rejects ${defect}`, t => {
+    const f = adoptedFixture(t);
+    assert.equal(f.adopt().status, 0);
+    f.finalize();
+    assert.equal(f.check().ok, true);
+    const claimPath = join(f.root, 'research/r-step3-published-claims.jsonl');
+    const claim = JSON.parse(readFileSync(claimPath, 'utf8'));
+    if (defect === 'receipt-hash') writeFileSync(join(f.root, 'research/adoption.json'), '{}');
+    if (defect === 'receipt-identity') {
+      const adoption = JSON.parse(readFileSync(join(f.root, 'research/adoption.json'), 'utf8'));
+      adoption.run = 'other';
+      const raw = JSON.stringify(adoption);
+      writeFileSync(join(f.root, 'research/adoption.json'), raw);
+      claim.adoption_sha256 = sha(raw);
+    }
+    if (defect === 'acceptance-hash') { f.acceptance.group = 'other'; f.putAcceptance(); }
+    if (defect === 'delegated-hash') writeFileSync(join(f.root, 'research/delegated.json'), '{}');
+    if (defect === 'claim-kind') claim.claim_kind = 'unknown';
+    if (defect === 'downgraded-kind') claim.claim_kind = 'pre-edit';
+    if (defect === 'missing-kind') delete claim.claim_kind;
+    if (defect === 'claim-owner') claim.group = 'other';
+    if (defect === 'receipt-owner') f.receipt.group = 'other';
+    if (defect === 'commit') f.receipt.prior_publication_commit = '0'.repeat(40);
+    if (defect === 'current-body') writeFileSync(join(f.root, 'items', `${id}.md`), f.current + 'changed');
+    if (defect === 'ledger') writeFileSync(join(f.root, 'research/published-consumer-supplier-ledger.md'), 'changed');
+    if (defect === 'stale-precheck') f.receipt.local_checks.precheck.content_sha256 = '0'.repeat(64);
+    if (defect === 'failed-rendercheck') f.receipt.local_checks.rendercheck.exit_code = 1;
+    if (defect === 'pre-adoption-check') f.receipt.local_checks.precheck.checked_at = '2026-10-01T00:00:00Z';
+    writeFileSync(claimPath, JSON.stringify(claim)); f.putReceipt();
+    assert.equal(f.check(readFileSync(join(f.root, 'items', `${id}.md`), 'utf8')).ok, false);
+  });
+}
+
+function chainedFixture(t: any) {
+  const f = adoptedFixture(t);
+  const intermediate = f.current.replace('Corrected.', 'Intermediate delegated repair.');
+  writeFileSync(join(f.root, 'research/intermediate.md'), intermediate);
+  f.delegated.actual_source_repairs[0].current.sha256 = sha(intermediate);
+  const firstRaw = JSON.stringify(f.delegated);
+  writeFileSync(join(f.root, 'research/delegated.json'), firstRaw);
+  const second = { version: 1, run: 'r', agent: '/root/second-repair', lane: 'integration',
+    items: [{ id, original: { path: 'research/before.md', sha256: sha(f.before) },
+      integrated_preimage: { path: 'research/intermediate.md', sha256: sha(intermediate) },
+      current: { path: `items/${id}.md`, sha256: sha(f.current) } }] };
+  const secondRaw = JSON.stringify(second);
+  writeFileSync(join(f.root, 'research/second.json'), secondRaw);
+  for (const key of ['delegated_file', 'delegated_sha256', 'delegated_pointer']) delete f.acceptance[key];
+  f.acceptance.delegated_chain = [
+    { file: 'research/delegated.json', sha256: sha(firstRaw), pointer: '/actual_source_repairs/0',
+      before_field: 'before', corrected_file: 'research/intermediate.md' },
+    { file: 'research/second.json', sha256: sha(secondRaw), pointer: '/items/0',
+      before_field: 'integrated_preimage', corrected_file: 'research/corrected.md' },
+  ];
+  f.putAcceptance();
+  return f;
+}
+
+test('explicit delegated chain authenticates ancestor through genuine intermediate snapshots', t => {
+  const f = chainedFixture(t), result = f.adopt();
+  assert.equal(result.status, 0, result.stderr);
+  f.finalize();
+  assert.equal(f.check().ok, true);
+  writeFileSync(join(f.root, 'research/intermediate.md'), 'fabricated intermediate');
+  assert.equal(f.check().ok, false, 'policy reauthenticates each chain snapshot');
+});
+
+for (const defect of ['disconnected', 'swapped', 'final-endpoint', 'wrong-before-field', 'mixed-single-chain', 'changed-artifact'])
+  test(`delegated chain rejects ${defect}`, t => {
+    const f = chainedFixture(t), chain = f.acceptance.delegated_chain;
+    if (defect === 'disconnected') chain[1].before_field = 'original';
+    if (defect === 'swapped') chain.reverse();
+    if (defect === 'final-endpoint') chain.pop();
+    if (defect === 'wrong-before-field') chain[0].before_field = 'integrated_preimage';
+    if (defect === 'mixed-single-chain') f.acceptance.delegated_file = 'research/delegated.json';
+    if (defect === 'changed-artifact') writeFileSync(join(f.root, 'research/second.json'), '{}');
+    f.putAcceptance();
+    assert.notEqual(f.adopt().status, 0);
+    assert.throws(() => readFileSync(join(f.root, 'research/r-step3-published-claims.jsonl')));
+  });

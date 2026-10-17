@@ -15,7 +15,7 @@ const algorithm = (id, deps = []) => `---\nid: ${id}\nkind: algorithm\ntitle: Fi
 function fixture(t) {
  const root = mkdtempSync(join(tmpdir(), 'algorithm-items-')); t.after(() => rmSync(root,{recursive:true,force:true}));
  for(const dir of ['tools','items','library/test','research'])mkdirSync(join(root,dir),{recursive:true});
- for(const file of ['depcheck.mjs','facts-block.mjs','frontmatter-list.mjs','item-scope.mjs','published-repair-policy.mjs','item-hash.mjs'])copyFileSync(join(toolDir,file),join(root,'tools',file));
+ for(const file of ['depcheck.mjs','facts-block.mjs','frontmatter-list.mjs','item-scope.mjs','published-repair-adoption.mjs','published-repair-policy.mjs','item-hash.mjs'])copyFileSync(join(toolDir,file),join(root,'tools',file));
 
  writeFileSync(join(root,'research/b-leaf-legacy-allowlist.json'),JSON.stringify({version:1,edges:[]}));
  const rows=[{id:'alg-small',kind:'algorithm',deps:[],dependency_level:0},

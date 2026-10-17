@@ -597,6 +597,54 @@ repair, audit, acceptance or initial publication. A changed canonical hash still
 requires the ordinary recorded published repair; neither claim nor native evidence
 is rewritten. The no-op receipt itself belongs to the sealed closeout scope.
 
+For an already-performed genuinely delegated published repair whose pre-edit
+ownership was not serialized, use the explicit owner recovery:
+`node tools/published-repairs.mjs adopt --run RUN --file research/acceptance.json
+--receipt research/adoption.json`. Ordinary pre-edit claims remain the default.
+This command never edits items or supplies native execution, audit or judge
+coverage. It refuses an existing claim and stamps adoption with the actual
+current time. Do not backdate evidence or restore old items to simulate history.
+
+The owner acceptance is version 1, kind
+`owner-acceptance-delegated-published-repair`, with `authorized_by: owner`,
+`verdict: accepted`, actual `accepted_at`, `run`, `id`, `group`, `before_file`,
+`before_raw_sha256`, `pre_sha256`, `corrected_file`, `corrected_raw_sha256`,
+`content_sha256`, `prior_publication_commit`, `delegated_file`,
+`delegated_sha256`, and `delegated_pointer`. Files are durable regular research
+files; `corrected_file` archives the complete corrected bytes before replacing
+stale verification stamps. Both canonical hashes use `itemHashGuard`.
+The full immutable publication commit must be an ancestor of HEAD and contain
+the byte-identical published `before_file`, regardless of old audit markers.
+The separate delegated JSON must name this run, a delegated `/root/` agent and
+lane; the pointer is exactly `/actual_source_repairs/N` (a `before`/`current`
+record) or `/items/N` (an `original`/`current` record). The unique item record
+must bind the original archive path/raw hash and corrected live item path/raw
+hash. Owner acceptance must bind the exact delegated JSON bytes. A changed
+delegated artifact requires new acceptance before adoption.
+
+For an actual sequence of delegated integrations, replace the three
+`delegated_*` fields with `delegated_chain`, an ordered array of
+`{file, sha256, pointer, before_field, corrected_file}` records (at most 16).
+Each `corrected_file` is a complete raw snapshot matching that delegated
+record's `current.sha256`. The first delegated before path/hash must match the
+Git-authenticated original archive; subsequent before bytes must equal the
+preceding corrected snapshot, and the final corrected bytes must equal the
+accepted corrected snapshot. `before_field` is `before` for
+`actual_source_repairs`, or `original` or the explicitly recorded
+`integrated_preimage` for `items`. Every artifact and intermediate snapshot is
+reauthenticated; mixed single/chain evidence, gaps and inferred endpoints fail.
+
+The resulting claim has explicit `claim_kind: owner-adopted-delegated-repair`,
+`adoption_receipt` and `adoption_sha256`; its receipt binds the exact owner
+acceptance. Recorded local repair policy reauthenticates this entire chain,
+including Git provenance and the current canonical carrier. Replace stale
+verification evidence, run actual current precheck and rendercheck after
+adoption, and record the ordinary repair receipt and canonical ledger block.
+The repair receipt's original archive, before hashes, current canonical hash,
+publication commit, item, run and group must match owner acceptance. Recovery
+does not satisfy or alter any native workflow gate, frozen history, audit,
+judge, publication or owner mathematical acceptance requirement.
+
 Owner-authorized `RUN-closeout-operational-contexts.json` may omit exact temporary
 `overlay`/`shadow` resolver directories beneath the run's owner repair evidence
 from the scoped Git commit. Each directory binds its physical tree (file bytes,

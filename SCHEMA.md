@@ -117,6 +117,18 @@
   missing or mismatched evidence remains an error. There is no item gate,
   rejudgment or adjudication duty for this recorded repair state.
 
+  If genuine delegated edits already happened without serializing ownership,
+  the owner may use the explicit `published-repairs.mjs adopt` recovery in
+  WORKFLOW.md. An `owner-adopted-delegated-repair` claim carries its actual
+  adoption date and a hash-bound adoption receipt; it is never a backdated
+  pre-edit claim. The original raw archive must equal an ancestor published Git
+  carrier even if it contains an audit stamp. Separate delegated repair and
+  focused owner acceptance JSON bind the original and corrected raw snapshots
+  and canonical hashes. Verification-only changes after adoption are allowed;
+  changes to the mathematical carrier invalidate the evidence. Ordinary local
+  check and canonical ledger requirements above still apply, with checks after
+  adoption. This recovery grants no audit, judge or native workflow coverage.
+
 ### Open problems
 
 An `open-problem` (displayed as **Open problem**) records a precise unresolved
