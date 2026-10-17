@@ -886,3 +886,33 @@ snapshot exists. Recover and record exact source-byte evidence when repairing
 historical bindings. The additional post-snapshot metadata is removed when
 comparing routing with original reports, so authentic reader/refuter reports
 remain unchanged. A missing, malformed or changed post snapshot fails binding.
+
+
+### Published prerequisite page findings in Step 3
+
+A reader may retain an outside published page finding with the existing fields
+`id`, `subject_type: published-dependency`, `consumer_id`, `location`, `defect`,
+`evidence`, and `severity`; `observed_source` remains null or omitted. The exact
+assigned consumer must reach an actually published item listed in that page's
+`items` or `examples` through the ordinary item dependency closure. A mere link,
+page `requires`, or an unrelated member does not establish that reachability.
+The page must have a unique regular canonical library carrier, matching page ID
+and published status, and belong to no current-run manifest. Ambiguous identities,
+item/page ID collisions, draft pages and malformed inventories fail closed.
+
+Split derives `carrier_kind: page`, `observation_basis: split-current`, and
+`page_dependency: {path, supplier_ids}` (sorted reachable published members).
+Its `observed_sha256` fingerprints `{file_sha256, page_dependency}` at routing
+time. This is a current routing guard, never evidence of the reader's observed
+bytes or an item `pre_sha256`; original reports remain unchanged. Checks rederive
+page identity, published membership and exact owned-consumer reachability.
+
+The obligation retains route `reader` and ordinary adjudication/ledger duties.
+A confirmed nonfatal page defect may be `nonfatal-recorded`, or `fixed` after
+explicit authorized correction and actual review. A fixed disposition fails if
+the page carrier is unchanged; any correction requires fresh decision stamping.
+The decision must retain the exact `consumer_id`. Page support grants no source
+write authority, item repair claim, refuter coverage exemption or
+`context_accepted` receipt. Imported pages remain read-only. Native page prose
+maintenance requires owner authorization, exact preimages and writer checks;
+claims and supplier interfaces retain their ordinary consumer-review duties.
