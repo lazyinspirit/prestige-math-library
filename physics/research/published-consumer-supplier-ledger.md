@@ -989,4 +989,3 @@ Status: OPEN published-owner maintenance; adjudication disposition nonfatal-reco
 Published ID: `thm-gr-nondegenerate-levi-civita-and-tensor-derivative`; run `physics-remaining-80-2026-10-17`; reporting group `batch-50`; owned consumer `lem-tgr-c1-current-density-divergence` (reader:50:2).
 
 Status: OPEN published-owner maintenance; adjudication disposition nonfatal-recorded. Strategy: recover valid existing audit evidence or perform an authorized genuine audit in the owning workspace, then refresh the physics snapshot under owner control. No source repair or audit certification is supplied by this dispatch. See `research/physics-remaining-80-2026-10-17-alpha-batch-50-3a.md`.
-
