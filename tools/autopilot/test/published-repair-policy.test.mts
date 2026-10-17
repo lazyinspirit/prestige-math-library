@@ -407,3 +407,128 @@ for (const defect of ['disconnected', 'swapped', 'final-endpoint', 'wrong-before
     assert.notEqual(f.adopt().status, 0);
     assert.throws(() => readFileSync(join(f.root, 'research/r-step3-published-claims.jsonl')));
   });
+
+function refreshFixture(t: any) {
+  const f = adoptedFixture(t), initial = f.adopt();
+  assert.equal(initial.status, 0, initial.stderr);
+  const claimsPath = join(f.root, 'research/r-step3-published-claims.jsonl');
+  const previousClaim = JSON.parse(readFileSync(claimsPath, 'utf8'));
+  const before = f.current.replace('verification:\n', 'verification:\n  precheck: pass\n');
+  const formatted = before.replace('Corrected.', 'Formatted corrected.');
+  writeFileSync(join(f.root, 'research/format-before.md'), before);
+  writeFileSync(join(f.root, 'research/formatted.md'), formatted);
+  writeFileSync(join(f.root, 'items', `${id}.md`), formatted);
+  const formatter: any = { version: 1, run: 'r', agent: '/root/formatter', lane: 'mechanical-normalization',
+    actual_source_repairs: [{ id, before: { path: 'research/format-before.md', sha256: sha(before) },
+      current: { path: `items/${id}.md`, sha256: sha(formatted) } }] };
+  const formatterRaw = JSON.stringify(formatter);
+  writeFileSync(join(f.root, 'research/formatter.json'), formatterRaw);
+  const acceptance: any = { ...f.acceptance, accepted_at: new Date().toISOString(),
+    corrected_file: 'research/formatted.md', corrected_raw_sha256: sha(formatted), content_sha256: itemHashGuard(formatted),
+    previous_claim_sha256: sha(JSON.stringify(previousClaim)), delegated_file: 'research/formatter.json',
+    delegated_sha256: sha(formatterRaw), delegated_pointer: '/actual_source_repairs/0' };
+  const putAcceptance = () => writeFileSync(join(f.root, 'research/refresh-acceptance.json'), JSON.stringify(acceptance));
+  putAcceptance();
+  const refresh = (command = 'adopt-refresh') => spawnSync(process.execPath, [join(REPO, 'tools/published-repairs.mjs'), command,
+    '--run', 'r', '--root', f.root, '--file', 'research/refresh-acceptance.json', '--receipt', 'research/refresh-adoption.json',
+    '--history', 'research/refresh-history.json'], { encoding: 'utf8' });
+  const finalize = () => {
+    const content = itemHashGuard(formatted);
+    f.receipt.content_sha256 = content;
+    for (const check of Object.values(f.receipt.local_checks) as any[]) check.content_sha256 = content;
+    const path = join(f.root, 'research/published-consumer-supplier-ledger.md');
+    const ledger = readFileSync(path, 'utf8').replace(itemHashGuard(f.current), content);
+    writeFileSync(path, ledger);
+    f.receipt.ledger_sha256 = sha(ledger.split(':begin -->')[1].split('<!-- local-published-repair:')[0]);
+    f.finalize();
+  };
+  const check = () => recordedPublishedRepair(f.root, id, formatted, receiptPath);
+  return { ...f, acceptance, formatter, before, formatted, previousClaim, claimsPath, putAcceptance, refresh, finalize, check };
+}
+
+test('explicit adoption refresh preserves complete history and permits only initial verification-only guard join', t => {
+  const f = refreshFixture(t);
+  const oldClaim = readFileSync(f.claimsPath, 'utf8');
+  const unrelated = '  {"version":1,"run":"r","id":"thm-unrelated","group":"other"}  ';
+  writeFileSync(f.claimsPath, oldClaim + unrelated + '\n');
+  const oldAdoption = readFileSync(join(f.root, 'research/adoption.json'), 'utf8');
+  const oldAcceptance = readFileSync(join(f.root, 'research/acceptance.json'), 'utf8');
+  const started = Date.now(), result = f.refresh();
+  assert.equal(result.status, 0, result.stderr);
+  const claim = JSON.parse(readFileSync(f.claimsPath, 'utf8').split('\n')[0]);
+  assert.ok(Date.parse(claim.claimed_at) >= started);
+  const history = JSON.parse(readFileSync(join(f.root, 'research/refresh-history.json'), 'utf8'));
+  assert.deepEqual(history.previous_claim, JSON.parse(oldClaim));
+  assert.equal(history.previous_claim_raw, oldClaim.trim());
+  assert.ok(readFileSync(f.claimsPath, 'utf8').endsWith(unrelated + '\n'), 'unrelated claim bytes preserved');
+  assert.equal(history.previous_adoption_raw, oldAdoption);
+  assert.equal(history.previous_acceptance_raw, oldAcceptance);
+  assert.equal(readFileSync(join(f.root, 'research/adoption.json'), 'utf8'), oldAdoption);
+  assert.equal(readFileSync(join(f.root, 'research/acceptance.json'), 'utf8'), oldAcceptance);
+  assert.equal(f.check().ok, false, 'old checks and old repair receipt cannot certify refreshed content');
+  f.finalize();
+  assert.equal(f.check().ok, true);
+  assert.notEqual(f.refresh().status, 0, 'cannot overwrite history or receipt');
+});
+
+for (const defect of ['predecessor-guard', 'pre-edit-claim', 'wrong-prehash', 'wrong-owner', 'wrong-run', 'wrong-id',
+  'wrong-original', 'wrong-commit', 'missing-predecessor-binding', 'wrong-predecessor-binding', 'stale-formatter',
+  'forged-predecessor', 'ordinary-adopt']) test(`adoption refresh rejects ${defect}`, t => {
+    const f = refreshFixture(t), a = f.acceptance;
+    if (defect === 'predecessor-guard') {
+      const before = f.before.replace('Corrected.', 'Unrelated mathematical predecessor.');
+      writeFileSync(join(f.root, 'research/format-before.md'), before);
+      f.formatter.actual_source_repairs[0].before.sha256 = sha(before);
+      const raw = JSON.stringify(f.formatter); writeFileSync(join(f.root, 'research/formatter.json'), raw); a.delegated_sha256 = sha(raw);
+    }
+    if (defect === 'pre-edit-claim') {
+      const claim = { ...f.previousClaim, claim_kind: 'pre-edit' };
+      writeFileSync(f.claimsPath, JSON.stringify(claim));
+      a.previous_claim_sha256 = sha(JSON.stringify(claim));
+    }
+    if (defect === 'wrong-prehash') a.pre_sha256 = '0'.repeat(64);
+    if (defect === 'wrong-owner') a.group = 'other';
+    if (defect === 'wrong-run') a.run = 'other';
+    if (defect === 'wrong-id') a.id = 'thm-other';
+    if (defect === 'wrong-original') a.before_file = 'research/format-before.md';
+    if (defect === 'wrong-commit') a.prior_publication_commit = '0'.repeat(40);
+    if (defect === 'missing-predecessor-binding') delete a.previous_claim_sha256;
+    if (defect === 'wrong-predecessor-binding') a.previous_claim_sha256 = '0'.repeat(64);
+    if (defect === 'stale-formatter') writeFileSync(join(f.root, 'research/formatter.json'), '{}');
+    if (defect === 'forged-predecessor') writeFileSync(join(f.root, 'research/adoption.json'), '{}');
+    f.putAcceptance();
+    const before = readFileSync(f.claimsPath, 'utf8');
+    assert.notEqual(f.refresh(defect === 'ordinary-adopt' ? 'adopt' : 'adopt-refresh').status, 0);
+    assert.equal(readFileSync(f.claimsPath, 'utf8'), before);
+    assert.throws(() => readFileSync(join(f.root, 'research/refresh-history.json')));
+  });
+
+for (const defect of ['history-bytes', 'history-predecessor', 'previous-adoption', 'previous-acceptance', 'previous-snapshot',
+  'formatter-preimage', 'pre-refresh-check']) test(`recorded repair reauthenticates refreshed history: ${defect}`, t => {
+    const f = refreshFixture(t), result = f.refresh();
+    assert.equal(result.status, 0, result.stderr);
+    f.finalize(); assert.equal(f.check().ok, true);
+    if (defect === 'history-bytes') writeFileSync(join(f.root, 'research/refresh-history.json'), '{}');
+    if (defect === 'history-predecessor') {
+      // Even rehashing the outer carriers cannot manufacture an earlier claim.
+      const historyPath = join(f.root, 'research/refresh-history.json');
+      const h = JSON.parse(readFileSync(historyPath, 'utf8'));
+      h.previous_claim.claimed_at = '2026-09-01T00:00:00Z';
+      h.previous_claim_raw = JSON.stringify(h.previous_claim); h.previous_claim_sha256 = sha(h.previous_claim_raw);
+      const historyRaw = JSON.stringify(h); writeFileSync(historyPath, historyRaw);
+      const adoptionPath = join(f.root, 'research/refresh-adoption.json');
+      const adoption = JSON.parse(readFileSync(adoptionPath, 'utf8'));
+      adoption.previous_claim = h.previous_claim; adoption.previous_history_sha256 = sha(historyRaw);
+      const raw = JSON.stringify(adoption); writeFileSync(adoptionPath, raw);
+      const claim = JSON.parse(readFileSync(f.claimsPath, 'utf8')); claim.adoption_sha256 = sha(raw);
+      writeFileSync(f.claimsPath, JSON.stringify(claim));
+    }
+    if (defect === 'previous-adoption') writeFileSync(join(f.root, 'research/adoption.json'), '{}');
+    if (defect === 'previous-acceptance') writeFileSync(join(f.root, 'research/acceptance.json'), '{}');
+    if (defect === 'previous-snapshot') writeFileSync(join(f.root, 'research/corrected.md'), 'forged previous snapshot');
+    if (defect === 'formatter-preimage') writeFileSync(join(f.root, 'research/format-before.md'), 'forged formatter preimage');
+    if (defect === 'pre-refresh-check') {
+      f.receipt.local_checks.precheck.checked_at = f.previousClaim.claimed_at; f.putReceipt();
+    }
+    assert.equal(f.check().ok, false);
+  });

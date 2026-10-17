@@ -50,7 +50,7 @@ function delegatedRecord(artifact, pointer) {
 
 /** Validate owner acceptance and both exact endpoints. Current raw bytes live
  * in a snapshot so subsequent verification-only changes remain possible. */
-export function validateAdoptionAcceptance(root, acceptancePath, now, liveText) {
+export function validateAdoptionAcceptance(root, acceptancePath, now, liveText, predecessor) {
   const raw = readAdoptionResearch(root, acceptancePath), a = JSON.parse(raw);
   if (a.version !== 1 || a.kind !== 'owner-acceptance-delegated-published-repair'
     || a.authorized_by !== 'owner' || a.verdict !== 'accepted'
@@ -68,6 +68,15 @@ export function validateAdoptionAcceptance(root, acceptancePath, now, liveText) 
     throw new Error('adoption endpoints do not match published sources');
   if (!hasCommittedPriorPublication(root, a.id, before, a.prior_publication_commit, now))
     throw new Error('adoption requires an exact ancestor published Git carrier');
+  if (predecessor) {
+    const old = predecessor.acceptance;
+    if (a.previous_claim_sha256 !== adoptionSha(JSON.stringify(predecessor.claim))
+      || Date.parse(a.accepted_at) < Date.parse(predecessor.claim.claimed_at)
+      || a.content_sha256 === old.content_sha256)
+      throw new Error('refresh does not bind changed predecessor content');
+    for (const key of ['run', 'id', 'group', 'before_file', 'before_raw_sha256', 'pre_sha256', 'prior_publication_commit'])
+      if (a[key] !== old[key]) throw new Error(`refresh changes original ${key}`);
+  } else if (a.previous_claim_sha256 !== undefined) throw new Error('refresh acceptance requires authenticated predecessor');
   const single = ['delegated_file', 'delegated_sha256', 'delegated_pointer'];
   if (a.delegated_chain !== undefined && single.some(key => a[key] !== undefined))
     throw new Error('ambiguous single/chain delegated evidence');
@@ -82,6 +91,11 @@ export function validateAdoptionAcceptance(root, acceptancePath, now, liveText) 
       || d.version !== 1 || d.run !== a.run || typeof d.agent !== 'string' || !d.agent.trim()
       || d.agent === 'owner' || !d.agent.startsWith('/root/') || typeof d.lane !== 'string' || !d.lane.trim())
       throw new Error('missing or mismatched separate delegated repair evidence');
+    if (predecessor) {
+      const old = predecessor.acceptance;
+      const oldFiles = old.delegated_chain?.map(entry => entry.file) ?? [old.delegated_file];
+      if (oldFiles.includes(step.file)) throw new Error('refresh requires separate new delegated evidence');
+    }
     const { row, shape } = delegatedRecord(d, step.pointer);
     const beforeKey = step.before_field ?? (shape === 'items' ? 'original' : 'before');
     if (!(shape === 'items' ? ['original', 'integrated_preimage'] : ['before']).includes(beforeKey))
@@ -90,7 +104,9 @@ export function validateAdoptionAcceptance(root, acceptancePath, now, liveText) 
     const stepBefore = readAdoptionResearch(root, original?.path);
     const stepCurrent = readAdoptionResearch(root, step.corrected_file);
     if (row.id !== a.id || original?.sha256 !== adoptionSha(stepBefore)
-      || (index === 0 && original.path !== a.before_file) || stepBefore !== previous
+      || (index === 0 && predecessor
+        ? itemHashGuard(stepBefore) !== predecessor.acceptance.content_sha256
+        : (index === 0 && original.path !== a.before_file) || stepBefore !== previous)
       || row.current?.path !== `items/${a.id}.md` || row.current?.sha256 !== adoptionSha(stepCurrent)
       || !published(stepBefore, a.id) || !published(stepCurrent, a.id))
       throw new Error('delegated repair record does not bind exact chained endpoints');
@@ -100,14 +116,40 @@ export function validateAdoptionAcceptance(root, acceptancePath, now, liveText) 
   return { acceptance: a, acceptance_sha256: adoptionSha(raw) };
 }
 
-export function authenticateAdoption(root, claim, receipt, liveText) {
+export function authenticateAdoption(root, claim, receipt, liveText, seen = new Set()) {
+  if (seen.has(claim.adoption_receipt) || seen.size >= 16 || claim.version !== 1
+    || !Number.isFinite(Date.parse(claim.claimed_at))) throw new Error('invalid or cyclic adoption history');
+  seen.add(claim.adoption_receipt);
   const raw = readAdoptionResearch(root, claim.adoption_receipt), adoption = JSON.parse(raw);
   if (claim.claim_kind !== ADOPTION_KIND || adoptionSha(raw) !== claim.adoption_sha256
     || adoption.version !== 1 || adoption.kind !== ADOPTION_KIND
     || adoption.recorded_at !== claim.claimed_at || Date.parse(claim.claimed_at) > Date.now())
     throw new Error('invalid hash-bound adoption receipt');
+  let predecessor;
+  if (adoption.previous_history !== undefined || adoption.previous_claim !== undefined
+    || adoption.previous_history_sha256 !== undefined) {
+    const historyRaw = readAdoptionResearch(root, adoption.previous_history), h = JSON.parse(historyRaw);
+    if (adoptionSha(historyRaw) !== adoption.previous_history_sha256 || h.version !== 1
+      || h.kind !== 'published-repair-adoption-history' || h.recorded_at !== claim.claimed_at
+      || JSON.stringify(h.previous_claim) !== JSON.stringify(adoption.previous_claim)
+      || JSON.stringify(JSON.parse(h.previous_claim_raw)) !== JSON.stringify(h.previous_claim)
+      || h.previous_claim_sha256 !== adoptionSha(h.previous_claim_raw)
+      || h.previous_adoption_raw !== readAdoptionResearch(root, h.previous_claim.adoption_receipt)
+      || h.previous_adoption_sha256 !== adoptionSha(h.previous_adoption_raw))
+      throw new Error('forged or mismatched adoption history');
+    const oldAdoption = JSON.parse(h.previous_adoption_raw);
+    if (h.previous_acceptance_raw !== readAdoptionResearch(root, oldAdoption.acceptance_file)
+      || h.previous_acceptance_sha256 !== adoptionSha(h.previous_acceptance_raw))
+      throw new Error('previous owner acceptance history mismatch');
+    const oldAcceptance = JSON.parse(h.previous_acceptance_raw);
+    authenticateAdoption(root, h.previous_claim, oldAcceptance,
+      readAdoptionResearch(root, oldAcceptance.corrected_file), seen);
+    if (Date.parse(h.previous_claim.claimed_at) >= Date.parse(claim.claimed_at))
+      throw new Error('refresh must follow predecessor adoption');
+    predecessor = { claim: h.previous_claim, acceptance: oldAcceptance };
+  }
   const { acceptance: a, acceptance_sha256 } = validateAdoptionAcceptance(root,
-    adoption.acceptance_file, claim.claimed_at, liveText);
+    adoption.acceptance_file, claim.claimed_at, liveText, predecessor);
   if (acceptance_sha256 !== adoption.acceptance_sha256) throw new Error('owner acceptance changed after adoption');
   for (const key of ['run', 'id', 'group', 'pre_sha256'])
     if (a[key] !== claim[key] || adoption[key] !== claim[key] || receipt[key] !== claim[key])
@@ -115,4 +157,20 @@ export function authenticateAdoption(root, claim, receipt, liveText) {
   for (const key of ['before_file', 'before_raw_sha256', 'content_sha256', 'prior_publication_commit'])
     if (receipt[key] !== a[key]) throw new Error(`repair/adoption ${key} mismatch`);
   return adoption;
+}
+
+/** Preserve a truthful predecessor in a new nonoverwriting history carrier. */
+export function prepareAdoptionRefresh(root, claim, now, claimRaw = JSON.stringify(claim)) {
+  if (claim?.claim_kind !== ADOPTION_KIND) throw new Error('refresh requires an explicit adopted ownership claim');
+  const adoptionRaw = readAdoptionResearch(root, claim.adoption_receipt), adoption = JSON.parse(adoptionRaw);
+  const acceptanceRaw = readAdoptionResearch(root, adoption.acceptance_file), acceptance = JSON.parse(acceptanceRaw);
+  authenticateAdoption(root, claim, acceptance, readAdoptionResearch(root, acceptance.corrected_file));
+  if (Date.parse(now) <= Date.parse(claim.claimed_at)) throw new Error('refresh must follow predecessor adoption');
+  if (JSON.stringify(JSON.parse(claimRaw)) !== JSON.stringify(claim)) throw new Error('previous raw claim mismatch');
+  return { predecessor: { claim, acceptance }, history: {
+    version: 1, kind: 'published-repair-adoption-history', recorded_at: now,
+    previous_claim: claim, previous_claim_raw: claimRaw, previous_claim_sha256: adoptionSha(claimRaw),
+    previous_adoption_raw: adoptionRaw, previous_adoption_sha256: adoptionSha(adoptionRaw),
+    previous_acceptance_raw: acceptanceRaw, previous_acceptance_sha256: adoptionSha(acceptanceRaw),
+  } };
 }

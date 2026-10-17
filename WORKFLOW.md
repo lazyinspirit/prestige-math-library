@@ -645,6 +645,29 @@ publication commit, item, run and group must match owner acceptance. Recovery
 does not satisfy or alter any native workflow gate, frozen history, audit,
 judge, publication or owner mathematical acceptance requirement.
 
+If a subsequent actual delegated normalization changes the adopted canonical
+carrier, preserve history through `node tools/published-repairs.mjs adopt-refresh
+--run RUN --file research/new-acceptance.json --receipt research/new-adoption.json
+--history research/new-history.json`. This route requires exactly one existing
+explicit adopted claim; it cannot refresh an ordinary pre-edit claim. The new
+focused acceptance adds `previous_claim_sha256`, the SHA-256 of
+`JSON.stringify` of the parsed active claim. Original item/run/group, ancestor
+commit, archive and pre-edit hashes must remain identical. New acceptance
+supplies separate genuine delegated formatter evidence and complete raw
+snapshots. Its first before snapshot must match the predecessor's accepted
+canonical hash; verification-only raw differences are allowed at this sole
+boundary. Subsequent steps still join exact raw bytes. The final snapshot must
+match the live canonical carrier and differ from the predecessor canonical hash.
+
+Refresh creates new nonoverwriting history and adoption receipts at the actual
+current time, preserves the complete prior claim and raw adoption/acceptance
+receipts with their hashes, then atomically replaces only the active claim row
+under the ownership lock. Earlier evidence remains intact. Recorded repair
+policy recursively authenticates each predecessor using its own accepted raw
+snapshot, never the later live source. Forged history, changed original scope,
+unbound formatter evidence and gaps fail. Refresh confers no audit, judge or
+native coverage; current actual local checks must follow the refresh date.
+
 Owner-authorized `RUN-closeout-operational-contexts.json` may omit exact temporary
 `overlay`/`shadow` resolver directories beneath the run's owner repair evidence
 from the scoped Git commit. Each directory binds its physical tree (file bytes,

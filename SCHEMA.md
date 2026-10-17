@@ -128,6 +128,11 @@
   changes to the mathematical carrier invalidate the evidence. Ordinary local
   check and canonical ledger requirements above still apply, with checks after
   adoption. This recovery grants no audit, judge or native workflow coverage.
+  Later delegated normalization of an adopted carrier uses the explicit
+  `adopt-refresh` history protocol in WORKFLOW.md. The original publication and
+  ownership scope remain fixed; predecessor evidence is preserved and
+  reauthenticated against its own snapshot. New local checks must follow the
+  actual refresh date.
 
 ### Open problems
 
