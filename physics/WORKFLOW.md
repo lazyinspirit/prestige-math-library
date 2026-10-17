@@ -827,6 +827,14 @@ import identity and pins. Unrelated imported logical or category defects are
 outside that planning frontier. Bare checks remain strict across the corpus;
 local import snapshot pins retain their existing verification.
 
+Scoped original item lookup indexes canonical IDs, aliases and mathematical
+classification without requiring unrelated descriptive YAML to be finished.
+An unreadable index field or ambiguous top-level identity shape remains blocking;
+no original record is omitted. Required original items and actual nonlogical
+reference targets are still parsed in full, and relevant original/page/category
+checks and immutable snapshot pins retain their ordinary strict checks. Bare
+unscoped verification continues to parse every original in full.
+
 Item/page validators select current run manifests. Outside suppliers stay
 prerequisite context; do not validate or repair unrelated content. Closeout verifies the engine's exact owned content commit inside its transaction.
 Fresh Step 6 uses metadata/render checks -> focused repair -> all final gates

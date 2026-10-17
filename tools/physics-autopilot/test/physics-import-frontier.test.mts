@@ -114,3 +114,42 @@ test('owned reference-only imports do not recursively acquire unrelated proof su
  writeFileSync(join(f.source, 'items/thm-deep.md'), f.item('thm-deep') + 'Outside reference-only proof cone.\n'); assert.ok(f.verify());
  writeFileSync(path, f.item('thm-unrelated', ['thm-deep']) + 'Changed directly cited claim.\n'); assert.throws(f.verify, /import changed/);
 });
+
+test('unrelated malformed descriptive YAML stays outside scoped original loading; bare verification stays strict', t => {
+ const f = fixture(t);
+ const malformed = f.item('thm-new').replace('status: published', 'status: draft\nlocator: "unfinished \\gamma source"');
+ writeFileSync(join(f.source, 'items/thm-new.md'), malformed);
+ assert.ok(f.verify());
+ const native = f.native(); assert.equal(native.status, 0, native.stdout + native.stderr);
+ assert.throws(() => verifyMathematicsImports(f.root), /escape/);
+ // Source identity collisions remain visible even when the unrelated prose is invalid.
+ writeFileSync(join(f.source, 'items/thm-new.md'), malformed.replace('aliases: []', 'aliases: [supplier-alias]'));
+ assert.throws(f.verify, /identity.*ambiguous/);
+ writeFileSync(join(f.source, 'items/thm-new.md'), malformed.replace('kind: theorem', 'kind: postulate\ndomain: physics'));
+ assert.throws(f.verify, /physical item in mathematics source/);
+});
+
+test('malformed required originals and identity metadata never disappear from the closure', t => {
+ const f = fixture(t), path = join(f.source, 'items/thm-deep.md');
+ writeFileSync(path, f.item('thm-deep').replace('kind: theorem', 'kind: theorem\nlocator: "bad \\gamma"'));
+ assert.throws(f.verify, /import changed|escape/);
+ writeFileSync(path, f.item('thm-deep').replace('deps: []', 'deps: []\ndeps: [thm-unknown]'));
+ assert.throws(f.verify, /import changed|unique/);
+ writeFileSync(path, f.item('thm-deep'));
+ const other = join(f.source, 'items/thm-new.md');
+ for (const fragment of ['aliases: "bad \\gamma"', 'aliases: []\naliases: [supplier-alias]', 'id: thm-new\nid: thm-supplier']) {
+  writeFileSync(other, f.item('thm-new').replace(fragment.startsWith('id:') ? 'id: thm-new' : 'aliases: []', fragment));
+  assert.throws(f.verify);
+ }
+});
+
+test('imported nonlogical alias indexes isolate unrelated prose but strictly read the actual target', t => {
+ const f = fixture(t), path = join(f.source, 'items/thm-supplier.md');
+ writeFileSync(join(f.source, 'items/thm-context.md'), f.item('thm-context', [], ['context-alias']).replace('status: published', 'status: draft'));
+ writeFileSync(path, f.item('thm-supplier', ['thm-deep'], ['supplier-alias']).replace('kind: theorem', 'kind: theorem\nexternal_refs: [context-alias]'));
+ importMathematics(f.root, f.source);
+ writeFileSync(join(f.source, 'items/thm-new.md'), f.item('thm-new').replace('kind: theorem', 'kind: theorem\nlocator: "bad \\gamma"'));
+ const native = f.native(); assert.equal(native.status, 0, native.stdout + native.stderr);
+ writeFileSync(join(f.source, 'items/thm-context.md'), f.item('thm-context', [], ['context-alias']).replace('kind: theorem', 'kind: theorem\nlocator: "bad \\gamma"'));
+ const invalidTarget = f.native(); assert.notEqual(invalidTarget.status, 0); assert.match(invalidTarget.stderr, /escape/);
+});

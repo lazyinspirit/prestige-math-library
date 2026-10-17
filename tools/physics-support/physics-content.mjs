@@ -3,6 +3,7 @@ import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { parseFrontmatter, referenceUrls, openProblemErrors } from './content-policy-lib.mjs';
 import { splitFrontmatter, sectionText } from './facts-block.mjs';
+import { readOriginalItemIdentity } from './original-item-index.mjs';
 
 export const PHYSICS_PREFIXES = Object.freeze({ postulate: 'post', 'physics-theorem': 'pthm', experiment: 'exp', 'thought-experiment': 'texp' });
 export const PHYSICS_KINDS = new Set(Object.keys(PHYSICS_PREFIXES));
@@ -248,10 +249,14 @@ export function loadPhysicsRepository(root, plan = null, selectedPages = null) {
     }
     // Aliases are original-context identities too. Inspect only to resolve an
     // actual imported pointer; none of these rows enters the local item graph.
-    originalItems ??= markdownFiles(join(imports.source_root, 'items')).map(readItem);
+    originalItems ??= markdownFiles(join(imports.source_root, 'items')).map(readOriginalItemIdentity);
     const matches = originalItems.filter(item => Array.isArray(item.aliases) && item.aliases.includes(token));
     if (matches.length > 1) throw Error(`ambiguous imported nonlogical original reference ${token}`);
-    return matches.length ? { ...matches[0], domain: matches[0].domain ?? 'mathematics' } : null;
+    if (!matches.length) return null;
+    const original = readItem(matches[0].file);
+    if (original.id !== matches[0].id || !Array.isArray(original.aliases) || !original.aliases.includes(token))
+      throw Error(`imported nonlogical original identity changed during lookup: ${token}`);
+    return { ...original, domain: original.domain ?? 'mathematics' };
   };
   return { items, pages, importedIds, importedReferenceContext };
 }

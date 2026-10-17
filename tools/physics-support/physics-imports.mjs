@@ -9,6 +9,7 @@ import { REPO } from './paths.mjs';
 import { frontierMathematicsImportScope } from './frontier-import-scope.mjs';
 import { parseFrontmatter } from './content-policy-lib.mjs';
 import { splitFrontmatter } from './facts-block.mjs';
+import { readOriginalItemIdentity } from './original-item-index.mjs';
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 // A source folder rename does not move the immutable local snapshot.
 export function originalImportPath(receipt, file) {
@@ -78,7 +79,8 @@ export function verifyMathematicsImports(root, { run = null, planning = false, f
       || !/^[a-f0-9]{64}$/.test(file.sha256 ?? '')) throw Error('invalid or duplicate import path');
     seen.add(file.path);
   }
-  const originals = markdownFiles(join(receipt.source_root, 'items')).map(readItem);
+  const scoped = run !== null || proposedPages !== null;
+  const originals = markdownFiles(join(receipt.source_root, 'items')).map(scoped ? readOriginalItemIdentity : readItem);
   const sourcePages = run || proposedPages !== null ? markdownFiles(join(receipt.source_root, 'library'))
     .filter(file => !file.split('/').at(-1).startsWith('_')).map(file => ({ ...readItem(file), path: relative(receipt.source_root, file) })) : [];
   const scope = run || proposedPages !== null ? frontierMathematicsImportScope(root, run, { planning, receipt, originals: { items: originals, pages: sourcePages }, proposedPages }) : null;
