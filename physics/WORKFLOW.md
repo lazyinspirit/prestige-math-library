@@ -436,6 +436,65 @@ review must still match. A caller-supplied historical hash map is not authority.
 These continuations do not authorize outside source writes, bypass gates, alter
 original reports, or waive normal consumer/context closure and certification.
 
+A distinct preexisting page-summary defect referred by a completed initial
+adjudicator has a separate one-page native route. It is confined to round 1's
+drained `5.1-adjudicate` join, before parent collection and impact certification.
+Root advertises `owner-page-correction-ID.json` through
+`research/RUN-step5-v2/owner-page-correction-request.json` with `version:1`,
+`run`, and `request:{path,sha256}`. The immutable request contains `version:1`,
+`run`, `reviewer:"/root"`, `phase:"initial"`, `round:1`, `subject` (page ID),
+`page_path`, `batch`, `root_finding:{defect_id,record:{path,sha256}}`,
+`before_source:{path,sha256}`, `before_raw_sha256`,
+`native_outcome:{path,sha256}`, `batch_digest:{path,sha256}`,
+`scientific_owner` and `scientific_proposal:{path,sha256}`. Evidence must be
+run-local research with exact raw hashes; the state directory is the run's
+ordinary `.physics-autopilot/RUN`.
+
+Intake requires the unique current-run manifest owner and canonical draft
+physics page, matching page inventory and frozen original batch members, no
+imported page, an exact unsuperseded OPEN canonical owner page finding, and
+genuine current before bytes. The original completed Sol 6.1 high native
+report/task/pack/dispatch must authenticate an assigned member of that same page
+and an explicit `repair_notes.page_uses` referral with `refer_page_owner`.
+Its bound Step-4 batch digest must contain the exact page concern. Neither a
+companion item assignment nor a page concern alone grants this permission.
+
+The original scientific owner's proposal binds the same referral, page preimage,
+current guard, one exact unique body excerpt/replacement, and unapplied candidate
+and patch bytes, plus its actual page finding. Frontmatter, inventory and
+prerequisites must remain identical. After genuine item-queue completion, if
+present, the engine freezes `page-correction-initial-1.json` and its task/progress
+and dispatches only `page-correction-initial:1` to native Sol 6.1 high. The child
+must independently check the proposed qualified claim and actual supplier uses;
+an unsound proposal or necessary additional repair blocks completion.
+It may author only that exact one-page prose correction and its own report,
+using the shared write lock for the page. No item, other page, contract,
+manifest, ledger, tuple, original report or prerequisite edits are authorized.
+
+The child returns `page_review`, exact unaffected `consumer_reviews`, and one
+typed `root_finding_resolutions` row, with ordinary item `decisions`, `reviews`,
+`created_items` and `downstream` all empty. After actual current page/consumer
+review, `step5-workflow.mjs page-review-context --run RUN --round 1` supplies
+the current page raw hash and source-context hash. These hashes preserve currency
+and grant no whole-library review acceptance. Completion authenticates native
+identity and every original evidence file, requires the actual changed-source
+set to equal this page alone and its exact approved excerpt correction, and
+preserves all original item/library bytes and owning metadata. Original workflow
+evidence stays unchanged; genuine parent retry outputs remain replayable.
+
+Parent collection retains every ordinary item guard and adjudication, records
+the separately authenticated page correction and immutable receipt, and binds
+the current page raw guard through its ordinary gates and certification. It
+waits for both item and page corrections before collecting once, then uses the
+existing owner-findings pause for Root canonical closure before the next gate
+snapshot. Replay verifies the immutable parent, child receipts and retained
+original finding rows instead of reopening already closed findings; Root's
+append-only fixed successors are allowed. While the initial join remains live,
+its exact current source snapshot and page-review context must still match.
+Later native impact stages retain their ordinary historical source semantics.
+This route adds no item judge tuple, item fatal count, outside
+authorship, general page permission, impact reopening or gate waiver.
+
 When an actual initial/repeat collection gate reports a missing original-frontier
 downstream inventory, root may complete the routing metadata through
 `research/RUN-step5-v2/owner-downstream-inventory.json` with `version:1`, `run`,

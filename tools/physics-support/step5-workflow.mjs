@@ -51,6 +51,11 @@ const ownerFindingCollectionToken=Symbol('authenticated native owner finding col
 const ownerFindingPhase=phase=>'owner-finding-correction-'+phase;
 const ownerFindingProgressPath=(root,run,phase,round)=>join(workflowDir(root,run),ownerFindingPhase(phase)+'-'+round+'-progress.json');
 const scientificValidationToken=Symbol('authenticated single-subject scientific correction');
+const PAGE_CORRECTION_URL=new URL('./step5-owner-page-correction.mjs',import.meta.url);
+const PAGE_CORRECTION_STAT=statSync(PAGE_CORRECTION_URL);
+const { pageCorrectionPhase, pageCorrectionProgressPath, pageCorrectionRequest, pageCorrectionSources,
+  pageCorrectionProtected, pageCorrectionConsumers, pageCorrectionReview, pageCorrectionCompletion, verifyPageCorrectionReplay }=await import(
+  PAGE_CORRECTION_URL.href+'?v='+PAGE_CORRECTION_STAT.mtimeMs+':'+PAGE_CORRECTION_STAT.size);
 
 export const digest = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
 const read = path => JSON.parse(readFileSync(path, 'utf8'));
@@ -478,7 +483,51 @@ export function adjudicationCorrectionWork(root,run,phase,round) {
   const path=correctionProgressPath(workflowDir(root,run),phase,round);
   return [...(existsSync(path)?[correctionPhase(phase)+':1']:[]),
     ...(existsSync(scientificCorrectionProgressPath(workflowDir(root,run),phase,round))?[scientificCorrectionPhase(phase)+':1']:[]),
-    ...(existsSync(ownerFindingProgressPath(root,run,phase,round))?['1','2','3'].map(unit=>ownerFindingPhase(phase)+':'+unit):[])];
+    ...(existsSync(ownerFindingProgressPath(root,run,phase,round))?['1','2','3'].map(unit=>ownerFindingPhase(phase)+':'+unit):[]),
+    ...(phase==='initial'&&existsSync(pageCorrectionProgressPath(root,run,round))?[pageCorrectionPhase+':1']:[])];
+}
+
+function advancePageCorrection(root,run,phase,round) {
+  if(phase!=='initial')return null;
+  const progressPath=pageCorrectionProgressPath(root,run,round);
+  if(existsSync(progressPath)){
+    const prior=read(progressPath),pointer=read(join(workflowDir(root,run),'owner-page-correction-request.json'));
+    requireValue(prior.run===run&&prior.phase===phase&&prior.round===round
+      &&resolve(root,pointer.request.path)===prior.request.path&&pointer.request.sha256===prior.request.sha256,
+      'frozen page correction authority changed');
+    verifyEvidence(prior.evidence);
+    const dispatch=join(root,'research',run+'-dispatch','alpha-repair-'+workerLabel(pageCorrectionPhase,round,'1')+'.result.json');
+    if(!existsSync(dispatch)||read(dispatch).ok!==true)return prior;
+    return {...prior,completion:pageCorrectionCompletion(root,run,round,pageCorrectionRequest(root,run,phase,round,{continuation:true}))};
+  }
+  const context=pageCorrectionRequest(root,run,phase,round);
+  if(!context)return null;
+  const request=context.payload,packFile=packPath(root,run,pageCorrectionPhase,round);
+  const pack={version:1,run,phase:pageCorrectionPhase,round,unit:'1',repair_scope:'one-referred-draft-page-prose',
+    subject:request.subject,page_path:request.page_path,request:context.request,payload:request,
+    expected_page_sha256:context.expected_page_sha256,before_sources:pageCorrectionSources(root),
+    before_protected:pageCorrectionProtected(root,run),consumers:pageCorrectionConsumers(root,request.subject)};
+  const report=workerReport(root,run,pageCorrectionPhase,round,'1'),task=report.replace(/\.json$/,'.task.md');
+  const text=[
+    '# Native initial page-only correction',
+    'Read physics CLAUDE.md, SCHEMA.md and WORKFLOW.md. This exact generated page-only assignment replaces the ordinary frontier item-repair scope in the general role brief.',
+    'Frozen inputs: '+packFile+'. Immutable Root request: '+context.request.path+'.',
+    'ONLY source permission: '+request.page_path+'. Correct only the single genuine before-body excerpt in the original scientific owner proposal, after checking its countercase, intended qualified claim and actual supplier uses. The candidate is unapplied evidence; reject it and report uncertainty if unsound. Preserve all other page bytes, frontmatter, inventory and prerequisites.',
+    'No item, other page, contract, manifest, ledger, source evidence, original report/task/tuple, frozen pack, code or state edits. No prerequisite creation, ordinary item decisions/reviews, judges, certificates, gates or canonical ledger closure.',
+    'Use the guarded shared metadata write-lock command from the role brief for the one page edit; reread the exact page inside the short guarded command. Do not hold the lock while reading science or reviewing.',
+    'Read the completed native page_uses referral, exact batch Step4 digest, and original scientific owner proposal plus its bound candidate/patch/preimage. Credit prior focused science honestly; review the actual current page and precise supplier hypotheses yourself. Preserve the richest sound claim and all conditional proof statuses. Do not repeat whole-proof audits.',
+    'Read each exact consumer in pack.consumers and return an unaffected consumer review with its actual use checked. If any consumer requires an edit, report uncertainty and stop; this one-page permission cannot repair that consumer.',
+    'After the edit and actual page/consumer reviews, run node tools/physics-support/step5-workflow.mjs page-review-context --run '+run+' --round '+round+' and copy its exact id/path/post_sha256/review_context_sha256 fields into page_review. Never refresh a stale review without examining the changed context.',
+    'Run scoped page rendercheck and appropriate page metadata checks. No item proof-layout is needed because all items must remain byte-for-byte unchanged. Record genuine commands/results in repair_notes, not invented evidence paths.',
+    'Return JSON {version:1,run:"'+run+'",phase:"'+pageCorrectionPhase+'",round:'+round+',unit:"1",input_sha256:"'+digest(pack)+'",decisions:[],reviews:[],created_items:[],downstream:[],page_review:{id:"'+request.subject+'",path:"'+request.page_path+'",disposition:"repaired",post_sha256,review_context_sha256,reason,uncertain:false,source_urls:[],familiar:true},consumer_reviews:[{id,path,kind,disposition:"unaffected",reason,uncertain:false,source_urls:[],familiar:true}],root_finding_resolutions:[{defect_id:"'+request.root_finding.defect_id+'",status:"fixed",subjects:["'+request.subject+'"],reason,uncertain:false,source_urls:[],familiar:true}],supporting_evidence:{},repair_notes:{}}.',
+    'Every reason is at least 40 characters of concrete actual checks. Familiarity/source evidence must be honest; unresolved uncertainty blocks collection. Bind extra run-local research evidence actually read by raw SHA256 in supporting_evidence. Do not claim independent acceptance, certification or a gate waiver.',
+    'Write only the exact page and '+report+'.', ''
+  ].join('\n');
+  frozen(packFile,pack);
+  if(existsSync(task))requireValue(readFileSync(task,'utf8')===text,'immutable page-only task conflict');else writeFileSync(task,text,{flag:'wx'});
+  const progress={version:1,run,phase,round,correction_phase:pageCorrectionPhase,request:context.request,subject:request.subject,
+    evidence:{...context.evidence,[packFile]:digest(readFileSync(packFile,'utf8')),[task]:digest(text)}};
+  frozen(progressPath,progress);return progress;
 }
 
 function inheritedContext(root,run,phase,round) {
@@ -605,6 +654,11 @@ function advanceOwnerFindingQueue(root,run,phase,round) {
 export function advanceAdjudicationCorrection(root,run,phase,round) {
   // Pending writers retain their frozen authority. Full scientific current-
   // state authentication belongs at the drained completion join, not mid-edit.
+  if(phase==='initial'&&existsSync(pageCorrectionProgressPath(root,run,round))
+    &&existsSync(join(workflowDir(root,run),'initial-'+round+'-collected.json'))){
+    collect(root,run,phase,round);
+    return {...read(pageCorrectionProgressPath(root,run,round)),parent_collected:true};
+  }
   const queueProgress=ownerFindingProgressPath(root,run,phase,round);
   if(existsSync(queueProgress)){
     const prior=read(queueProgress),pointer=read(join(workflowDir(root,run),'owner-finding-queue-request.json'));
@@ -617,6 +671,12 @@ export function advanceAdjudicationCorrection(root,run,phase,round) {
       return existsSync(path)&&read(path).ok===true;
     });
     if(completed){
+      // The one-page writer starts only after genuine item correction
+      // completion, before either correction can collect the parent.
+      if(phase==='initial'&&existsSync(join(workflowDir(root,run),'owner-page-correction-request.json')))
+        requireValue(ownerFindingContext(root,run,phase,round)?.continuation,'item corrections have not genuinely completed before page intake');
+      const page=advancePageCorrection(root,run,phase,round);
+      if(page&&!page.completion)return page;
       collect(root,run,phase,round);
       return {...prior,parent_collected:true};
     }
@@ -630,6 +690,11 @@ export function advanceAdjudicationCorrection(root,run,phase,round) {
   const findings=advanceOwnerFindingQueue(root,run,phase,round);
   if(findings)return findings;
   if(scientific)return scientific;
+  const page=advancePageCorrection(root,run,phase,round);
+  if(page){
+    if(!page.completion)return page;
+    collect(root,run,phase,round);return {...page,parent_collected:true};
+  }
   const context=inheritedContext(root,run,phase,round);
   if(!context)return null;
   assertCorrectionDrained(root,context);
@@ -673,6 +738,7 @@ export function advanceAdjudicationCorrection(root,run,phase,round) {
 const inheritedCollectionToken=Symbol('native inherited correction collection');
 const scientificCollectionToken=Symbol('native scientific correction collection');
 export function collect(root,run,phase,round,{deferImpactClosure=false,correctionToken=null}={}) {
+  requireValue(phase!==pageCorrectionPhase,'page-only correction must be collected by its authenticated initial parent');
   if(phase.startsWith('owner-finding-correction-'))requireValue(correctionToken===ownerFindingCollectionToken,
     'owner finding collection requires its authenticated native parent');
   if(phase.startsWith('scientific-correction-'))requireValue(correctionToken===scientificCollectionToken,
@@ -686,13 +752,20 @@ export function collect(root,run,phase,round,{deferImpactClosure=false,correctio
       requireValue(ownerHandoffPhase(phase),'external owner repairs require deferred impact collection');
       if(!deferImpactClosure)return verifyClosedOwnerCollection(root,run,phase,round,collectedPath,prior);
     }
-    verifyEvidence(prior.evidence);syncMaintenance(root,run,prior.statement_events??[]);return prior;
+    verifyEvidence(prior.evidence);
+    if(phase==='initial')verifyPageCorrectionReplay(root,run,round,prior);
+    syncMaintenance(root,run,prior.statement_events??[]);return prior;
   }
   const pack=readPack(root,run,phase,round);
   requireValue(pack.run===run&&pack.phase===phase&&pack.round===round,'collection pack identity mismatch');
   const reports=pack.units.map(unit=>read(workerReport(root,run,phase,round,unit)));
   const collectionItems=pack.scientific_repair?readLibraryItems(root):null;
   const current=hashes(root,collectionItems??undefined),reported={...current};
+  const pageProgress=phase==='initial'?pageCorrectionProgressPath(root,run,round):null;
+  const pageCompletion=pageProgress&&existsSync(pageProgress)
+    ?pageCorrectionCompletion(root,run,round,pageCorrectionRequest(root,run,phase,round,{continuation:true})):null;
+  if(phase==='initial'&&existsSync(join(workflowDir(root,run),'owner-page-correction-request.json')))
+    requireValue(pageCompletion,'explicit page correction is pending native completion before parent collection');
   let external={repairs:[],evidence:{}};
   if(deferImpactClosure) {
     requireValue(!pack.rejected,'only owner waves can defer impact closure');
@@ -859,6 +932,14 @@ export function collect(root,run,phase,round,{deferImpactClosure=false,correctio
     receipt.ledger_updates.push(...scientificCorrection.ledger_updates);
   }
   if(pack.owner_finding_queue)receipt.owner_finding_completion=ownerCompletion;
+  if(pageCompletion){
+    const path=join(workflowDir(root,run),pageCorrectionPhase+'-'+round+'-collected.json');
+    frozen(path,pageCompletion);
+    Object.assign(receipt.evidence,pageCompletion.evidence,{[path]:digest(readFileSync(path,'utf8'))});
+    receipt.native_page_correction={request:pageCompletion.request,subject:pageCompletion.subject,page_path:pageCompletion.page_path,
+      page_review:pageCompletion.page_review,root_finding_resolution:pageCompletion.root_finding_resolution,
+      attribution:'Separate exact native page prose correction; all item adjudications and source guards retained'};
+  }
   if(ownerCorrection){
     const path=join(workflowDir(root,run),ownerFindingPhase(phase)+'-'+round+'-collected.json');
     Object.assign(receipt.evidence,ownerContext.evidence,ownerCorrection.evidence,{[path]:digest(readFileSync(path,'utf8'))});
@@ -1392,6 +1473,9 @@ function main() {
   if(args[0]==='review-contexts'){
     const ids=opt('--items').split(',').filter(Boolean);requireValue(ids.length,'--items required');
     console.log(JSON.stringify(reviewContextHashes(root,ids),null,2));return;
+  }
+  if(args[0]==='page-review-context'){
+    console.log(JSON.stringify(pageCorrectionReview(root,run,round),null,2));return;
   }
   switch(args[0]) {
     case 'init':result=initialize(root,run);break;

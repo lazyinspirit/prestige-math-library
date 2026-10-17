@@ -47,6 +47,38 @@ test('new rounds cannot adopt old judge, review, impact, certification or gate r
     }
   }finally{f.close();}
 });
+test('the initial page-only child has one native Sol high repair unit and no repeat-stage route',()=>{
+  const f=fixture();try{
+    const phase='page-correction-initial',unit=phase+':1';
+    writeFileSync(join(f.repo,`research/demo-step5-v2/${phase}-1-progress.json`),'{}');
+    writeFileSync(join(f.repo,'research/demo-step5-v2/initial-1.json'),'{}');
+    const stage=f.stage('5.1-adjudicate'),job=stage.plan(f.ctx,[unit])[0];
+    assert.deepEqual(stage.units(f.ctx),['1','2',unit]);
+    assert.equal(job.role,'alpha-repair');assert.equal(job.profile,MODEL_PROFILE_NAMES.sol61High);
+    assert.deepEqual(job.covers,[unit]);assert.equal(job.label,'step5-v2-page-correction-initial-r1-u1');
+    assert.equal(job.task,'research/demo-step5-v2/step5-v2-page-correction-initial-r1-u1.task.md');
+    assert.equal(stage.pattern(f.ctx).test('alpha-repair-'+job.label+'.result.json'),true);
+    assert.equal(stage.pattern(f.ctx).test('alpha-repair-step5-v2-page-correction-initial-r1-u2.result.json'),false);
+    assert.equal(f.stage('5.5-adjudicate').pattern(f.ctx).test('alpha-repair-'+job.label+'.result.json'),false);
+    assert.deepEqual(f.stage('5.5-adjudicate').units(f.ctx),['1','2']);
+  }finally{f.close();}
+});
+test('an authenticated page-parent handoff pauses once before the next gate snapshot',()=>{
+  const f=fixture();try{
+    for(const id of ['thm-a','thm-b'])writeFileSync(join(f.repo,'items',id+'.md'),`---\nid: ${id}\nkind: theorem\nstatus: draft\ndeps: []\n---\n## Statement\nA valid claim.\n`);
+    writeFileSync(join(f.repo,'research/demo-step5-v2/page-correction-initial-1-progress.json'),JSON.stringify({version:1,run:'demo',phase:'initial',round:1}));
+    writeFileSync(join(f.repo,'research/demo-step5-v2/initial-1-collected.json'),JSON.stringify({version:2,run:'demo',phase:'initial',round:1,evidence:{},statement_events:[]}));
+    const stage=f.stage('5.1-adjudicate'),handoff:any={},notices:any[]=[];
+    const executor:any={inflight:new Map(),hasAdoptedWork:()=>false,unitsComplete:()=>new Set(stage.units(f.ctx)),
+      state:{paused:false,stage:()=>handoff},reporter:{notify:(...args:any[])=>notices.push(args)}};
+    stage.onProgress({ctx:f.ctx,executor,stage});
+    assert.equal(executor.state.paused,true);assert.equal(notices.length,1);
+    assert.match(notices[0][1],/Root closes canonical findings before the next gate snapshot/);
+    executor.state.paused=false;
+    stage.onProgress({ctx:f.ctx,executor,stage});
+    assert.equal(executor.state.paused,false);assert.equal(notices.length,1);
+  }finally{f.close();}
+});
 test('owner continuations run parallel siblings after the preceding pass drains',()=>{
   const f=fixture();try {
     writeFileSync(join(f.repo,'research/demo-step5-v2/impact-initial-1-progress.json'),JSON.stringify({passes:['impact-initial','impact-initial-pass-2']}));
