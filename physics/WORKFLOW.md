@@ -307,6 +307,12 @@ Current Step-5 certification is checked first with all existing content and
 context guards; it is not a replacement judge verdict. Sol 6.1 high repair and
 rejudge work retains its own identity, without requiring untouched original
 items to acquire a different judge lineage.
+Step-6 stamp preparation and final stamp verification use this same authenticated
+frozen Step-4 lineup as closure and coverage, overriding the standalone tool
+default. Authenticated legacy singleton lineups retain their original model;
+only runs without any frozen Step-5 authority use the modern Luna fallback.
+Current Step-5 certifications retain their separate content/context guards and
+do not manufacture judge pass stamps.
 Shared metadata patches use the guarded command
 `node tools/physics-support/step5-shared-write-lock.mjs run --owner DISPATCH_LABEL -- COMMAND ARGS...`.
 It acquires the lock before launching the command, launches nothing and exits 2

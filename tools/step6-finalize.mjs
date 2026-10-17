@@ -40,12 +40,12 @@ function failedBatteryGeneration(root, run, physics) {
   eventMemo.set(file, { size, failure, active, pending }); return failure;
 }
 const resultLimit = 16 * 1024 * 1024;
-function invoke(root, tool, args, { physics = false, commands = [] } = {}) {
+function invoke(root, tool, args, { physics = false, commands = [], env = {} } = {}) {
   const absolute = join(TOOL_ROOT, physics ? 'physics-support' : '', tool);
   const startedAt = new Date().toISOString();
   const result = spawnSync(process.execPath, [absolute, ...args], { cwd: root, encoding: 'utf8',
-    env: { ...process.env, ...(physics ? { PHYSICS_REPO: root } : {}) }, maxBuffer: resultLimit, timeout: 900_000 });
-  const evidence = { argv: ['node', (physics ? 'tools/physics-support/' : 'tools/') + tool, ...args],
+    env: { ...process.env, ...(physics ? { PHYSICS_REPO: root } : {}), ...env }, maxBuffer: resultLimit, timeout: 900_000 });
+  const evidence = { argv: [...(Object.keys(env).length ? ['env', ...Object.entries(env).map(([key, value]) => `${key}=${value}`)] : []), 'node', (physics ? 'tools/physics-support/' : 'tools/') + tool, ...args],
     startedAt, endedAt: new Date().toISOString(), code: result.status,
     stdout: result.stdout ?? '', stderr: result.stderr ?? '', error: result.error?.message ?? null };
   commands.push(evidence);
@@ -95,13 +95,17 @@ export async function prepareFinal(root, run, { physics = false } = {}) {
       throw Error(`Preparation requires other native writers drained: ${key}`);
   }
   const prefix = physics ? './physics-support/' : './';
+  // Bind physics stamps to the same frozen lineage as closure and coverage.
+  // The mathematics caller keeps its existing configured environment.
+  const judgeEnv = physics ? { JUDGE_LINEUP:
+    (await import(prefix + 'original-judge-lineup.mjs')).originalJudgeLineup({ repo: root, run }) } : {};
   const { runPages } = await import(prefix + 'item-dependency-levels.mjs');
   const pages = runPages(root, run), batches = [...new Set(pages.map(page => String(page.batch)))];
   invoke(root, 'defect-ledger.mjs', ['render'], { physics, commands });
   invoke(root, 'apply-judge-stamps.mjs', ['--ledger', `research/${run}-judge.jsonl`, '--exclude-published',
     ...(!physics ? ['--step5-run', run] : []), '--manifests', batches.map(batch => `research/${run}-batch-${batch}.pages.json`).join(','),
     '--terminal-resolutions', `research/${run}-step5-terminal-resolutions.jsonl`, '--run', run,
-    '--auditor-certifications', `research/${run}-step7-auditor-certifications.json`, '--apply', '--report', `research/${run}-judge-stamps.json`], { physics, commands });
+    '--auditor-certifications', `research/${run}-step7-auditor-certifications.json`, '--apply', '--report', `research/${run}-judge-stamps.json`], { physics, commands, env: judgeEnv });
   const actual = await checkMetadataAndRender(root, run, { physics });
   atomicJSON(join(root, 'research', `${run}-proof-layout.json`), actual.layoutReceipt);
   invoke(root, 'publication-ready.mjs', ['--run', run, '--write'], { physics, commands });

@@ -23,13 +23,14 @@ import { createHash } from 'node:crypto';
 import { join, relative, resolve } from 'node:path';
 import { itemHashGuard, shortHash } from '../../physics-support/item-hash.mjs';
 import { isPublishedItem } from '../../physics-support/published-repair-policy.mjs';
-import { MODEL_PROFILE_NAMES, JUDGE_LINEUPS } from '../../physics-support/models.mjs';
+import { MODEL_PROFILE_NAMES } from '../../physics-support/models.mjs';
 import { MAX_RUN_BATCHES, MAX_GROUPS } from '../src/capacity.mjs';
 import { alphabeticLabel } from '../../alpha-group-assignment.mjs';
 import { scopedGateOutput } from '../src/repair-evidence.mts';
 import { batchInput, loopState, collectBatch, accepted, loopPattern, batchPlans, engineRepairEligible, repairCohort } from '../../physics-support/batch-scope-review.mjs';
 import { holdStep1 } from './step1-hold.mts';
 import { yaml } from '../../physics-support/pathway-lib.mjs';
+import { originalJudgeLineup } from '../../physics-support/original-judge-lineup.mjs';
 import { prepareFinalIfChanged } from '../../physics-support/step6-finalize.mjs';
 import { assertFreshStep6State } from '../../step6-prepared.mjs';
 
@@ -926,38 +927,6 @@ const ledgerGate = (ctx, { terminal = false } = {}) => {
  *            that; an unadjudicated rejection and an open fatal are NOT allowed.
  *   after  — no allowances at all.
  */
-/** Coverage retains the actual frozen Step-4 judge lineage. Native Step-5
- * repair/rejudge identities and current certificate guards remain independent. */
-function originalJudgeLineup(ctx: any): string {
-  const dir = R(ctx, 'research', `${ctx.run}-step5-v2`);
-  const verdictPath = resolve(dir, 'step4-verdicts.json');
-  const packPath = resolve(dir, 'initial-1.json');
-  if (!existsSync(verdictPath)) {
-    if (existsSync(packPath) || existsSync(join(dir, 'frontier.json')))
-      throw Error('original judge lineage: incomplete frozen Step-5 authority');
-    return 'luna'; // Modern Step 4, before its Step-5 snapshot exists.
-  }
-  if (!existsSync(packPath)) throw Error('original judge lineage: missing initial frozen pack');
-  const bytes = readFileSync(verdictPath);
-  const verdicts = JSON.parse(bytes.toString('utf8'));
-  const pack = JSON.parse(readFileSync(packPath, 'utf8'));
-  const expected = pack.input_evidence?.[verdictPath]
-    ?? pack.input_evidence?.[relative(ctx.repo, verdictPath)];
-  if (pack.version !== 2 || pack.run !== ctx.run || pack.phase !== 'initial' || pack.round !== 1
-    || !/^[a-f0-9]{64}$/.test(expected ?? '')
-    || createHash('sha256').update(bytes).digest('hex') !== expected)
-    throw Error('original judge lineage: frozen Step-4 bytes are not bound by the initial pack');
-  if (!Array.isArray(verdicts) || !verdicts.length
-    || verdicts.some((row: any) => !row || typeof row.id !== 'string' || typeof row.keep !== 'boolean'))
-    throw Error('original judge lineage: malformed frozen Step-4 verdicts');
-  const models = [...new Set(verdicts.map((row: any) => row.model))];
-  const matches = Object.entries(JUDGE_LINEUPS).filter(([, lanes]) =>
-    lanes.length === 1 && models.length === 1 && lanes[0] === models[0]);
-  if (matches.length !== 1 || pack.judge_model !== models[0])
-    throw Error('original judge lineage: mixed, unknown or inconsistent frozen model');
-  return matches[0][0];
-}
-
 const closureGate = (ctx, { allowUnadjudicated = false, pendingRejudge = false, judgeLineup = originalJudgeLineup(ctx), excludePublished = true } = {}) =>
   gate('judge-closure', ['env', `JUDGE_LINEUP=${judgeLineup}`, 'node', 'tools/physics-support/level-coverage.mjs',
     '--judge-only', '--verify-current-context',
@@ -1109,7 +1078,7 @@ function step6FinalGates(ctx: any) {
   const all = [
     closureGate(ctx), ledgerGate(ctx, { terminal: true }),
     gate('pathway-closure', ['node', 'tools/physics-support/pathway-closure.mjs', 'check', '--run', ctx.run]),
-    ...[gate('judge-stamps', ['node', 'tools/physics-support/apply-judge-stamps.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,
+    ...[gate('judge-stamps', ['env', `JUDGE_LINEUP=${originalJudgeLineup(ctx)}`, 'node', 'tools/physics-support/apply-judge-stamps.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,
       '--exclude-published',
       '--manifests', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`).join(','),
       '--terminal-resolutions', terminalResolutionsPath(ctx), ...auditorCertificationArgs(ctx), '--verify'], {

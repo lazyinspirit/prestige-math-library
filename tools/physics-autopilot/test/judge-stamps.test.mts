@@ -17,9 +17,12 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
 
-import { itemHashJudge } from '../../physics-support/item-hash.mjs';
+import { itemHashGuard, itemHashJudge } from '../../physics-support/item-hash.mjs';
 import { writeAuditorCreatedBaseline, certifyAuditorCreatedItems, loadAuditorCreatedCertifications } from '../../physics-support/auditor-created-items.mjs';
 import { JUDGE_LINEUPS, DEFAULT_LINEUP, MODELS } from '../../physics-support/models.mjs';
+
+import { digest } from '../../physics-support/step5-workflow.mjs';
+import { originalJudgeLineup } from '../../physics-support/original-judge-lineup.mjs';
 
 const REPO: string = process.env.AUTOPILOT_TEST_REPO
   ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
@@ -401,4 +404,50 @@ test('--verify is check-only and refuses --apply and the targeted route', () => 
     [TOOL, '--ledger', 'research/judge.jsonl', '--audit-targeted-rejudges', 'research/targets.json', '--verify'],
     { cwd: dir, encoding: 'utf8', timeout: 60_000 });
   assert.equal(r.status, 2);
+});
+
+
+test('frozen Luna originals stamp while genuine current Sol Step-5 certification stays separate; stale or forged inputs reject', t => {
+  const dir = fixture(['itm-original', 'itm-repaired']);
+  t.after(() => rmSync(dir, { recursive: true, force: true }));
+  const workflow = join(dir, 'research/demo-step5-v2'); mkdirSync(workflow, { recursive: true });
+  const originalPath = join(dir, 'items/itm-original.md'), repairedPath = join(dir, 'items/itm-repaired.md');
+  const original = readFileSync(originalPath, 'utf8'), repaired = readFileSync(repairedPath, 'utf8');
+  const frozen = [JSON.parse(ledgerRow('itm-original', MODELS.luna.id, true, itemHashJudge(original))),
+    JSON.parse(ledgerRow('itm-repaired', MODELS.luna.id, true, '0'.repeat(64), 'e'.repeat(64)))];
+  const frozenPath = join(workflow, 'step4-verdicts.json'); writeFileSync(frozenPath, JSON.stringify(frozen));
+  writeFileSync(join(workflow, 'initial-1.json'), JSON.stringify({ version: 2, run: 'demo', phase: 'initial', round: 1,
+    judge_model: MODELS.luna.id, input_evidence: { [frozenPath]: digest(readFileSync(frozenPath, 'utf8')) } }));
+  const solRow = ledgerRow('itm-repaired', MODELS.sol61.id, true, itemHashJudge(repaired), STUB_CONTEXT);
+  writeLedger(dir, [...frozen.map(row => JSON.stringify(row)), solRow]);
+  const reportPath = join(workflow, 'review.json'), thresholdPath = join(workflow, 'threshold-1.json');
+  writeFileSync(reportPath, JSON.stringify({ reviewed: ['itm-repaired'], model: MODELS.sol61.id, effort: 'high' }));
+  writeFileSync(thresholdPath, JSON.stringify({ round: 1, originalCount: 2, fatalIds: [], fatalCount: 0, errors: [] }));
+  const payload = { version: 2, run: 'demo', phase: 'impact-repeat', round: 1, latest_adjudication_round: 1,
+    changed: ['itm-repaired'], items: [{ id: 'itm-repaired', guard_sha256: itemHashGuard(repaired),
+      item_sha256: itemHashJudge(repaired), context_sha256: STUB_CONTEXT, reason: 'Reviewed actual repaired argument and supplier context.' }],
+    evidence: { [reportPath]: digest(readFileSync(reportPath, 'utf8')), [thresholdPath]: digest(readFileSync(thresholdPath, 'utf8')) } };
+  const certificatePath = join(workflow, 'certification.json');
+  const certificate = { ...payload, sha256: digest(payload) }; writeFileSync(certificatePath, JSON.stringify(certificate));
+  const lineup = originalJudgeLineup({ repo: dir, run: 'demo' });
+  assert.equal(lineup, 'luna');
+  const check = (mode: string) => spawnSync(process.execPath, [TOOL, '--ledger', 'research/judge.jsonl',
+    '--manifests', 'research/m.pages.json', '--run', 'demo', mode, '--report', 'research/stamps.json'],
+  { cwd: dir, encoding: 'utf8', env: { ...process.env, JUDGE_LINEUP: lineup } });
+  let result = check('--apply'); assert.equal(result.status, 0, result.stderr);
+  assert.match(readFileSync(originalPath, 'utf8'), /model: "gpt-6-luna"/);
+  assert.doesNotMatch(readFileSync(repairedPath, 'utf8'), /^ {2}judge:/m);
+  const receipt = JSON.parse(readFileSync(join(dir, 'research/stamps.json'), 'utf8'));
+  assert.deepEqual(receipt.stamped.map((row: any) => row.id), ['itm-original']);
+  assert.equal(receipt.skipped.find((row: any) => row.id === 'itm-repaired').reason, 'step5-centrally-certified');
+  result = check('--verify'); assert.equal(result.status, 0, result.stderr);
+  const contextTool = join(dir, 'tools/physics-support/judge.mts'), contextSource = readFileSync(contextTool, 'utf8');
+  writeFileSync(contextTool, contextSource.replaceAll(STUB_CONTEXT, OTHER_CONTEXT));
+  result = check('--verify'); assert.equal(result.status, 1); assert.match(result.stderr, /itm-repaired: no current configured-judge verdict/);
+  writeFileSync(contextTool, contextSource);
+  writeFileSync(repairedPath, repaired + '\nUncertified change.\n');
+  result = check('--verify'); assert.equal(result.status, 1); assert.match(result.stderr, /itm-repaired: no current configured-judge verdict/);
+  writeFileSync(repairedPath, repaired);
+  writeFileSync(certificatePath, JSON.stringify({ ...certificate, round: 2 }));
+  result = check('--verify'); assert.equal(result.status, 2); assert.match(result.stderr, /certification payload changed/);
 });
