@@ -719,6 +719,59 @@ and native report basis, and uses the current contract hash. It never edits or
 reseals the old certificate, closure, report or supporting evidence, and does
 not claim that missing historical contract bytes have been recovered.
 
+A collected initial page correction can bind an owning pages manifest before a
+later native impact owner repairs one consumer's public statement and its exact
+manifest mirror. The old parent, page receipt and native report stay immutable.
+Root may advertise `research/RUN-step5-v2/owner-historical-manifest-request.json`
+with `{version: 1, run, request: {path, sha256}}`, naming immutable
+`owner-historical-manifest-ID.json` in that directory. This is an explicit
+historical binding, not an exception to ordinary evidence validation.
+
+The request contains `version: 1`, `run`, `reviewer: "/root"`, `manifest_path`
+(`research/RUN-batch-N.pages.json`), `batch`, `subject`, exact `json_pointer`
+(`/PAGE_INDEX/items/ITEM_INDEX/statement`), raw references `initial_parent`,
+`page_receipt`, `page_report`, and a nonempty `transitions` array. Each transition
+contains `phase`, `round`, genuine raw `before_manifest`, `after_manifest`,
+`before_source`, `after_source`, native `repair` and `final_review` references
+(each with `pack`, `task`, `report`, `dispatch`), `impact_progress`,
+`impact_closed`, and `owner_gate`. References are `{path, sha256}` with relative
+run-local research paths; `owner_gate` instead names the actual consumed
+`.physics-autopilot/RUN/owner-gate-history/ATTEMPT.json`. First transition must
+be initial impact round one. Later transitions may use ordinary native impact
+or gate repair waves. A new immutable request may append authenticated
+transitions through `previous_binding: {path, sha256}`; the original binding
+fields and complete transition prefix must remain identical.
+
+Intake authenticates the exact original page/parent manifest guards, page
+owner pack and source snapshot, and the frozen batch. Each pair of archived
+manifests must differ only at that subject's declared statement field, equal
+the canonical public sections of genuine archived source, and correspond to an
+actual assigned native Sol 6.1 high repair plus closed current review. Native
+closure and consumed full-frontier formatting/metadata history must bind the
+after source and manifest. Missing historical bytes, unrelated manifest edits,
+scientific/proof evidence substitutions, and stale current statement mirrors
+fail closed. Historical replay authenticates that immutable wave without
+freezing unrelated current items to its old gate. Current source, native review,
+context and complete current gate checks remain mandatory at certification.
+The new certificate binds both raw archives, immutable request/native history,
+and current manifest, recording a typed `historical-page-manifest` transition.
+Original receipt hashes are never rewritten.
+
+If a required current predecessor snapshot has become stale, including because
+workflow code changed, the certification stage's native `onProgress` waits for
+all writers to drain and pauses for a fresh actual Root formatting/metadata
+pass. It then runs the exact composed predecessor battery: `physics-content`,
+`frontier-dependency-ledger`, and `step5-wave-evidence`, retaining all descriptor
+conditions and liveness checks. It records successful results and the fresh
+consumed owner gate in immutable
+`.physics-autopilot/RUN/pre-certification-PHASE-ROUND-ATTEMPT.json`, with a
+hash-bound native pointer for replay. Original predecessor stage and gate
+history remain unchanged. Every bound current input, including tools and
+explicitly absent inputs, must still match before the certification tool starts.
+A failed or interrupted battery creates no successful preparation and requires
+fresh owner checks on native retry. Normal certification-stage gates still run
+with their ordinary owner authorization.
+
 Physics precheck presents each numbered Markdown paragraph as a complete step
 to the normative application checker: single newlines within that paragraph
 become spaces in checker input, retaining all mathematics, citations and tags.

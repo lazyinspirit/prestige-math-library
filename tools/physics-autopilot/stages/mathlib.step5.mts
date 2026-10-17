@@ -4,6 +4,11 @@
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { MODEL_PROFILE_NAMES } from '../../physics-support/models.mjs';
+import { authorizeOwnerGate } from '../src/owner-gate-recertification.mjs';
+import { runGates } from '../src/gates.mts';
+const HISTORICAL_URL=new URL('../../physics-support/step5-historical-manifest.mjs',import.meta.url),HISTORICAL_STAT=statSync(HISTORICAL_URL);
+const {validateCurrentHistoricalManifestGate,historicalManifestPredecessor,recordHistoricalManifestPreparation}=await import(
+  HISTORICAL_URL.href+'?v='+HISTORICAL_STAT.mtimeMs+':'+HISTORICAL_STAT.size);
 // The live controller must load a repaired frontier adapter along with this
 // versioned stage module, rather than retain its original static ESM import.
 const FRONTIER_GATE_URL = new URL('../../physics-support/step5-frontier-gate.mjs', import.meta.url);
@@ -103,6 +108,30 @@ export function step5Stages({ gate, repoWide, contractGates, ledgerGate, closure
   });
   const certifyStage=(id:string,phase:string):any=>({
     id,label:`${id.split('-')[0]} orchestrator certifies complete stable repair wave`,units:()=>['all'],
+    onProgress:async({ctx,executor,stage}:any)=>{
+      if(ctx.doctor||!existsSync(join(workflowDir(ctx.repo,ctx.run),'owner-historical-manifest-request.json')))return;
+      if(executor.inflight.size||executor.hasAdoptedWork(stage)||executor.liveDispatchLabels?.().length)return;
+      const n=round(ctx,id);
+      try{validateCurrentHistoricalManifestGate(ctx.repo,ctx.run,phase,n);return;}catch{}
+      const predecessor=phase==='impact-initial'?'5.2-impact':'5.6-impact';
+      const prior=executor.stages.find((candidate:any)=>candidate.id===predecessor),gates=prior?.gates?.(ctx);
+      if(!ctx.config.ownerGateRecertification||!Array.isArray(gates)||!gates.length
+        ||!['physics-content','frontier-dependency-ledger','step5-wave-evidence'].every(key=>gates.some((g:any)=>g.id===key)))
+        throw Error('historical manifest certification requires the complete composed predecessor battery and native owner recertification');
+      const authorization=authorizeOwnerGate({ctx,gates,stages:[id],writers:[]});
+      if(!authorization.ok){
+        executor.state.paused=true;
+        executor.reporter.notify('paused','Fresh pre-certification formatting/metadata checks required before the complete predecessor battery: '+authorization.why,{stage:id});
+        return;
+      }
+      const predecessorHistory=historicalManifestPredecessor(ctx.repo,ctx.run,phase);
+      const result=await runGates(authorization.gates,{cwd:ctx.repo,signal:executor.signal,logger:()=>{}});
+      for(const row of result.results)executor.reporter.event('gate',row);
+      if(!result.ok)throw Error('fresh native pre-certification predecessor battery failed: '+JSON.stringify(result.results.at(-1)));
+      recordHistoricalManifestPreparation(ctx.repo,ctx.run,phase,n,{attempt:authorization.attempt,results:result.results,predecessor:predecessorHistory});
+      validateCurrentHistoricalManifestGate(ctx.repo,ctx.run,phase,n);
+      executor.reporter.notify('pre-certification-checked','Fresh complete predecessor battery passed under current source and code.',{stage:id});
+    },
     pattern:pattern(`certify-${phase}`,id),concurrency:1,
     artifacts:(ctx:any)=>relative(ctx.repo,join(workflowDir(ctx.repo,ctx.run),`certification-${phase}-${round(ctx,id)}.json`)),
     plan:(ctx:any)=>[{role:'tool',label:`step5-v2-certify-${phase}-r${round(ctx,id)}-all`,covers:['all'],job:'bookkeeping-mechanical',

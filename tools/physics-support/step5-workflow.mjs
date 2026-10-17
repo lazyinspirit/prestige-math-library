@@ -19,7 +19,10 @@ import { syncMaintenance, maintenanceStatus, prepareMaintenance, collectMaintena
 import { orderedItems, runPages } from './item-dependency-levels.mjs';
 import { ownerRepairHandoffs, ownerHandoffPhase } from './step5-owner-repair-handoffs.mjs';
 import { ownerFormatRepair } from './step5-owner-format-repair.mjs';
-import { certificationEvidenceTransition } from './step5-certification-transition.mjs';
+const CERTIFICATION_TRANSITION_URL=new URL('./step5-certification-transition.mjs',import.meta.url),CERTIFICATION_TRANSITION_STAT=statSync(CERTIFICATION_TRANSITION_URL);
+const {certificationEvidenceTransition}=await import(CERTIFICATION_TRANSITION_URL.href+'?v='+CERTIFICATION_TRANSITION_STAT.mtimeMs+':'+CERTIFICATION_TRANSITION_STAT.size);
+const HISTORICAL_MANIFEST_URL=new URL('./step5-historical-manifest.mjs',import.meta.url),HISTORICAL_MANIFEST_STAT=statSync(HISTORICAL_MANIFEST_URL);
+const {historicalManifestEvidence,validateCurrentHistoricalManifestGate}=await import(HISTORICAL_MANIFEST_URL.href+'?v='+HISTORICAL_MANIFEST_STAT.mtimeMs+':'+HISTORICAL_MANIFEST_STAT.size);
 // The live controller may have loaded an earlier helper during owner review.
 const INHERITED_REPAIR_URL=new URL('./step5-inherited-repair.mjs',import.meta.url);
 const INHERITED_REPAIR_STAT=statSync(INHERITED_REPAIR_URL);
@@ -95,6 +98,11 @@ function sol61Step5Run(root,run) {
   return false;
 }
 const verifyEvidence=evidence=>{for(const [p,hash]of Object.entries(evidence??{}))requireValue(existsSync(p)&&createHash('sha256').update(readFileSync(p)).digest('hex')===hash,`Step 5 evidence changed: ${p}`);};
+// Only immutable collection/certification history may resolve this one typed
+// native manifest transition. Intake and ordinary scientific evidence stay strict.
+const verifyHistoricalEvidence=(root,run,evidence)=>{
+  const binding=historicalManifestEvidence(root,run,evidence);verifyEvidence(binding.evidence);return binding;
+};
 const rawHashes=root=>Object.fromEntries(readLibraryItems(root).map(row=>[row.id,row.sha256]));
 const creationId=/^(?:alg|def|lem|thm|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)*$/;
 function gateFrontier(root,run) {
@@ -805,7 +813,7 @@ export function collect(root,run,phase,round,{deferImpactClosure=false,correctio
       requireValue(ownerHandoffPhase(phase),'external owner repairs require deferred impact collection');
       if(!deferImpactClosure)return verifyClosedOwnerCollection(root,run,phase,round,collectedPath,prior);
     }
-    verifyEvidence(prior.evidence);
+    verifyHistoricalEvidence(root,run,prior.evidence);
     if(phase==='initial'){verifyPageCorrectionReplay(root,run,round,prior);verifyReviewCorrectionReplay(root,run,prior);}
     syncMaintenance(root,run,prior.statement_events??[]);return prior;
   }
@@ -1408,14 +1416,14 @@ function readCertification(root,run,{allowMissing=true}={}) {
 
 export function verifyCertification(root,run,options={}) {
   const row=readCertification(root,run,options);
-  if(row)verifyEvidence(row.evidence);
+  if(row)verifyHistoricalEvidence(root,run,row.evidence);
   return row;
 }
 
 export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={}) {
   const savedPath=join(workflowDir(root,run),`certification-${phase}-${round}.json`);
   if(existsSync(savedPath)) {
-    const saved=read(savedPath),{sha256,...payload}=saved;requireValue(sha256===digest(payload),'completed certification payload changed');verifyEvidence(saved.evidence);
+    const saved=read(savedPath),{sha256,...payload}=saved;requireValue(sha256===digest(payload),'completed certification payload changed');verifyHistoricalEvidence(root,run,saved.evidence);
     const frontier=gateFrontier(root,run),scoped=saved.items.filter(row=>frontier.has(row.id));
     const current=hashes(root);for(const row of scoped)requireValue(row.guard_sha256===current[row.id],`stale completed certification ${row.id}`);
     const contexts=contextHasher(root,scoped.map(row=>row.id));
@@ -1425,13 +1433,15 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
   const advanced=advanceImpact(root,run,phase,round);
   requireValue(advanced.complete,'owner impact repair continuation must finish before certification');
   const dir=workflowDir(root,run), closedPath=impactClosedPath(root,run,phase,round),result=read(closedPath);
-  verifyEvidence(result.evidence);
+  const resultHistory=verifyHistoricalEvidence(root,run,result.evidence);
   const source=phase==='impact-initial'?'initial':'repeat';
   const prior=readCertification(root,run);
   const sourceResult=phase==='gate'?null:read(join(dir,`${source}-${round}-collected.json`));
-  verifyEvidence(sourceResult?.evidence);
+  const sourceHistory=verifyHistoricalEvidence(root,run,sourceResult?.evidence);
   const transition=certificationEvidenceTransition(root,run,phase,round,prior,sourceResult,result);
   verifyEvidence({...prior?.evidence,...transition.evidence});
+  const manifestTransitions=[...sourceHistory.transitions,...resultHistory.transitions,...transition.transitions.filter(row=>row.kind==='historical-page-manifest')];
+  const currentManifestGate=manifestTransitions.length?validateCurrentHistoricalManifestGate(root,run,phase,round):{};
   const allReviews=[...(sourceResult?.reviews??[]),...result.reviews];
   const eligible=gateFrontier(root,run),createdIds=new Set([...(prior?.creations??[]),...(sourceResult?.created_items??[]),...(result.created_items??[])].map(row=>row.id));
   const certifiedScope=id=>eligible.has(id)||createdIds.has(id);
@@ -1456,7 +1466,7 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
   const contexts=contextHasher(root,ids); // One corpus read, after every writer drains.
   for(const id of ids)requireValue(contexts.has(id),`missing certification context: ${id}`);
   if(JSON.stringify(rawBefore)!==JSON.stringify(rawHashes(root)))throw Error('item writer overlapped certification');
-  const evidence={...(prior?.evidence??{}),...(sourceResult?.evidence??{}),...result.evidence,...transition.evidence};
+  const evidence={...(prior?.evidence??{}),...sourceHistory.evidence,...resultHistory.evidence,...transition.evidence,...currentManifestGate};
   evidence[closedPath]=digest(readFileSync(closedPath,'utf8'));
   for(const name of ['frontier.json','baseline.json','step4-verdicts.json',`${phase}-${round}-progress.json`,...(phase==='gate'?[]:[`${source}-${round}-collected.json`])]){const p=join(dir,name);evidence[p]=digest(readFileSync(p,'utf8'));}
   const items=ids.map(id=>({id,...contexts.get(id),guard_sha256:current[id],reason:reviewed.get(id)?.reason??priorItems.get(id)?.reason}));
@@ -1465,7 +1475,8 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
   const creations=[...creationById.values()].sort((a,b)=>a.id.localeCompare(b.id));
   for(const row of creations){creationRegistration(root,run,row);requireValue(current[row.id],`created item missing at certification: ${row.id}`);}
   const certificate={version:2,run,phase,round,at:new Date().toISOString(),items,creations,evidence,changed,
-    ...(transition.transitions.length||prior?.evidence_transitions?.length?{evidence_transitions:[...(prior?.evidence_transitions??[]),...transition.transitions]}:{}),
+    ...(transition.transitions.length||sourceHistory.transitions.length||resultHistory.transitions.length||prior?.evidence_transitions?.length
+      ?{evidence_transitions:[...(prior?.evidence_transitions??[]),...sourceHistory.transitions,...resultHistory.transitions,...transition.transitions]}:{}),
     latest_adjudication_round:phase==='impact-repeat'?round:(prior?.latest_adjudication_round??null)};
   if(phase==='impact-repeat') {
     const frontier=read(join(dir,'frontier.json'));

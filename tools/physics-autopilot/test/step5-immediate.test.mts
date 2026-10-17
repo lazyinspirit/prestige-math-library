@@ -55,8 +55,7 @@ test('handoff never accepts an old context or another item verdict', () => {
 test('Step 5 drains repair writers before central certification and repeat routing', () => {
   const byId=(id:string):any=>stages.find(s=>s.id===id);
   for (const id of ['5.1-adjudicate','5.2-impact','5.5-adjudicate','5.6-impact','5.9-repair']) {
-    if(['5.2-impact','5.6-impact','5.9-repair'].includes(id))assert.equal(typeof byId(id).onProgress,'function');
-    else assert.equal(byId(id).onProgress,undefined);
+    assert.equal(typeof byId(id).onProgress,'function');
     assert.equal(byId(id).pipeline,undefined);
   }
   assert.deepEqual(byId('5.7-certify').routeTargets,['5.4-rejudge']);

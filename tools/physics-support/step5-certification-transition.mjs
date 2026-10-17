@@ -1,10 +1,12 @@
 // A historical certificate keeps its original bindings. Only native round
 // certification can carry a repaired owning contract into current evidence.
-import { existsSync, readFileSync, readdirSync, realpathSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, realpathSync, statSync } from 'node:fs';
 import { basename, join, relative, resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { frontierGateScope } from './frontier-gate-scope.mjs';
 import { MODELS } from './models.mjs';
+const HISTORICAL_URL=new URL('./step5-historical-manifest.mjs',import.meta.url),HISTORICAL_STAT=statSync(HISTORICAL_URL);
+const {historicalManifestEvidence}=await import(HISTORICAL_URL.href+'?v='+HISTORICAL_STAT.mtimeMs+':'+HISTORICAL_STAT.size);
 const hash = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
 const fileHash = path => createHash('sha256').update(readFileSync(path)).digest('hex');
 const read = path => JSON.parse(readFileSync(path, 'utf8'));
@@ -36,10 +38,16 @@ function checkedContractSubjects(row, root, file, batch, owned) {
 }
 
 export function certificationEvidenceTransition(root, run, phase, round, prior, source, closed) {
-  const evidence = {}, transitions = [];
-  if (!prior) return { evidence, transitions };
+  if (!prior) return { evidence:{}, transitions:[] };
   root = resolve(root);
-  const stale = Object.entries(prior.evidence).filter(([path, sha]) => !existsSync(resolve(root, path)) || fileHash(resolve(root, path)) !== sha);
+  const manifestHistory=historicalManifestEvidence(root,run,prior.evidence),evidence={...manifestHistory.additions},transitions=[...manifestHistory.transitions];
+  const manifests=new Set(manifestHistory.transitions.map(row=>resolve(root,row.path)));
+  const stale = Object.entries(prior.evidence).filter(([path, sha]) => !manifests.has(resolve(root,path))&&(!existsSync(resolve(root, path)) || fileHash(resolve(root, path)) !== sha));
+  if(manifestHistory.transitions.length){
+    const priorPath=join(root,'research',run+'-step5-v2',`certification-${prior.phase}-${prior.round}.json`);
+    check(existsSync(priorPath)&&JSON.stringify(read(priorPath))===JSON.stringify(prior),'immutable prior certificate differs');
+    evidence[priorPath]=fileHash(priorPath);
+  }
   if (!stale.length) return { evidence, transitions };
   check(['impact-repeat', 'gate'].includes(phase), 'only a subsequent native wave may evolve evidence');
   const dir = join(root, 'research', `${run}-step5-v2`), frontier = read(join(dir, 'frontier.json'));
