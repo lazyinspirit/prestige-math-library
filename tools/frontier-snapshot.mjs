@@ -11,8 +11,7 @@ const hash = value => createHash('sha256').update(JSON.stringify(value)).digest(
 // Read complete top-level graph/identity fields while unrelated live metadata
 // may be unfinished. Decode quoted keys before selection and reject duplicates.
 // Each selected field retains its entire YAML value, including block lists.
-function constructionSourceFields(frontmatter, subject) {
-  const wanted = new Set(['id', 'kind', 'pipeline_run', 'page', 'deps']);
+function constructionSourceFields(frontmatter, subject, wanted = new Set(['id', 'kind', 'pipeline_run', 'page', 'deps'])) {
   const seen = new Set(), selected = [], lines = frontmatter.split(/\r?\n/);
   const header = /^("(?:[^"\\]|\\.)*"|'(?:[^']|'')*'|[a-zA-Z_][a-zA-Z0-9_-]*)[ \t]*:/;
   for (let i = 0; i < lines.length; i++) {
@@ -200,7 +199,11 @@ function itemInputs(s, id, extra = []) {
         const canonical=new Set(names.map(name=>name.slice(0,-3)));
         for(const name of names){
           const text=readFileSync(join(s.root,'items',name),'utf8');
-          const fm=yaml().parse(text.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1]??'')??{};
+          // Alias discovery is corpus navigation, not validation of unrelated
+          // carriers. Reached sources are still parsed in full by dependency().
+          const fm=constructionSourceFields(text.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1]??'',name,new Set(['aliases']))??{};
+          if(fm.aliases!=null&&(!Array.isArray(fm.aliases)||fm.aliases.some(alias=>typeof alias!=='string'||!alias.trim())))
+            throw Error(`Invalid aliases for ${name}`);
           for(const alias of fm.aliases??[])if(!canonical.has(alias)){
             if(s.aliases.has(alias)&&s.aliases.get(alias)!==name.slice(0,-3))throw Error(`Ambiguous alias ${alias}`);
             s.aliases.set(alias,name.slice(0,-3));

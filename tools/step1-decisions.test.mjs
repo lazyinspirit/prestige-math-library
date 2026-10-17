@@ -80,3 +80,28 @@ test('empty scaffolds, malformed records and missing evidence fail closed', t =>
   writeFileSync(join(f.root, 'research/demo-step1-lem-local-first.json'), '{"version":2}');
   assert.throws(f.check, /Invalid Step 1 record/);
 });
+
+test('alias discovery ignores unrelated malformed fields and still binds reached suppliers', t => {
+  const f = fixture(t);
+  writeFileSync(join(f.root, 'items/unrelated.md'), '---\nid: unrelated\nproof_strategy: directverification: {}\n---\nUnrelated.');
+  writeFileSync(f.supplier, '---\nid: def-published-input\naliases: [def-old-input]\ndeps: []\n---\nOriginal.');
+  f.pages[0].items[0].deps = ['def-old-input']; f.save();
+  f.record('lem-local-first'); f.record('ex-local-consumer');
+  assert.equal(f.check().closed, true);
+  writeFileSync(f.supplier, readFileSync(f.supplier, 'utf8') + '\nChanged.');
+  assert.equal(f.check().ready, 0);
+  writeFileSync(f.supplier, '---\naliases: [def-old-input]\nproof_strategy: directverification: {}\n---\nBad reached supplier.');
+  assert.throws(f.check, /Nested mappings/);
+});
+
+test('alias discovery rejects malformed, duplicate and ambiguous alias declarations', t => {
+  const f = fixture(t);
+  f.pages[0].items[0].deps = ['def-old-input']; f.save();
+  for (const aliases of ['aliases: {old: name}', 'aliases: [def-old-input]\naliases: []', 'aliases: [unterminated']) {
+    writeFileSync(f.supplier, `---\n${aliases}\n---\nSupplier.`);
+    assert.throws(() => f.record('lem-local-first'));
+  }
+  writeFileSync(f.supplier, '---\naliases: [def-old-input]\n---\nSupplier.');
+  writeFileSync(join(f.root, 'items/def-second.md'), '---\naliases: [def-old-input]\n---\nSecond.');
+  assert.throws(() => f.record('lem-local-first'), /Ambiguous alias/);
+});

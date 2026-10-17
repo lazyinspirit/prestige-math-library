@@ -825,6 +825,9 @@ supplier context, checks dependency labels and actual-renderer proof formatting
 in dependency order, and records a single-battery permission. The supervisor
 resumes the native controller. Changed inputs or a consumed permission require
 a fresh pass; no review verdict, certification history or gate is waived.
+Readiness alias discovery parses only alias declarations in unrelated carriers;
+it rejects invalid or ambiguous aliases. Every reached supplier is still parsed
+in full and bound into the current-input hash.
 Drift planning boundaries record page metadata only because content does not
 yet exist; authored boundaries reject empty inventories. This optional wrapper
 does not affect other runs or change their worker prompts.
