@@ -2,6 +2,35 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { citationUrls } from './citation-urls.mjs';
 
+test('coverage candidate dispositions exclude failed/unselected history while retaining active citations', () => {
+  const active = 'https://example.org/active.pdf';
+  const historical = 'https://dead.example.org/book.pdf';
+  const unknown = 'https://example.org/unclassified.pdf';
+  const context = 'https://example.org/context.pdf';
+  const value = {
+    retrieval_history: [{ attempted_url: historical, outcome: 'HTTP 404' }],
+    candidate_dispositions: [
+      { url: historical, disposition: 'retrieval-failed-then-recovered' },
+      { url: historical, disposition: 'retrieval-failed-then-recovered-by-independent-full-text' },
+      { url: historical, disposition: 'retrieval-failed-then-recovered-by-author-preprint' },
+      { url: historical, disposition: 'not-selected-for-this-page' },
+      { url: historical, disposition: 'screened-out' },
+      { url: active, disposition: 'included' },
+      { url: context, disposition: 'read-context-only' },
+      { url: unknown, disposition: 'unrecognized' },
+    ],
+    pages: [{ sources: [{ url: active }] }],
+    note: `Also consult ${active}`,
+  };
+  const before = JSON.stringify(value);
+  assert.deepEqual([...citationUrls(value, { coverage: true })], [active, context, unknown]);
+  assert.deepEqual([...citationUrls(value)], [historical, active, context, unknown]);
+  assert.equal(JSON.stringify(value), before, 'history remains byte-for-byte unchanged');
+  value.pages[0].sources.push({ url: historical, disposition: 'not-selected-for-this-page' });
+  assert.deepEqual([...citationUrls(value, { coverage: true })], [active, context, unknown, historical],
+    'candidate-only exclusions cannot hide a URL in active page sources');
+});
+
 test('decoded JSON newlines cannot become URL path suffixes', () => {
   const value = JSON.parse(JSON.stringify({ note: 'https://example.org/book.pdf\nERROR next line' }));
   assert.deepEqual([...citationUrls(value)], ['https://example.org/book.pdf']);

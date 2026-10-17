@@ -17,7 +17,21 @@ export function citationUrls(value, { coverage = false } = {}) {
       for (const [key, child] of Object.entries(node)) {
         // Diagnostic history is evidence, not a reader-facing citation.
         if (coverage && (key.startsWith('historical_')
-          || ['checks', 'recovery_attempts', 'failed_url_attempts', 'source_resolution'].includes(key))) continue;
+          || ['checks', 'recovery_attempts', 'failed_url_attempts', 'source_resolution', 'retrieval_history'].includes(key))) continue;
+        if (coverage && key === 'candidate_dispositions' && Array.isArray(child)) {
+          // Failed/unselected search candidates are retained as retrieval
+          // evidence. Keep included, context-only and unknown dispositions in
+          // the sweep; active sources elsewhere are always traversed normally.
+          for (const candidate of child) {
+            const disposition = candidate?.disposition;
+            if (typeof disposition === 'string'
+              && (/^retrieval-failed(?:-|$)/.test(disposition)
+                || /^not-selected(?:-|$)/.test(disposition)
+                || disposition === 'screened-out')) continue;
+            visit(candidate);
+          }
+          continue;
+        }
         visit(child);
       }
     }
