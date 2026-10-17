@@ -537,8 +537,10 @@ function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingRecei
     git(root, ['--no-replace-objects', 'merge-base', '--is-ancestor', spec.original_head, 'HEAD']);
     const originalHead = decodePlan(git(root, ['--no-replace-objects', 'show', spec.original_head + ':research/plan-spec.json']));
     const originalIndex = decodePlan(git(root, ['--no-replace-objects', 'cat-file', 'blob', spec.original_index_blob]));
-    validatePlanProjection(spec, run, selected.pages, decodePlan(readFileSync(join(root, row.path))), originalHead, originalIndex, root);
+    validatePlanProjection(spec, run, selected.pages, decodePlan(readFileSync(join(root, row.path))), originalHead, originalIndex, root,
+      { additionalPaths: policy.additional_paths });
     required.add(row.authority);
+    for (const support of spec.supporting_pages ?? []) required.add(support.ownership_evidence);
     for (const evidence of spec.evidence) {
       if (!evidence || Object.keys(evidence).some(key => !['path', 'sha256'].includes(key))
         || !runResearch(run, safePath(evidence.path)) || !/^[a-f0-9]{64}$/.test(evidence.sha256 ?? ''))

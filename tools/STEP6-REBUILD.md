@@ -139,7 +139,46 @@ The three row inventories have exactly the same IDs and relative order; the
 IDs must equal both the scope-ledger/physical-home inventory and the manifest
 inventory. Target items/requires, page kind and category must agree with the
 actual current manifests and homes. Transitive prerequisite/context pages
-never enlarge this commit ownership set.
+never implicitly enlarge this commit ownership set.
+
+An optional `supporting_pages` array handles an accepted item-placement repair
+on existing outside pages. Each entry has exactly these fields:
+
+```json
+{
+  "id": "supporting-page-id",
+  "path": "library/category/supporting-page-id.md",
+  "sha256": "64 lowercase hexadecimal characters",
+  "ownership_evidence": "research/RUN-owner-supporting-ownership.json",
+  "ownership_evidence_sha256": "64 lowercase hexadecimal characters"
+}
+```
+
+`page_ids` **still equals the exact selected scope**, for example all 162 pages
+of an 81-pair run. The supplement cannot add IDs to that field, its ledger or
+its manifests. Only with this optional supplement do the three raw-row arrays
+cover the exact ordered union of selected and supporting IDs. Both subsequences
+retain their declared order. Every supporting page must have a matching explicit
+`additional_paths` policy row with the same path, current hash and ownership
+evidence. The independently hash-bound regular JSON evidence must identify this
+run, `authorized_by: owner`, a concrete `authorization` of at least 20 characters,
+and a unique exact `{path, sha256}` claim in `owned_paths`. Missing, stale,
+conflicting, foreign-run or non-owner evidence fails closed. Root may issue a
+fresh current ownership receipt referencing retained historical acceptance;
+historical receipts are never rewritten to pretend their old hashes are current.
+
+The actual nonsymlink page must have that ID in renderer-parsed frontmatter;
+its ordered `items` plus `examples` must equal the target plan membership.
+Its physical category must match the target plan category. Supporting replacements
+may change **only `items`**: all other plan values must equal both original HEAD
+and original index rows. Thus this route grants no page creation, deletion,
+category relocation, prerequisite change, or general outside-plan ownership.
+The supporting page bytes and evidence are sealed through explicit additional
+ownership before preparation. Composition, inverse reconstruction and foreign
+residual checks use the exact union; HEAD and index still preserve their separate
+foreign bytes. Opted-in transaction receipts retain selected `page_ids` and add
+`supporting_page_ids`. Authorities and receipts without a supplement keep their
+existing schema and behavior.
 
 This route supports existing page replacements only. Missing, duplicate,
 unknown or reordered owned IDs, duplicate JSON keys, malformed pages, scope
